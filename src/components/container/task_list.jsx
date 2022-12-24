@@ -28,8 +28,18 @@ const TaskList = () => {
                 <h3 className='text-4xl font-semibold mb-3'>You have 3 tasks for today</h3>
             </div>
             {/* TODO: Aplicar un foreach para renderizar la lista */}
-            <TaskComponent task={ defaultTask }></TaskComponent>
-            <Button otherClasses='bg-indigo-700 fixed bottom-0 right-0 mb-16 mx-20 rounded-xl p-3'>
+            <div className='grid grid-cols-3 gap-4'>
+                <TaskComponent task={ defaultTask }></TaskComponent>
+                <TaskComponent task={ defaultTask }></TaskComponent>
+                <TaskComponent task={ defaultTask }></TaskComponent>
+                <TaskComponent task={ defaultTask }></TaskComponent>
+                <TaskComponent task={ defaultTask }></TaskComponent>
+                <TaskComponent task={ defaultTask }></TaskComponent>
+                <TaskComponent task={ defaultTask }></TaskComponent>
+
+            </div>
+            <Button otherClasses='bg-indigo-700 flex items-center fixed bottom-0 right-0 mb-16 mx-20 rounded-xl p-3 hover:scale-110'>
+                <i class="bi bi-plus-circle mr-2 text-2xl"></i>
                 New task
             </Button>
         </div>
