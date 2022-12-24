@@ -8,7 +8,7 @@ import Button from './components/pure/button';
 function App() {
   return (
     <div className="App bg-gray-900 grid grid-cols-12 text-white">
-        <div className='bg-indigo-800 flex flex-col gap-6 p-8 col-span-3 h-screen'> 
+        <div className='bg-indigo-800 flex flex-col gap-6 p-8 col-span-3 h-screen sticky top-0'> 
           <div className='flex flex-row gap-4 items-center justify-center cursor-pointer'>
             <img className='rounded-full w-12' alt='' src='https://images.unsplash.com/photo-1595433707802-6b2626ef1c91?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxleHBsb3JlLWZlZWR8MXx8fGVufDB8fHx8&w=1000&q=80'></img>
             <h2 className='text-2xl'>

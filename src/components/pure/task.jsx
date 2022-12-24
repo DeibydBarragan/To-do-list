@@ -12,7 +12,7 @@ const TaskComponent = ({ task }) => {
     }, [task])
 
     return (
-        <div className='bg-indigo-600 rounded-2xl p-3 shadow-xl transition ease-in-out hover:bg-indigo-800 hover:scale-105'>
+        <div className='bg-indigo-600 outline outline-1 outline-indigo-500 rounded-2xl p-3 shadow-xl transition ease-in-out hover:bg-indigo-800 hover:scale-105'>
             
             <div className=' col-span-9 cursor-pointer'> 
                 <h2 className='text-xl font-semibold'>
@@ -23,14 +23,14 @@ const TaskComponent = ({ task }) => {
                 </h4>
             </div>
             <div className='grid grid-cols-3 gap-2'>
-                <button>
-                    <i className='bi bi-check-circle-fill text-3xl transition ease-in-out hover:text-slate-400'></i>
+                <button className='transition ease-in-out hover:scale-110'>
+                    <i className='bi bi-check-circle-fill text-3xl'></i>
                 </button>
-                <button className='col-start-11'>
-                    <i class="bi bi-pencil-fill text-3xl transition ease-in-out hover:text-slate-400"></i>
+                <button className='col-start-11 transition ease-in-out hover:scale-110'>
+                    <i class="bi bi-pencil-fill text-3xl"></i>
                 </button>
-                <button className='col-start-12'>
-                    <i class="bi bi-trash-fill text-3xl transition ease-in-out hover:text-slate-300"></i>
+                <button className='col-start-12 transition ease-in-out hover:scale-110'>
+                    <i class="bi bi-trash-fill text-3xl"></i>
                 </button>
             </div>
         </div>

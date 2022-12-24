@@ -36,6 +36,7 @@ const TaskList = () => {
                 <TaskComponent task={ defaultTask }></TaskComponent>
                 <TaskComponent task={ defaultTask }></TaskComponent>
                 <TaskComponent task={ defaultTask }></TaskComponent>
+                <TaskComponent task={ defaultTask }></TaskComponent>
 
             </div>
             <Button otherClasses='bg-indigo-700 flex items-center fixed bottom-0 right-0 mb-16 mx-20 rounded-xl p-3 hover:scale-110'>
