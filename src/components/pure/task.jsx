@@ -1,19 +1,25 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import PropTypes from 'prop-types'
 import { Task } from '../../models/task.class'
+import { TasksContext } from '../context/tasksContext'
 
 /**
  * Component that receives an instance of task and returns a card with the task information
  * @param {instance of task} param0
  * @returns
  */
-const TaskComponent = ({ task, deleteTask }) => {
+const TaskComponent = ({ task }) => {
+  const { deleteTask } = useContext(TasksContext)
+
   return (
         <div className='bg-indigo-600 outline outline-1 outline-indigo-500 rounded-2xl p-3 shadow-xl transition ease-in-out hover:bg-indigo-800 hover:scale-105'>
 
             <div className=' col-span-9 cursor-pointer'>
                 <h2 className='text-xl font-semibold'>
                     { task.name }
+                </h2>
+                <h2 className='text-xl font-semibold'>
+                    { task.description }
                 </h2>
                 <h4 className='text-lg col-end-11'>
                     { task.level }
