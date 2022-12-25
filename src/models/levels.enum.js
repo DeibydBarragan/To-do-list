@@ -1,5 +1,7 @@
+/**
+ * Urgency levels of a task
+ */
 export const LEVELS = {
-    NORMAL: 'normal',
-    URGENT: 'urgente',
-    BLOCKING: 'bloqueante',
+  NORMAL: 'Normal',
+  URGENT: 'Urgente'
 }

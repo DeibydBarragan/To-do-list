@@ -1,14 +1,33 @@
-import React from 'react';
+import React from 'react'
+import PropTypes from 'prop-types'
 
-const Button = (props) => {
-    
-    const buttonClass = props.otherClasses + '  outline outline-1 outline-indigo-400 p-2 rounded-lg font-semibold text-lg drop-shadow-lg transition ease-in-out hover:bg-indigo-700'
-    return (
-        <button className=  {buttonClass} >
-            {props.children}
+/**
+ *
+ * @param {text} param0 otherClasses in adition to the butonClass - optional
+ * @param {text} param1 color of the button if it is required
+ * @param {func} param2 not optional - onClick must be a function that de button executes
+ * @param {html} param3 the children elements of this component
+ * @returns
+ */
+const Button = ({ otherClasses = '', color = ' bg-indigo-700 ', onClick, children }) => {
+  return (
+        <button
+            className= { ' outline outline-1 outline-indigo-400 p-2 rounded-lg font-semibold text-lg drop-shadow-lg transition ease-in-out hover:bg-indigo-800 ' + color + otherClasses }
+            onClick= {onClick}
+        >
+
+            {/** Here is where the children will be rendered */}
+            {children}
         </button>
 
-    );
+  )
 }
 
-export default Button;
+Button.propTypes = {
+  color: PropTypes.string,
+  otherClasses: PropTypes.string,
+  onClick: PropTypes.func,
+  children: PropTypes.any
+}
+
+export default Button
