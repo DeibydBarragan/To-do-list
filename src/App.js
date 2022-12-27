@@ -6,7 +6,7 @@ import Navbar from './components/interface/navbar'
 
 function App () {
   return (
-    <div className="App bg-gray-900 grid grid-cols-12 text-white">
+    <div className="App bg-gray-900 grid grid-cols-12 text-white gap-5">
         <Navbar/>
         <TaskList/>
     </div>

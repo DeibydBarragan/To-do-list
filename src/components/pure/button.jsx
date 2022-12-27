@@ -12,7 +12,7 @@ import PropTypes from 'prop-types'
 const Button = ({ otherClasses = '', color = ' bg-indigo-700 ', onClick, children }) => {
   return (
         <button
-            className= { ' outline outline-1 outline-indigo-400 p-2 rounded-lg font-semibold text-lg drop-shadow-lg transition ease-in-out hover:bg-indigo-800 ' + color + otherClasses }
+            className= { ' p-2 rounded-lg font-semibold text-lg drop-shadow-lg transition ease-in-out hover:bg-indigo-600 ' + color + otherClasses }
             onClick= {onClick}
         >
 

@@ -49,16 +49,20 @@ const TasksContextProvider = ({ children }) => {
     setTasks(tasks.filter(task => task.id !== id))
   }
 
-  const createTask = ({ name, description, level }) => {
+  const createTask = (name, description, level) => {
     const newTask = new Task(tasks.length + 1, name, description, level)
     setTasks([...tasks, newTask])
   }
+
+  const [showNewTask, setShowNewTask] = useState(false)
 
   return (
         <TasksContext.Provider value ={{
           tasks,
           createTask,
-          deleteTask
+          deleteTask,
+          showNewTask,
+          setShowNewTask
         }}>
             { children }
         </TasksContext.Provider>
