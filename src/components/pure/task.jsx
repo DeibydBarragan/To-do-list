@@ -18,7 +18,7 @@ const TaskComponent = ({ task }) => {
                     { task.name }
                 </h4>
                 <p className='text-lg'>
-                    { task.description }
+                    { task.description === '' ? 'Sin descripción' : task.description }
                 </p>
                 <h5>
                     { task.level }

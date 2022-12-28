@@ -13,11 +13,11 @@
 }
 
 h5 {
-  @apply text-xl font-semibold font-workSans;
+  @apply text-lg font-semibold font-workSans;
 }
 
 h4 {
-  @apply text-2xl font-semibold font-workSans;
+  @apply text-xl font-semibold font-workSans;
 }
 
 h3 {

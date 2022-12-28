@@ -34,7 +34,7 @@ const TaskList = () => {
           <i className="bi bi-plus-circle mr-2 text-2xl"></i>
           New task
         </button>
-        {showNewTask && <NewTask set={setShowNewTask}></NewTask>}
+        {showNewTask && <NewTask></NewTask>}
       </div>
     </div>
   )
