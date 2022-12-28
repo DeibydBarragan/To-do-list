@@ -12,24 +12,24 @@ const TasksContextProvider = ({ children }) => {
     1,
     'Ejemplo',
     'Descripción de ejemplo',
-    false,
-    LEVELS.NORMAL
+    LEVELS.NORMAL,
+    false
   )
 
   const task2 = new Task(
     2,
     'Ejemplo2',
     'Descripción de ejemplo2',
-    true,
-    LEVELS.URGENT
+    LEVELS.URGENT,
+    true
   )
 
   const task3 = new Task(
     3,
     'Ejemplo3',
     'Descripción de ejemplo3',
-    false,
-    LEVELS.NORMAL
+    LEVELS.NORMAL,
+    false
   )
 
   const task4 = new Task(

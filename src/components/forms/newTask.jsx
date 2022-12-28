@@ -1,22 +1,19 @@
 import React, { useContext, useRef, useState } from 'react'
 import { TasksContext } from '../context/tasksContext'
 import { LEVELS } from '../../models/levels.enum'
-import { H3, H2 } from '../pure/titles'
-import { InputText } from '../pure/inputs'
-import Button from '../pure/button'
 import PropTypes from 'prop-types'
 
 const NewTask = () => {
   const { createTask, setShowNewTask } = useContext(TasksContext)
 
-  const [name, setName] = useState('')
-  const [description, setDescription] = useState('')
-  const [level, setLevel] = useState(null)
+  const name = useRef('')
+  const description = useRef('')
+  const [level, setLevel] = useState('Urgency')
   const [open, setOpen] = useState(false)
   const handleSubmit = (e) => {
     e.preventDefault()
     setShowNewTask(false)
-    createTask(name, description, level)
+    createTask(name.current.value, description.current.value, level)
   }
   const handleCloseModal = (e) => {
     if (e.target.id === 'container') {
@@ -33,23 +30,21 @@ const NewTask = () => {
   }
   return (
         <div id='container' onClick={(e) => handleCloseModal(e)} className='fixed inset-0 bg-black bg-opacity-30 flex justify-center items-center backdrop-blur-sm'>
-            <form onClick={(e) => handleCloseDrop(e)} onSubmit={handleSubmit} className='p-7 rounded-lg bg-indigo-700 shadow-2xl'>
-              <H2>New task</H2>
-              <H3>Name</H3>
-              <InputText set={setName}/>
-              <H3>Description</H3>
-              <InputText set={setDescription}/>
-              <div ref = {drop} className='bg-slate-800 mt-4 rounded-lg p-2 flex items-center justify-between cursor-pointer transition ease-in-out hover:scale-105 hover:shadow-xl'
+            <form onClick={(e) => handleCloseDrop(e)} onSubmit={handleSubmit} className='flex flex-col gap-4 p-7 rounded-lg shadow-2xl bg-gradient-to-tl from-emerald-600 via-indigo-800 to-fuchsia-700'>
+              <h2>New task</h2>
+              <input type='text' placeholder='Name' ref={name}/>
+              <input type='text' placeholder='Description' ref={description}/>
+              <div ref = {drop} className={`${level === 'Urgency' && 'text-gray-400'} bg-slate-800 rounded-lg p-2 flex items-center justify-between cursor-pointer transition ease-in-out hover:scale-105 hover:shadow-xl`}
               onClick={() => setOpen(!open)}
               >
-                Urgency
+                {level}
                 <i ref={icon} className={`bi bi-caret-down-fill text-xl ${open && 'transition duration-300 ease-in-out rotate-180'}`}></i>
               </div>
-              <ul className={`bg-slate-800 mt-2 divide-y divide-indigo-500 fixed z-10 w-48 rounded-md shadow-xl ${!open && 'hidden'}`}>
+              <ul className={`bg-slate-800 mt-56 divide-y divide-indigo-500 fixed z-10 w-48 rounded-md shadow-xl ${!open && 'hidden'}`}>
                   <li onClick={() => setLevel(LEVELS.NORMAL)} className='hover:bg-slate-900 p-2 cursor-pointer rounded-t-md'>Normal</li>
                   <li onClick={() => setLevel(LEVELS.URGENT)} className='hover:bg-slate-900 p-2 cursor-pointer rounded-b-md'>Urgent</li>
               </ul>
-              <Button color='bg-indigo-600' otherClasses=' mt-4 w-full shadow-xl hover:bg-indigo-500 hover:text-black'>Aceptar</Button>
+              <button className='btn w-full'>Accept</button>
             </form>
         </div>
   )
