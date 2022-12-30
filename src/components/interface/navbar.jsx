@@ -47,7 +47,7 @@ const Navbar = () => {
               {/** Button that logouts the user */}
               <button className='btn col-span-3'>
                 Logout
-                <i className="bi bi-box-arrow-right ml-2 text-2xl"></i>
+                <i className="bi bi-box-arrow-right ml-2 text-xl"></i>
               </button>
             </div>
           </div>
