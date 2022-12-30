@@ -2,8 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-
-
 .btn {
   @apply font-ptSans outline outline-1 p-2 rounded-lg font-semibold text-lg transition ease-in-out hover:shadow-2xl hover:bg-white hover:text-indigo-800;
 }
@@ -32,6 +30,6 @@ h1 {
   @apply text-5xl font-bold font-ptSans;
 }
 
-input[type='text'] {
+input, textarea {
   @apply rounded-md outline-none bg-slate-800 p-2 shadow-lg;
 }

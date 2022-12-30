@@ -43,17 +43,35 @@ const TasksContextProvider = ({ children }) => {
   // List of task examples
   const tasksList = [task1, task2, task3, task4]
 
+  /**
+   * useState for the tasklist as an array that contains the tasks
+   */
   const [tasks, setTasks] = useState(tasksList)
 
+  /**
+   * function that deletes the task from the array tasks of the useState
+   * @param {number} id of the task
+   */
   const deleteTask = (id) => {
     setTasks(tasks.filter(task => task.id !== id))
   }
 
+  /**
+   *
+   * @param {string} name of the task
+   * @param {string} description
+   * @param {InstanceType} level as a instance of the class LEVELS
+   */
   const createTask = (name, description, level) => {
-    const newTask = new Task(tasks.length + 1, name, description, level)
-    setTasks([...tasks, newTask])
+    /**
+     * Calling the function setTasks to push a new instance of the task class into the array
+     */
+    setTasks([...tasks, new Task(tasks.length + 1, name, description, level)])
   }
 
+  /**
+   * useState for show the form to create a new task
+   */
   const [showNewTask, setShowNewTask] = useState(false)
 
   return (

@@ -1,9 +1,9 @@
-// eslint-disable-next-line no-unused-vars
-import React, { useState, useContext } from 'react'
+import React, { useContext } from 'react'
 import TaskComponent from '../pure/task'
 import moment from 'moment'
 import { dayToString, monthToString } from '../../functions/dates'
 import { TasksContext } from '../context/tasksContext'
+import { NavbarContext } from '../context/navbarContext'
 import NewTask from '../forms/newTask'
 
 /**
@@ -11,9 +11,10 @@ import NewTask from '../forms/newTask'
  */
 const TaskList = () => {
   const { tasks, showNewTask, setShowNewTask } = useContext(TasksContext)
+  const { navbarOpen } = useContext(NavbarContext)
 
   return (
-    <div className="flex flex-col p-6 gap-3 col-span-12 lg:col-span-8">
+    <div className={`${navbarOpen ? 'blur-sm' : ''} flex flex-col p-6 gap-3 col-span-12 lg:col-span-8`}>
       <h1 className="text-5xl font-bold">Today</h1>
       {/** weekday and month as strings */}
       <h4>
@@ -30,11 +31,11 @@ const TaskList = () => {
           {/** Iterate every element of tasklist to return a TaskComponent for each one */}
           {tasks.map((task, i) => <TaskComponent task={task} key={i}></TaskComponent>)}
         </div>
-        <button onClick={() => setShowNewTask(true)} className='font-semibold text-xl shadow-xl flex items-center fixed bottom-0 right-0 mb-4 mx-4 md:mb-16 md:mx-20 rounded-xl p-3 transition ease-in-out hover:scale-110 bg-gradient-to-tl hover: from-indigo-600 to-fuchsia-600 hover:drop-shadow-xl'>
+        <button onClick={() => setShowNewTask(true)} className='font-semibold text-xl shadow-xl flex items-center fixed bottom-0 right-0 mb-4 mx-4 md:mb-16 md:mx-20 rounded-xl p-3 transition ease-in-out hover:scale-110 bg-gradient-to-tl from-indigo-600 to-fuchsia-600 hover:drop-shadow-xl z-10'>
           <i className="bi bi-plus-circle mr-2 text-2xl"></i>
           New task
         </button>
-        {showNewTask && <NewTask></NewTask>}
+        {showNewTask && <NewTask/>}
       </div>
     </div>
   )

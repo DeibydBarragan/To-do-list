@@ -4,12 +4,15 @@ import './index.css'
 import App from './App'
 import reportWebVitals from './reportWebVitals'
 import { TasksContextProvider } from './components/context/tasksContext'
+import { NavbarContextProvider } from './components/context/navbarContext'
 
 const root = ReactDOM.createRoot(document.getElementById('root'))
 root.render(
   <React.StrictMode>
     <TasksContextProvider>
-      <App />
+      <NavbarContextProvider>
+        <App />
+      </NavbarContextProvider>
     </TasksContextProvider>
   </React.StrictMode>
 )
