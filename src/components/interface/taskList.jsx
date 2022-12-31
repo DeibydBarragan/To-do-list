@@ -1,7 +1,7 @@
 import React, { useContext } from 'react'
 import TaskComponent from '../pure/task'
 import moment from 'moment'
-import { dayToString, monthToString } from '../../functions/dates'
+import { dayToString, monthToString } from '../../helpers/dates'
 import { TasksContext } from '../context/tasksContext'
 import { NavbarContext } from '../context/navbarContext'
 import NewTask from '../forms/newTask'
@@ -14,7 +14,7 @@ const TaskList = () => {
   const { navbarOpen } = useContext(NavbarContext)
 
   return (
-    <div className={`${navbarOpen ? 'blur-sm' : ''} flex flex-col p-6 gap-3 col-span-12 lg:col-span-8`}>
+    <div className={`${navbarOpen ? 'blur-sm' : ''} flex flex-col p-6 gap-3 col-span-12 lg:col-span-8 lg:ml-5 xl:ml-0`}>
       <h1 className="text-5xl font-bold">Today</h1>
       {/** weekday and month as strings */}
       <h4>
@@ -29,7 +29,7 @@ const TaskList = () => {
         </div>
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 2xl:grid-cols-4">
           {/** Iterate every element of tasklist to return a TaskComponent for each one */}
-          {tasks.map((task, i) => <TaskComponent task={task} key={i}></TaskComponent>)}
+          {tasks.map((task, i) => <TaskComponent task={task} key={task.id}></TaskComponent>)}
         </div>
         <button onClick={() => setShowNewTask(true)} className='font-semibold text-xl shadow-xl flex items-center fixed bottom-0 right-0 mb-4 mx-4 md:mb-16 md:mx-20 rounded-xl p-3 transition ease-in-out hover:scale-110 bg-gradient-to-tl from-indigo-600 to-fuchsia-600 hover:drop-shadow-xl z-10'>
           <i className="bi bi-plus-circle mr-2 text-2xl"></i>

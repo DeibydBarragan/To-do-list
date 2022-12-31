@@ -1,4 +1,4 @@
-import React, { useContext } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { NavbarContext } from '../context/navbarContext'
 /**
  *
@@ -7,12 +7,30 @@ import { NavbarContext } from '../context/navbarContext'
 const Navbar = () => {
   const { navbarOpen, setNavBarOpen } = useContext(NavbarContext)
 
+  const [width, setWidth] = useState(window.innerWidth)
+
+  const handleResize = () => {
+    setWidth(window.innerWidth)
+  }
+
+  window.addEventListener('resize', handleResize)
+
+  useEffect(() => {
+    setNavBarOpen(false)
+  }, [width])
+
+  const handleCloseNavbar = (e) => {
+    if (e.target.id === 'navbar') {
+      setNavBarOpen(false)
+    }
+  }
+
   return (
-        <div id='navbar' className='col-span-3 fixed lg:sticky z-20 lg:z-auto'>
-          <button onClick={() => setNavBarOpen(!navbarOpen)} className='fixed shadow-xl flex items-center top-0 right-0 mt-4 mx-4 rounded-xl p-1 transition ease-in-out hover:scale-110 bg-gradient-to-tl from-indigo-600 to-fuchsia-600 hover:drop-shadow-xl fixed lg:hidden z-10'>
+        <div id='navbar' onClick={(e) => handleCloseNavbar(e)} className={`${navbarOpen ? 'inset-0 grid grid-cols-12' : ''} col-span-3 h-screen fixed lg:sticky z-20 lg:z-auto`}>
+          <button onClick={() => setNavBarOpen(!navbarOpen)} className='shadow-xl flex items-center top-0 right-0 mt-4 mx-4 rounded-xl p-1 transition ease-in-out hover:scale-110 bg-gradient-to-tl from-indigo-600 to-fuchsia-600 hover:drop-shadow-xl fixed lg:hidden z-10'>
             <i className="bi bi-list text-4xl"></i>
           </button>
-          <div className={`bg-gradient-to-tl from-emerald-600 via-indigo-800 to-fuchsia-700 gap-6 p-4 lg:p-8 top-0 w-auto h-screen ${navbarOpen ? 'flex' : 'hidden lg:flex'} flex-col`}>
+          <div className={`bg-gradient-to-tl from-emerald-600 via-indigo-800 to-fuchsia-700 gap-6 p-4 lg:p-8 top-0 w-auto ${navbarOpen ? 'flex col-span-8 sm:col-span-5 md:col-span-4' : 'hidden lg:flex'} flex-col h-screen fixed`}>
             <div className='flex flex-row gap-4 items-center justify-center cursor-pointer'>
               <img className='rounded-full w-12' alt='' src='https://images.unsplash.com/photo-1595433707802-6b2626ef1c91?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxleHBsb3JlLWZlZWR8MXx8fGVufDB8fHx8&w=1000&q=80'></img>
               <h2 className='text-2xl'>
