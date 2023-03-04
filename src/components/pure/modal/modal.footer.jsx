@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 
 const ModalFooter = ({ children }) => {
   return (
-        <div className='mt-auto'>
+        <div className='mt-3'>
             {children}
         </div>
   )

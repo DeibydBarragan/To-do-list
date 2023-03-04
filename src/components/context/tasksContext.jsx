@@ -14,6 +14,7 @@ const TasksContextProvider = ({ children }) => {
     'Ejemplo',
     'Descripción de ejemplo',
     LEVELS.NORMAL,
+    null,
     false
   )
 
@@ -22,6 +23,7 @@ const TasksContextProvider = ({ children }) => {
     'Ejemplo2',
     'Descripción de ejemplo2',
     LEVELS.URGENT,
+    null,
     true
   )
 
@@ -30,6 +32,7 @@ const TasksContextProvider = ({ children }) => {
     'Ejemplo3',
     'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod aaaa Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod aaaaLorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod aaaa',
     LEVELS.NORMAL,
+    null,
     false
   )
 
@@ -38,6 +41,7 @@ const TasksContextProvider = ({ children }) => {
     'Ejemplo4',
     'Descripción de ejemplo4',
     LEVELS.NORMAL,
+    null,
     true
   )
 
@@ -62,7 +66,26 @@ const TasksContextProvider = ({ children }) => {
       * push a new instance of the task class into the array
       */
       case TYPES.create: {
-        return [...state, new Task(Math.random(), action.payload.name, action.payload.description, action.payload.level, false)]
+        return [...state, new Task(Math.random(), action.payload.name, action.payload.description, action.payload.level, action.payload.endDate, false)]
+      }
+      /**
+       * complete a task
+       */
+      case TYPES.complete: {
+        return state.map(task => {
+          if (task.id === action.payload) {
+            return new Task(task.id, task.name, task.description, task.level, task.endDate, !task.isCompleted)
+          }
+          return new Task(task.id, task.name, task.description, task.level, task.endDate, task.isCompleted)
+        })
+      }
+      case TYPES.edit: {
+        return state.map(task => {
+          if (task.id === action.payload.id) {
+            return new Task(task.id, action.payload.name, action.payload.description, action.payload.level, action.payload.endDate, task.isCompleted)
+          }
+          return new Task(task.id, task.name, task.description, task.level, task.endDate, task.isCompleted)
+        })
       }
       default: return state
     }
@@ -72,13 +95,7 @@ const TasksContextProvider = ({ children }) => {
    */
   const [tasks, dispatchTask] = useReducer(reducer, tasksList)
 
-  /**
-   *
-   * @param {string} name of the task
-   * @param {string} description
-   * @param {InstanceType} level as a instance of the class LEVELS
-   */
-
+  const [showedTask, setShowedTask] = useState(null)
   /**
    * useState for show the form to create a new task
    */
@@ -86,7 +103,7 @@ const TasksContextProvider = ({ children }) => {
   /**
    * useState for show the form to edit a task
    */
-  const [editTask, setShowEditTask] = useState(false)
+  const [showEditTask, setShowEditTask] = useState(false)
   /**
    * useState for show the details of a task
    */
@@ -98,9 +115,11 @@ const TasksContextProvider = ({ children }) => {
           dispatchTask,
           showTask,
           setShowTask,
+          showedTask,
+          setShowedTask,
           showNewTask,
           setShowNewTask,
-          editTask,
+          showEditTask,
           setShowEditTask
         }}>
             { children }

@@ -2,8 +2,12 @@
 @tailwind components;
 @tailwind utilities;
 
+.background-auth {
+  background-image: url(../public/background.svg);
+}
+
 .btn {
-  @apply font-ptSans outline outline-1 p-2 rounded-lg font-semibold text-lg transition ease-in-out hover:shadow-2xl hover:bg-white hover:text-indigo-800;
+  @apply font-ptSans flex items-center justify-center outline outline-1 p-2 rounded-lg font-semibold text-lg transition ease-in-out hover:shadow-2xl hover:bg-white hover:text-indigo-800;
 }
 
 .btn-icon {
@@ -30,6 +34,10 @@ h1 {
   @apply text-5xl font-bold font-ptSans;
 }
 
-input, textarea {
+.input-tasks {
   @apply rounded-md outline-none bg-slate-800 p-2 shadow-lg;
+}
+
+.input-auth {
+  @apply bg-transparent border-b outline-none border-slate-400 text-lg
 }

@@ -3,17 +3,14 @@ import ReactDOM from 'react-dom/client'
 import './index.css'
 import App from './App'
 import reportWebVitals from './reportWebVitals'
-import { TasksContextProvider } from './components/context/tasksContext'
-import { NavbarContextProvider } from './components/context/navbarContext'
+import { ModalContextProvider } from './components/context/ModalContext'
 
 const root = ReactDOM.createRoot(document.getElementById('root'))
 root.render(
   <React.StrictMode>
-    <TasksContextProvider>
-      <NavbarContextProvider>
-        <App />
-      </NavbarContextProvider>
-    </TasksContextProvider>
+    <ModalContextProvider>
+      <App />
+    </ModalContextProvider>
   </React.StrictMode>
 )
 

@@ -1,5 +1,6 @@
 export const TYPES = {
   create: 'create',
   edit: 'edit',
-  delete: 'delete'
+  delete: 'delete',
+  complete: 'complete'
 }

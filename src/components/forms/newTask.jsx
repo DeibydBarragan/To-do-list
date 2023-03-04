@@ -1,4 +1,4 @@
-import React, { useContext, useRef, useState } from 'react'
+import React, { useContext, useState } from 'react'
 import { TasksContext } from '../context/tasksContext'
 import { LEVELS } from '../../models/levels.enum'
 import { useForm } from 'react-hook-form'
@@ -6,12 +6,20 @@ import Modal from '../pure/modal/modal'
 import { TYPES } from '../../models/taskActions'
 import ModalFooter from '../pure/modal/modal.footer'
 import ModalBody from '../pure/modal/modal.body'
+import { ModalContext } from '../context/ModalContext'
+import Select from './pure/select'
+import Option from './pure/option'
 
 const NewTask = () => {
   /**
-   * Brings createTask and setShowNewTask functions from TasksContext
+   * Brings createTask function from TasksContext
    */
+  // eslint-disable-next-line no-unused-vars
   const { dispatchTask, setShowNewTask } = useContext(TasksContext)
+  /**
+   * Brings setModalOpen to close the modal whether the form is submitted
+   */
+  const { setModalOpen } = useContext(ModalContext)
 
   /**
    * Brings register to save the data form
@@ -37,60 +45,47 @@ const NewTask = () => {
      */
     data.level === null && (data.level = LEVELS.NORMAL)
     // Close de form
+    setModalOpen(false)
     setShowNewTask(false)
+    // setShowNewTask(false)
     dispatchTask({
       type: TYPES.create,
-      payload: { name: data.name, description: data.description, level: data.level }
+      payload: { name: data.name, description: data.description, level: data.level, endDate: data.endDate }
     })
   }
 
-  /**
-   * state for the dropdown, when it is false, it isn't open
-   */
-  const [open, setOpen] = useState(false)
-  const drop = useRef()
-  const icon = useRef()
-  /**
-   *This function is for closing the dropdown when the user touches an element different to the icon or the drop button
-   * @param {InstanceType} e event
-   */
-  const handleCloseDrop = (e) => {
-    if (drop.current !== e.target && icon.current !== e.target) {
-      setOpen(false)
-    }
-  }
   return (
     <Modal>
-      <form className='gap-4'
-        onClick={(e) => handleCloseDrop(e)}
-        onSubmit={handleSubmit(onSubmit)}
-      >
+      <form onSubmit={handleSubmit(onSubmit)}>
         <ModalBody>
-          <div>
             <h2>New task</h2>
-            <input className='w-full mt-4' autoComplete="off" type='text' maxLength='50' placeholder='Name' {...register('name', {
-              required: true
-            })} />
+            <input
+             className='input-tasks mt-4'
+             autoComplete="off"
+             type='text'
+             maxLength='50'
+             placeholder='Name'
+             {...register('name', { required: true })}
+            />
             <p>
               { errors.name?.type === 'required' && 'The name field is required'}
             </p>
-            <textarea className='w-full mt-4 h-3/6' maxLength='200' autoComplete="off" type='text' placeholder='Description' {...register('description'
-            )} />
-            <div ref = {drop} className={`${level === null && 'text-gray-400'} bg-slate-800 rounded-lg p-2 flex items-center justify-between cursor-pointer transition ease-in-out hover:scale-105 hover:shadow-xl mt-2`}
-              onClick={() => setOpen(!open)} >
-              {level === null ? 'Urgency' : level}
-              <i ref={icon} className={`bi bi-caret-down-fill text-xl ${open && 'transition duration-300 ease-in-out rotate-180'}`}/>
-            </div>
-            <ul className={`bg-slate-800 mt-2 divide-y divide-indigo-500 fixed z-10 w-48 rounded-md shadow-xl ${!open && 'hidden'}`}>
-              <li onClick={() => setLevel(LEVELS.NORMAL)} className='hover:bg-slate-900 p-2 cursor-pointer rounded-t-md'>
-                Normal
-              </li>
-              <li onClick={() => setLevel(LEVELS.URGENT)} className='hover:bg-slate-900 p-2 cursor-pointer rounded-b-md'>
-                Urgent
-              </li>
-            </ul>
-          </div>
-          <ModalFooter className='mt-auto'>
+            <textarea
+             className='input-tasks mt-3'
+             maxLength='200'
+             autoComplete="off"
+             placeholder='Description'
+             {...register('description')}
+            />
+            <input
+              type='date'
+              className='input-tasks mt-3'
+              {...register('endDate')}
+            />
+            <Select state={level} placeholder='Urgency'>
+              {Object.values(LEVELS).map((props) => <Option key={props} set={setLevel}>{props}</Option>)}
+            </Select>
+          <ModalFooter>
             <button type='submit' className='btn w-full'>Add task</button>
           </ModalFooter>
         </ModalBody>
