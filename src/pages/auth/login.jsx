@@ -29,7 +29,7 @@ const Login = () => {
                   Register
                   <i className='bi bi-person-add ml-2 text-2xl'/>
                 </button>
-                <a className='underline decoration-1' onClick={handleForgot}>Forgot your password?</a>
+                <a className='underline decoration-1'>Forgot your password?</a>
               </div>
               <div className='hidden sm:grid grid-cols-1 gap-4 content-center rounded-r-2xl p-8 bg-gradient-to-tr from-purple-800 to-orange-500'>
                 <h1>Welcome!</h1>

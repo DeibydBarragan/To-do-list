@@ -7,7 +7,9 @@ import { NavbarContext } from '../context/navbarContext'
 import NewTask from '../forms/newTask'
 import ShowTask from '../pure/showTask'
 import { ModalContext } from '../context/ModalContext'
+import { FiltersContext } from '../context/filtersContext'
 import EditTask from '../forms/editTask'
+import { FILTERS } from '../../models/filters.enum'
 
 /**
  * Component that returns the list of tasks
@@ -16,7 +18,7 @@ const TaskList = () => {
   const { tasks, showTask, showEditTask, showNewTask, setShowNewTask } = useContext(TasksContext)
   const { modalOpen, setModalOpen } = useContext(ModalContext)
   const { navbarOpen } = useContext(NavbarContext)
-
+  const { filter } = useContext(FiltersContext)
   // Function to sort the tasks by their date
   const sortByDate = (taskA, taskB) => {
     if (taskA.endDate < taskB.endDate) {
@@ -27,7 +29,20 @@ const TaskList = () => {
       return 0
     }
   }
-  const sortedTasks = tasks.sort(sortByDate)
+  // Function to filter tasks
+  const filterTasks = (task) => {
+    switch (filter) {
+      case FILTERS.ALL: return !task.isCompleted
+      case FILTERS.TODAY: return task?.endDate === moment().format('YYYY-MM-DD') && !task.isCompleted
+      case FILTERS.COMPLETED: return task.isCompleted
+      case FILTERS.NEXTSEVEN: {
+        const taskDate = moment(task.endDate)
+        const difference = taskDate.diff(moment(), 'days')
+        return difference <= 7 && difference >= 0
+      }
+    }
+  }
+  const sortedTasks = tasks.sort(sortByDate).filter(filterTasks)
 
   // Open modal for creating a new task
   const handleClickNewTask = () => {
@@ -37,7 +52,7 @@ const TaskList = () => {
 
   return (
     <div className={`${navbarOpen ? 'blur-sm' : ''} flex flex-col p-6 gap-3 col-span-12 lg:col-span-8 lg:ml-5 xl:ml-0`}>
-      <h1 className="text-5xl font-bold">Today</h1>
+      <h1 className="text-5xl font-bold">{filter}</h1>
       {/** weekday and month as strings */}
       <h4>
         {dayToString(moment().weekday())}, {monthToString(moment().month())},{' '}

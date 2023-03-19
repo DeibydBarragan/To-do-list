@@ -9,6 +9,9 @@
 .btn {
   @apply font-ptSans flex items-center justify-center outline outline-1 p-2 rounded-lg font-semibold text-lg transition ease-in-out hover:shadow-2xl hover:bg-white hover:text-indigo-800;
 }
+.btn-selected {
+  @apply bg-white text-indigo-800;
+}
 
 .btn-icon {
   @apply transition ease-in-out hover:scale-110;

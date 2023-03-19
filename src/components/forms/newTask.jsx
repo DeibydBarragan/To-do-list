@@ -24,7 +24,7 @@ const NewTask = () => {
   /**
    * Brings register to save the data form
    * errors to manage errors
-   * handleSubmit is the name of the function that manage the form when it is submitted
+   * handleSubmit is to manage the form when it is submitted
    */
   const { register, formState: { errors }, handleSubmit } = useForm()
 

@@ -4,15 +4,17 @@ import TaskList from '../../components/interface/taskList'
 import PropTypes from 'prop-types'
 import { TasksContextProvider } from '../../components/context/tasksContext'
 import { NavbarContextProvider } from '../../components/context/navbarContext'
-
+import { FiltersContextProvider } from '../../components/context/filtersContext'
 const Home = ({ filter }) => {
   return (
         <TasksContextProvider>
             <NavbarContextProvider>
-                <div className='grid grid-cols-12'>
-                    <Navbar/>
-                    <TaskList/>
-                </div>
+                <FiltersContextProvider>
+                      <div className='grid grid-cols-12'>
+                          <Navbar filter={ filter }/>
+                          <TaskList filter={ filter }/>
+                      </div>
+                </FiltersContextProvider>
             </NavbarContextProvider>
         </TasksContextProvider>
   )

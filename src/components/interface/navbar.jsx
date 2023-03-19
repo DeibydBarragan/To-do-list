@@ -1,12 +1,18 @@
 import React, { useContext, useEffect, useState } from 'react'
 import { NavbarContext } from '../context/navbarContext'
+import { FiltersContext } from '../context/filtersContext'
 import { useNavigate } from 'react-router-dom'
+import { FILTERS } from '../../models/filters.enum'
+import { ThemeContext } from '../context/themeContext'
 /**
  *
  * @returns the side navbar
  */
 const Navbar = () => {
+  // Active filter
+  const { filter, setFilter } = useContext(FiltersContext)
   const { navbarOpen, setNavBarOpen } = useContext(NavbarContext)
+  const { theme, setTheme } = useContext(ThemeContext)
 
   // Close the navbar wehen the window is resized
   const [width, setWidth] = useState(window.innerWidth)
@@ -32,23 +38,31 @@ const Navbar = () => {
   const navigate = useNavigate()
 
   const handleAll = () => {
-    navigate('/home')
+    setFilter(FILTERS.ALL)
+    navigate(`/home/${FILTERS.ALL}`)
   }
 
   const handleToday = () => {
-    navigate('/home/today')
+    setFilter(FILTERS.TODAY)
+    navigate(`/home/${FILTERS.TODAY}`)
   }
 
   const handleWeek = () => {
-    navigate('/home/week')
+    setFilter(FILTERS.NEXTSEVEN)
+    navigate(`/home/${FILTERS.NEXTSEVEN}`)
   }
 
   const handleCompleted = () => {
-    navigate('/home/completed')
+    setFilter(FILTERS.COMPLETED)
+    navigate(`/home/${FILTERS.COMPLETED}`)
   }
 
   const handleLogout = () => {
     navigate('/login')
+  }
+
+  const handleTheme = () => {
+    setTheme(theme === 'dark' ? 'light' : 'dark')
   }
   return (
         <div id='navbar' onClick={(e) => handleCloseNavbar(e)} className={`${navbarOpen ? 'inset-0 grid grid-cols-12' : ''} col-span-3 h-screen fixed lg:sticky z-20 lg:z-auto`}>
@@ -62,31 +76,32 @@ const Navbar = () => {
                 Name
               </h2>
             </div>
-            {/** Button that redirects to ALL */}
-            <button className='btn' onClick={handleAll}>
-              <i className="bi bi-calendar3 mr-2 text-xl"></i>
-              All
-            </button>
             {/** Button that redirects to Today tasks */}
-            <button className='btn' onClick={handleToday}>
+            <button className={`btn ${filter === FILTERS.TODAY && 'btn-selected'}`} onClick={handleToday}>
               <i className="bi bi-calendar-day mr-2 text-xl"></i>
               Today
             </button>
+            {/** Button that redirects to ALL */}
+            <button className={`btn ${filter === FILTERS.ALL && 'btn-selected'}`} onClick={handleAll}>
+              <i className="bi bi-calendar3 mr-2 text-xl"></i>
+              All
+            </button>
             {/** Button that redirects to Next 7 days */}
-            <button className='btn' onClick={handleWeek}>
+            <button className={`btn ${filter === FILTERS.NEXTSEVEN && 'btn-selected'}`} onClick={handleWeek}>
               <i className="bi bi-calendar-date mr-2 text-xl"></i>
               Next 7 days
             </button>
             {/** Button that redirects to Completed */}
-            <button className='btn' onClick={handleCompleted}>
+            <button className={`btn ${filter === FILTERS.COMPLETED && 'btn-selected'}`} onClick={handleCompleted}>
               <i className="bi bi-check2-square mr-2 text-xl"></i>
               Completed
             </button>
             <div className='mt-auto grid grid-cols-4 gap-3'>
               {/** Button that turns on the darkmode */}
-              <button className='btn'>
+              <button className='btn' onClick={handleTheme}>
                 <i className="bi bi-lightbulb text-3xl"></i>
               </button>
+              <h4>{theme}</h4>
               {/** Button that logouts the user */}
               <button className='btn col-span-3' onClick={handleLogout}>
                 Logout

@@ -5,7 +5,7 @@ import AppRoutes from './routes/AppRoutes'
 
 function App () {
   return (
-    <div className="App bg-gray-900 text-white gap-5 font-montserrat">
+    <div className="App dark:bg-gray-900 bg-white text-white gap-5 font-montserrat">
         <AppRoutes/>
     </div>
   )
