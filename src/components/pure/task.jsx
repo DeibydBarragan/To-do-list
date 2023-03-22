@@ -8,27 +8,8 @@ import CompleteTask from '../forms/pure/completeTask'
 import DeleteTask from '../forms/pure/deleteTask'
 import EditTaskBtn from '../forms/pure/editTaskBtn'
 import { motion, AnimatePresence } from 'framer-motion'
+import { taskVariants } from '../animations/tasksAnim'
 
-const taskVariants = {
-  key: 'box',
-  hidden: {
-    opacity: 0,
-    y: 50
-  },
-  visible: {
-    opacity: 1,
-    y: 0,
-    transition: { dutation: 0.3 }
-  },
-  exit: {
-    opacity: 0,
-    transition: { duration: 2 }
-  },
-  hover: {
-    scale: 1.05,
-    transition: { duration: 0.15 }
-  }
-}
 /**
  * Component that receives an instance of task and returns a card with the task information
  * @param {instance of task} param0

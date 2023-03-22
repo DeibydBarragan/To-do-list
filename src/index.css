@@ -38,7 +38,7 @@ h1 {
 }
 
 .input-tasks {
-  @apply rounded-md outline-none bg-slate-800 p-2 shadow-lg;
+  @apply rounded-md outline-none bg-slate-200 dark:bg-slate-800 placeholder:text-black dark:placeholder:text-gray-400 text-black dark:text-white p-2 shadow-lg;
 }
 
 .input-auth {

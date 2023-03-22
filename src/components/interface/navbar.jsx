@@ -4,6 +4,8 @@ import { FiltersContext } from '../context/filtersContext'
 import { useNavigate } from 'react-router-dom'
 import { FILTERS } from '../../models/filters.enum'
 import { ThemeContext } from '../context/themeContext'
+import { motion } from 'framer-motion'
+import { navbarVariants } from '../animations/navbarAnim'
 /**
  *
  * @returns the side navbar
@@ -65,7 +67,11 @@ const Navbar = () => {
     setTheme(theme === 'dark' ? 'light' : 'dark')
   }
   return (
-        <div id='navbar' onClick={(e) => handleCloseNavbar(e)} className={`${navbarOpen ? 'inset-0 grid grid-cols-12' : ''} col-span-3 h-screen fixed lg:sticky z-20 lg:z-auto`}>
+        <motion.div
+          variants={ navbarVariants }
+          initial='hidden'
+          animate='show'
+          id='navbar' onClick={(e) => handleCloseNavbar(e)} className={`${navbarOpen ? 'inset-0 grid grid-cols-12' : ''} col-span-3 h-screen fixed lg:sticky z-20 lg:z-auto`}>
           <button onClick={() => setNavBarOpen(!navbarOpen)} className='shadow-xl flex items-center top-0 right-0 mt-4 mx-4 rounded-xl p-1 transition ease-in-out hover:scale-110 bg-gradient-to-tl from-indigo-600 to-fuchsia-600 hover:drop-shadow-xl fixed lg:hidden z-10'>
             <i className="bi bi-list text-4xl"></i>
           </button>
@@ -101,7 +107,6 @@ const Navbar = () => {
               <button className='btn' onClick={handleTheme}>
                 <i className="bi bi-lightbulb text-3xl"></i>
               </button>
-              <h4>{theme}</h4>
               {/** Button that logouts the user */}
               <button className='btn col-span-3' onClick={handleLogout}>
                 Logout
@@ -109,7 +114,7 @@ const Navbar = () => {
               </button>
             </div>
           </div>
-        </div>
+        </motion.div>
   )
 }
 

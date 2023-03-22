@@ -3,6 +3,7 @@ import { ModalContext } from '../../context/ModalContext'
 import PropTypes from 'prop-types'
 import { TasksContext } from '../../context/tasksContext'
 import { motion, AnimatePresence } from 'framer-motion'
+import { modalVariants } from '../../animations/modalAnim'
 
 const Modal = ({ children }) => {
   const { setModalOpen } = useContext(ModalContext)
@@ -33,10 +34,10 @@ const Modal = ({ children }) => {
       >
         <motion.div
           key='box'
-          initial={{ opacity: 0, scale: 0.8 }}
-          transition={{ duration: 0.1, ease: 'easeOut' }}
-          animate={{ opacity: 1, scale: 1 }}
-          exit={{ duration: 2, opacity: 0 }}
+          variants={modalVariants}
+          initial='hidden'
+          animate='visible'
+          exit='exit'
           className='h-auto w-10/12 sm:w-8/12 md:w-6/12 xl:w-4/12 p-5 grid rounded-lg shadow-2xl bg-gradient-to-tl from-emerald-600 via-indigo-800 to-fuchsia-700'>
           {children}
         </motion.div>
