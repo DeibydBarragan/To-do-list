@@ -12,7 +12,7 @@ import { FiltersContext } from '../context/filtersContext'
 import EditTask from '../forms/editTask'
 import { FILTERS } from '../../models/filters.enum'
 import { motion, AnimatePresence } from 'framer-motion'
-import { btnVariants } from '../animations/btnAnim'
+import NewTaskButton from '../pure/buttons/newTaskButton'
 
 const container = {
   hidden: { opacity: 0 },
@@ -57,12 +57,6 @@ const TaskList = () => {
   }
   const sortedTasks = tasks.sort(sortByDate).filter(filterTasks)
 
-  // Open modal for creating a new task
-  const handleClickNewTask = () => {
-    setModalOpen(true)
-    setShowNewTask(true)
-  }
-
   return (
       <div className={`${navbarOpen ? 'blur-sm' : ''} flex flex-col p-6 gap-3 col-span-12 lg:col-span-8 lg:ml-5 xl:ml-0`}>
         <motion.div
@@ -92,18 +86,12 @@ const TaskList = () => {
             {/** Iterate every element of tasklist to return a TaskComponent for each one */}
             {sortedTasks.map((task) => <TaskComponent task={task} key={task.id}></TaskComponent>)}
           </div>
-          <motion.button onClick={handleClickNewTask}
-            variants={ btnVariants }
-            initial='hidden'
-            animate='show'
-            whileHover='hover'
-            className='font-semibold text-xl shadow-xl flex items-center fixed bottom-0 right-0 mb-4 mx-4 md:mb-16 md:mx-20 rounded-xl p-3 transition ease-in-out bg-gradient-to-tl from-indigo-600 to-fuchsia-600 hover:drop-shadow-xl z-10'>
-            <i className="bi bi-plus-circle mr-2 text-2xl"></i>
-            New task
-          </motion.button>
-          {showNewTask && modalOpen && <NewTask/>}
-          {showTask && modalOpen && <ShowTask/>}
-          {showEditTask && modalOpen && <EditTask/>}
+          <AnimatePresence>
+            {!navbarOpen && <NewTaskButton/>}
+            {showNewTask && modalOpen && <NewTask/>}
+            {showTask && modalOpen && <ShowTask/>}
+            {showEditTask && modalOpen && <EditTask/>}
+          </AnimatePresence>
         </div>
       </div>
   )

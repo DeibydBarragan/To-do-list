@@ -13,10 +13,6 @@
   @apply bg-white text-indigo-800;
 }
 
-.btn-icon {
-  @apply transition ease-in-out hover:scale-110;
-}
-
 h5 {
   @apply text-lg font-semibold font-workSans;
 }
@@ -44,3 +40,27 @@ h1 {
 .input-auth {
   @apply bg-transparent border-b outline-none border-slate-400 text-lg
 }
+
+::-webkit-scrollbar {
+  @apply w-auto
+}
+
+::-webkit-scrollbar-thumb {
+  @apply bg-indigo-700 rounded-sm
+}
+
+::-webkit-scrollbar-track {
+  @apply dark:bg-gray-900
+}
+
+::-webkit-scrollbar-button {
+  @apply dark:bg-gray-900
+}
+
+::-webkit-scrollbar-corner {
+  @apply bg-indigo-400
+}
+
+
+
+

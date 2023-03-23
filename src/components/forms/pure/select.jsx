@@ -1,6 +1,6 @@
 import React, { useState, useRef } from 'react'
 import PropTypes from 'prop-types'
-import { motion, AnimatePresence } from 'framer-motion'
+import { motion } from 'framer-motion'
 
 const Select = ({ children, state, placeholder }) => {
   /**
@@ -28,13 +28,11 @@ const Select = ({ children, state, placeholder }) => {
           {state === null ? placeholder : state}
           <i ref={icon} className={`bi bi-caret-down-fill text-xl ${open && 'transition duration-300 ease-in-out rotate-180'}`}/>
         </div>
-        <AnimatePresence>
-          <motion.div className='mt-2 divide-y-2'>
+        <motion.div className='mt-2 divide-y-2'>
             <ul className={`bg-slate-200 dark:bg-slate-800 absolute divide-y divide-indigo-500 z-10 w-48 rounded-md shadow-xl ${!open && 'hidden'}`}>
               {children}
             </ul>
-          </motion.div>
-        </AnimatePresence>
+        </motion.div>
     </div>
   )
 }

@@ -1,7 +1,11 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 
 const Login = () => {
+  const navigate = useNavigate()
+  const handleRegister = () => {
+    navigate('/register')
+  }
   return (
         <div className='fixed inset-0 content-center background-auth bg-cover grid grid-cols-6 sm:grid-cols-7 md:grid-cols-8 lg:grid-cols-10 xl:grid-cols-12 p-6 sm:p-10 md:p-14 lg:p-16 gap-7'>
             <div className='h-auto grid grid-cols-2 col-span-7'>
@@ -9,7 +13,7 @@ const Login = () => {
                 <h1>Sign in</h1>
                 <div className='flex gap-5'>
                   <Link>
-                    <i className="text-4xl bi bi-google transition ease-in-out hover:scale-110"/>
+                    <i className="text-4xl bi bi-google"/>
                   </Link>
                   <Link>
                     <i className="text-4xl bi bi-facebook"/>
@@ -35,7 +39,7 @@ const Login = () => {
                 <h1>Welcome!</h1>
                 <div className='flex flex-col gap-2 mb-20'>
                   <h4>Create your account</h4>
-                  <button className='btn'>
+                  <button className='btn' onClick={handleRegister}>
                     Register
                     <i className='bi bi-person-add ml-2 text-2xl'/>
                   </button>

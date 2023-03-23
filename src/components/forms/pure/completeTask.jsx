@@ -15,7 +15,7 @@ const CompleteTask = ({ taskId }) => {
     })
   }
   return (
-    <button onClick={handleOnClick} className='btn-icon w-min'>
+    <button onClick={handleOnClick} className='w-min'>
         <i className={tasks[tasks.findIndex(findTask)].isCompleted === false ? 'bi bi-check-circle-fill text-3xl' : 'bi bi-x-circle-fill text-3xl'}/>
     </button>
   )

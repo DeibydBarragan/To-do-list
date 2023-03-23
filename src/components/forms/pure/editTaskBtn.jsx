@@ -12,7 +12,7 @@ const EditTaskBtn = ({ taskId }) => {
     setModalOpen(true)
   }
   return (
-    <button onClick={handleOnClick} className='col-start-11 btn-icon'>
+    <button onClick={handleOnClick} className='col-start-11'>
       <i className='bi bi-pencil-fill text-3xl'/>
     </button>
   )

@@ -6,5 +6,8 @@ export const modalVariants = {
   visible: {
     y: 0,
     transition: { type: 'spring', duration: 0.1, stiffness: 300, damping: 18 }
+  },
+  exit: {
+    y: 30
   }
 }

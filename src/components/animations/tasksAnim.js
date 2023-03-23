@@ -3,7 +3,7 @@ export const taskVariants = {
     opacity: 0,
     y: 50
   },
-  visible: {
+  whileInView: {
     opacity: 1,
     y: 0,
     transition: { type: 'spring', duration: 0.5 }

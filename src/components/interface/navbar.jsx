@@ -72,7 +72,7 @@ const Navbar = () => {
           initial='hidden'
           animate='show'
           id='navbar' onClick={(e) => handleCloseNavbar(e)} className={`${navbarOpen ? 'inset-0 grid grid-cols-12' : ''} col-span-3 h-screen fixed lg:sticky z-20 lg:z-auto`}>
-          <button onClick={() => setNavBarOpen(!navbarOpen)} className='shadow-xl flex items-center top-0 right-0 mt-4 mx-4 rounded-xl p-1 transition ease-in-out hover:scale-110 bg-gradient-to-tl from-indigo-600 to-fuchsia-600 hover:drop-shadow-xl fixed lg:hidden z-10'>
+          <button onClick={() => setNavBarOpen(!navbarOpen)} className='shadow-xl flex items-center top-0 right-0 mt-4 mx-4 rounded-xl p-1 bg-gradient-to-tl from-indigo-600 to-fuchsia-600 hover:drop-shadow-xl fixed lg:hidden z-10'>
             <i className="bi bi-list text-4xl"></i>
           </button>
           <div className={`bg-gradient-to-tl from-emerald-600 via-indigo-800 to-fuchsia-700 gap-6 p-4 lg:p-8 top-0 w-auto ${navbarOpen ? 'flex col-span-8 sm:col-span-5 md:col-span-4' : 'hidden lg:flex'} flex-col h-screen fixed`}>

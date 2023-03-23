@@ -14,7 +14,7 @@ const DeleteTask = ({ taskId }) => {
     })
   }
   return (
-    <button onClick={handleOnCLick} className='col-start-12 btn-icon'>
+    <button onClick={handleOnCLick} className='col-start-12'>
       <i className="bi bi-trash-fill text-3xl"/>
     </button>
   )
