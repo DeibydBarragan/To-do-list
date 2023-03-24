@@ -11,5 +11,8 @@ export const taskVariants = {
   hover: {
     scale: 1.05,
     transition: { duration: 0.15 }
+  },
+  tap: {
+    scale: 1
   }
 }

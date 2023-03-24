@@ -6,12 +6,12 @@ const FiltersContext = createContext()
 const FiltersContextProvider = ({ children }) => {
   const [filter, setFilter] = useState(FILTERS.TODAY)
   return (
-        <FiltersContext.Provider value={{
-          filter,
-          setFilter
-        }}>
-          { children }
-      </FiltersContext.Provider>
+    <FiltersContext.Provider value={{
+      filter,
+      setFilter
+    }}>
+      { children }
+    </FiltersContext.Provider>
   )
 }
 

@@ -7,12 +7,12 @@ const NavbarContextProvider = ({ children }) => {
   const [navbarOpen, setNavBarOpen] = useState(false)
 
   return (
-        <NavbarContext.Provider value={{
-          navbarOpen,
-          setNavBarOpen
-        }}>
-            { children }
-        </NavbarContext.Provider>
+    <NavbarContext.Provider value={{
+      navbarOpen,
+      setNavBarOpen
+    }}>
+      { children }
+    </NavbarContext.Provider>
   )
 }
 

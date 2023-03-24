@@ -1,12 +1,10 @@
 import React, { useContext } from 'react'
-import { ModalContext } from '../../context/ModalContext'
 import PropTypes from 'prop-types'
 import { TasksContext } from '../../context/tasksContext'
 import { motion } from 'framer-motion'
 import { modalVariants } from '../../animations/modalAnim'
 
 const Modal = ({ children }) => {
-  const { setModalOpen } = useContext(ModalContext)
   const { setShowNewTask, setShowTask, setShowEditTask } = useContext(TasksContext)
 
   /**
@@ -15,7 +13,6 @@ const Modal = ({ children }) => {
    */
   const handleCloseModal = (e) => {
     if (e.target.id === 'container') {
-      setModalOpen(false)
       setShowTask(false)
       setShowNewTask(false)
       setShowEditTask(false)

@@ -7,15 +7,10 @@ import { TasksContext } from '../context/tasksContext'
 import Select from './pure/select'
 import { LEVELS } from '../../models/levels.enum'
 import Option from './pure/option'
-import { ModalContext } from '../context/ModalContext'
 import { TYPES } from '../../models/taskActions'
 
 const EditTask = () => {
   const { tasks, showedTask, dispatchTask, setShowEditTask } = useContext(TasksContext)
-  /**
-   * Brings setModalOpen to close the modal whether the form is submitted
-   */
-  const { setModalOpen } = useContext(ModalContext)
 
   const findTask = (element) => element.id === showedTask
   const task = tasks[tasks.findIndex(findTask)]
@@ -37,7 +32,6 @@ const EditTask = () => {
     // i declare a new propertie to save the level because it doesn't work if i use level directly (i don't know why)
     data.level = level
     // Close de form
-    setModalOpen(false)
     setShowEditTask(false)
     // setShowNewTask(false)
     dispatchTask({
@@ -47,44 +41,44 @@ const EditTask = () => {
   }
 
   return (
-        <Modal>
-          <form onSubmit={handleSubmit(onSubmit)}>
-            <ModalBody>
-              <h2>Edit task</h2>
-              <input
-                className='input-tasks mt-4'
-                autoComplete="off"
-                type='text'
-                maxLength='50'
-                placeholder={task.name}
-                {...register('name')}
-              />
-              <p>
-                { errors.name?.type === 'required' && 'The name field is required'}
-              </p>
-              <textarea
-                className='input-tasks mt-3'
-                maxLength='200'
-                autoComplete="off"
-                placeholder={task?.description}
-                {...register('description')}
-              />
+    <Modal>
+      <form onSubmit={handleSubmit(onSubmit)}>
+        <ModalBody>
+          <h2>Edit task</h2>
+          <input
+            className='input-tasks mt-4'
+            autoComplete="off"
+            type='text'
+            maxLength='50'
+            placeholder={task.name}
+            {...register('name')}
+          />
+          <p>
+            { errors.name?.type === 'required' && 'The name field is required'}
+          </p>
+          <textarea
+            className='input-tasks mt-3'
+            maxLength='200'
+            autoComplete="off"
+            placeholder={task?.description}
+            {...register('description')}
+          />
 
-              <input
-                type='date'
-                placeholder={task?.endDate}
-                className='input-tasks mt-3'
-                {...register('endDate')}
-              />
-              <Select state={level} placeholder='Urgency'>
-                {Object.values(LEVELS).map((props) => <Option key={props} set={setLevel}>{props}</Option>)}
-              </Select>
-              <ModalFooter>
-                <button type='submit' className='btn w-full'>Save</button>
-              </ModalFooter>
-            </ModalBody>
-          </form>
-        </Modal>
+          <input
+            type='date'
+            placeholder={task?.endDate}
+            className='input-tasks mt-3'
+            {...register('endDate')}
+          />
+          <Select state={level} placeholder='Urgency'>
+            {Object.values(LEVELS).map((props) => <Option key={props} set={setLevel}>{props}</Option>)}
+          </Select>
+          <ModalFooter>
+            <button type='submit' className='btn w-full'>Save</button>
+          </ModalFooter>
+        </ModalBody>
+      </form>
+    </Modal>
   )
 }
 

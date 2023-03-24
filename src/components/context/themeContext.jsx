@@ -17,13 +17,13 @@ const ThemeContextProvider = ({ children }) => {
       : localStorage.setItem('theme', 'dark')
   }, [theme])
   return (
-        <ThemeContext.Provider
-            value={{
-              theme,
-              setTheme
-            }}>
-            { children }
-        </ThemeContext.Provider>
+    <ThemeContext.Provider
+      value={{
+        theme,
+        setTheme
+      }}>
+      { children }
+    </ThemeContext.Provider>
   )
 }
 

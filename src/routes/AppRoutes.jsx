@@ -8,17 +8,17 @@ import { FILTERS } from '../models/filters.enum'
 
 const AppRoutes = () => {
   return (
-      <BrowserRouter>
-        <Routes>
-          <Route path={`/home/${FILTERS.ALL}`} element={<Home filter={FILTERS.ALL}/>}/>
-          <Route path={`/home/${FILTERS.TODAY}`} element={<Home filter={FILTERS.TODAY}/>}/>
-          <Route path={`/home/${FILTERS.NEXTSEVEN}`} element={<Home filter={FILTERS.NEXTSEVEN}/>}/>
-          <Route path={`/home/${FILTERS.COMPLETED}`} element={<Home filter={FILTERS.COMPLETED}/>}/>
-          <Route path='/login' element={<Login/>}/>
-          <Route path='/register' element={<Register/>}/>
-          <Route path='*' element={<NotFound/>}/>
-        </Routes>
-      </BrowserRouter>
+    <BrowserRouter>
+      <Routes>
+        <Route path={`/home/${FILTERS.ALL}`} element={<Home filter={FILTERS.ALL}/>}/>
+        <Route path={`/home/${FILTERS.TODAY}`} element={<Home filter={FILTERS.TODAY}/>}/>
+        <Route path={`/home/${FILTERS.NEXTSEVEN}`} element={<Home filter={FILTERS.NEXTSEVEN}/>}/>
+        <Route path={`/home/${FILTERS.COMPLETED}`} element={<Home filter={FILTERS.COMPLETED}/>}/>
+        <Route path='/login' element={<Login/>}/>
+        <Route path='/register' element={<Register/>}/>
+        <Route path='*' element={<NotFound/>}/>
+      </Routes>
+    </BrowserRouter>
   )
 }
 
