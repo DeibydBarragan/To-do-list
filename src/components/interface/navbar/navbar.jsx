@@ -37,7 +37,7 @@ const Navbar = () => {
   }
 
   return (
-    <motion.div
+    <motion.nav
       variants={ navbarVariants }
       initial='hidden'
       animate='show'
@@ -55,7 +55,7 @@ const Navbar = () => {
           <ButtonLogout/>
         </div>
       </div>
-    </motion.div>
+    </motion.nav>
   )
 }
 

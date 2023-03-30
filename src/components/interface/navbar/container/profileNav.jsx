@@ -1,11 +1,21 @@
-import React from 'react'
+import React, { useContext } from 'react'
+import { useNavigate } from 'react-router-dom'
+import { AuthContext } from '../../../context/authContext'
 
 const ProfileNav = () => {
+  const navigate = useNavigate()
+  const { userName, userPhoto } = useContext(AuthContext)
+  const handleViewProfile = () => {
+    navigate('/home/profile')
+  }
   return (
-    <div className='flex flex-row gap-4 items-center justify-center cursor-pointer'>
-      <img className='rounded-full w-12' alt='' src='https://images.unsplash.com/photo-1595433707802-6b2626ef1c91?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxleHBsb3JlLWZlZWR8MXx8fGVufDB8fHx8&w=1000&q=80'></img>
-      <h2 className='text-2xl'>
-        Name
+    <div className='flex flex-row gap-4 items-center justify-center cursor-pointer' onClick={handleViewProfile}>
+      {userPhoto === null
+        ? <i className='text-4xl bi bi-person-circle'/>
+        : <img className='rounded-full w-12' alt='user photo' src={userPhoto} referrerPolicy='no-referrer'></img>
+      }
+      <h2 className='text-xl'>
+        { userName }
       </h2>
     </div>
   )

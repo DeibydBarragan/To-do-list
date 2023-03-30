@@ -23,7 +23,7 @@ const Select = ({ children, state, placeholder }) => {
   })
   return (
     <div>
-      <div ref = {drop} className={`mt-3 text-black dark:text-white ${state === null && 'dark:text-gray-400'} bg-slate-200 dark:bg-slate-800 rounded-lg p-2 flex items-center justify-between cursor-pointer transition ease-in-out hover:scale-105 hover:shadow-xl`}
+      <div ref = {drop} className={`text-black dark:text-white ${state === null && 'dark:text-gray-400'} bg-slate-200 dark:bg-slate-800 rounded-lg p-2 flex items-center justify-between cursor-pointer transition ease-in-out hover:scale-105 hover:shadow-xl`}
         onClick={() => setOpen(!open)} >
         {state === null ? placeholder : state}
         <i ref={icon} className={`bi bi-caret-down-fill text-xl ${open && 'transition duration-300 ease-in-out rotate-180'}`}/>

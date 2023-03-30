@@ -1,10 +1,9 @@
 import { React, useContext } from 'react'
 import { motion } from 'framer-motion'
-import moment from 'moment'
-import { dayToString, monthToString } from '../../../../helpers/dates'
 import { FiltersContext } from '../../../context/filtersContext'
 import { TasksContext } from '../../../context/tasksContext'
 import { useSortTasks } from './../../../../hooks/useSortTasks'
+import TodayDate from '../pure/todayDate'
 
 const Date = () => {
   const { tasks } = useContext(TasksContext)
@@ -26,12 +25,11 @@ const Date = () => {
       animate='show'
       className='border-b-2 border-purple-500'
     >
-      <h1 className="text-5xl font-bold text-gray-800 dark:text-white">{filter}</h1>
+      <h1 className="text-5xl font-bold text-gray-800 dark:text-white">
+        {(filter?.charAt(0)?.toUpperCase() + filter?.slice(1)).toString()}
+      </h1>
       {/** weekday and month as strings */}
-      <h4 className=' text-gray-800 dark:text-white'>
-        {dayToString(moment().weekday())}, {monthToString(moment().month())},{' '}
-        {moment().date()}
-      </h4>
+      <TodayDate/>
       <h2 className='mb-3 text-gray-800 dark:text-white'>
         {sortedTasks.length === 0 ? 'You don\'t have any task' : `You have ${sortedTasks.length} task(s)`}
       </h2>

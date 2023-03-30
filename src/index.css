@@ -12,7 +12,9 @@
 .btn-selected {
   @apply bg-white text-indigo-800;
 }
-
+.btn-settings {
+  @apply font-ptSans flex items-center justify-center p-2 rounded-lg font-semibold text-lg transition ease-in-out active:scale-95 hover:scale-105 bg-gradient-to-tr from-indigo-600 to-fuchsia-600 z-10;
+}
 .btn-icon {
   @apply hover:opacity-80
 }
@@ -35,15 +37,13 @@ h2 {
 h1 {
   @apply text-5xl font-bold font-ptSans;
 }
-i {
-  @apply hover:scale-100 hover:shadow-none;
-}
+
 .input-tasks {
   @apply rounded-md outline-none bg-slate-200 dark:bg-slate-800 placeholder:text-black dark:placeholder:text-gray-400 text-black dark:text-white p-2 shadow-lg;
 }
 
 .input-auth {
-  @apply bg-transparent border-b outline-none border-slate-400 text-lg
+  @apply bg-transparent border-b outline-none border-slate-400 text-lg w-full
 }
 
 ::-webkit-scrollbar {

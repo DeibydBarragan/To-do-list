@@ -1,7 +1,5 @@
 import React, { useContext, useState } from 'react'
 import Modal from '../pure/modal/modal'
-import ModalBody from '../pure/modal/modal.body'
-import ModalFooter from '../pure/modal/modal.footer'
 import { useForm } from 'react-hook-form'
 import { TasksContext } from '../context/tasksContext'
 import Select from './pure/select'
@@ -41,42 +39,36 @@ const EditTask = () => {
   }
 
   return (
-    <Modal>
-      <form onSubmit={handleSubmit(onSubmit)}>
-        <ModalBody>
-          <h2>Edit task</h2>
-          <input
-            className='input-tasks mt-4'
-            autoComplete="off"
-            type='text'
-            maxLength='50'
-            placeholder={task.name}
-            {...register('name')}
-          />
-          <p>
-            { errors.name?.type === 'required' && 'The name field is required'}
-          </p>
-          <textarea
-            className='input-tasks mt-3'
-            maxLength='200'
-            autoComplete="off"
-            placeholder={task?.description}
-            {...register('description')}
-          />
+    <Modal setShow={setShowEditTask}>
+      <form onSubmit={handleSubmit(onSubmit)} className='flex flex-col gap-3'>
+        <h2>Edit task</h2>
+        <input
+          className='input-tasks'
+          autoComplete="off"
+          type='text'
+          maxLength='50'
+          placeholder={task.name}
+          {...register('name')}
+        />
+        { errors.name?.type === 'required' && <p>The name field is required</p>}
+        <textarea
+          className='input-tasks'
+          maxLength='200'
+          autoComplete="off"
+          placeholder={task?.description}
+          {...register('description')}
+        />
 
-          <input
-            type='date'
-            placeholder={task?.endDate}
-            className='input-tasks mt-3'
-            {...register('endDate')}
-          />
-          <Select state={level} placeholder='Urgency'>
-            {Object.values(LEVELS).map((props) => <Option key={props} set={setLevel}>{props}</Option>)}
-          </Select>
-          <ModalFooter>
-            <button type='submit' className='btn w-full'>Save</button>
-          </ModalFooter>
-        </ModalBody>
+        <input
+          type='date'
+          placeholder={task?.endDate}
+          className='input-tasks'
+          {...register('endDate')}
+        />
+        <Select state={level} placeholder='Urgency'>
+          {Object.values(LEVELS).map((props) => <Option key={props} set={setLevel}>{props}</Option>)}
+        </Select>
+        <button type='submit' className='btn w-full'>Save</button>
       </form>
     </Modal>
   )

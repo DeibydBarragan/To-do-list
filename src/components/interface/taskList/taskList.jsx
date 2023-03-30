@@ -21,7 +21,7 @@ const TaskList = () => {
   const sortedTasks = useSortTasks(tasks, filter)
 
   return (
-    <div className={`${navbarOpen ? 'blur-sm' : ''} flex flex-col p-6 gap-3 col-span-12 lg:col-span-8 lg:ml-5 xl:ml-0`}>
+    <main className={`${navbarOpen ? 'blur-sm' : ''} flex flex-col p-6 gap-3 col-span-12 lg:col-span-8 lg:ml-5 xl:ml-0`}>
       <Date/>
       <div
         className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 2xl:grid-cols-4 gap-4">
@@ -29,12 +29,12 @@ const TaskList = () => {
         {sortedTasks.map((task) => <TaskComponent task={task} key={`task${task.id}`}></TaskComponent>)}
       </div>
       <AnimatePresence>
-        {!navbarOpen && <NewTaskButton/>}
-        {showNewTask && <NewTask/>}
-        {showTask && <ShowTask/>}
-        {showEditTask && <EditTask/>}
+        {!navbarOpen && <NewTaskButton key='NewTaskButton'/>}
+        {showNewTask && <NewTask key='NewTask'/>}
+        {showTask && <ShowTask key='ShowTask'/>}
+        {showEditTask && <EditTask key='EditTask'/>}
       </AnimatePresence>
-    </div>
+    </main>
   )
 }
 

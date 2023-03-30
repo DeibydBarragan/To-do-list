@@ -4,8 +4,6 @@ import { LEVELS } from '../../models/levels.enum'
 import { useForm } from 'react-hook-form'
 import Modal from '../pure/modal/modal'
 import { TYPES } from '../../models/taskActions'
-import ModalFooter from '../pure/modal/modal.footer'
-import ModalBody from '../pure/modal/modal.body'
 import Select from './pure/select'
 import Option from './pure/option'
 
@@ -49,40 +47,34 @@ const NewTask = () => {
   }
 
   return (
-    <Modal>
-      <form onSubmit={handleSubmit(onSubmit)}>
-        <ModalBody>
-          <h2>New task</h2>
-          <input
-            className='input-tasks mt-4'
-            autoComplete="off"
-            type='text'
-            maxLength='50'
-            placeholder='Name'
-            {...register('name', { required: true })}
-          />
-          <p>
-            { errors.name?.type === 'required' && 'The name field is required'}
-          </p>
-          <textarea
-            className='input-tasks mt-3'
-            maxLength='200'
-            autoComplete="off"
-            placeholder='Description'
-            {...register('description')}
-          />
-          <input
-            type='date'
-            className='input-tasks mt-3'
-            {...register('endDate')}
-          />
-          <Select state={level} placeholder='Urgency'>
-            {Object.values(LEVELS).map((props) => <Option key={props} set={setLevel}>{props}</Option>)}
-          </Select>
-          <ModalFooter>
-            <button type='submit' className='btn w-full'>Add task</button>
-          </ModalFooter>
-        </ModalBody>
+    <Modal setShow={setShowNewTask}>
+      <form onSubmit={handleSubmit(onSubmit)} className='flex flex-col gap-3'>
+        <h2>New task</h2>
+        <input
+          className='input-tasks'
+          autoComplete="off"
+          type='text'
+          maxLength='50'
+          placeholder='Name'
+          {...register('name', { required: true })}
+        />
+        { errors.name?.type === 'required' && 'The name field is required'}
+        <textarea
+          className='input-tasks'
+          maxLength='200'
+          autoComplete="off"
+          placeholder='Description'
+          {...register('description')}
+        />
+        <input
+          type='date'
+          className='input-tasks'
+          {...register('endDate')}
+        />
+        <Select state={level} placeholder='Urgency'>
+          {Object.values(LEVELS).map((props) => <Option key={props} set={setLevel}>{props}</Option>)}
+        </Select>
+        <button type='submit' className='btn w-full'>Add task</button>
       </form>
     </Modal>
   )

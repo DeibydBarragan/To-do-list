@@ -1,27 +1,16 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import Navbar from '../../components/interface/navbar/navbar'
 import TaskList from '../../components/interface/taskList/taskList'
-import PropTypes from 'prop-types'
-import { TasksContextProvider } from '../../components/context/tasksContext'
-import { NavbarContextProvider } from '../../components/context/navbarContext'
-import { FiltersContextProvider } from '../../components/context/filtersContext'
-const Home = ({ filter }) => {
+import { FiltersContext } from '../../components/context/filtersContext'
+import ProfileView from './container/profileView/profileView'
+const Home = () => {
+  const { filter } = useContext(FiltersContext)
   return (
-    <TasksContextProvider>
-      <NavbarContextProvider>
-        <FiltersContextProvider>
-          <div className='grid grid-cols-12'>
-            <Navbar filter={ filter }/>
-            <TaskList filter={ filter }/>
-          </div>
-        </FiltersContextProvider>
-      </NavbarContextProvider>
-    </TasksContextProvider>
+    <div className='grid grid-cols-12'>
+      <Navbar/>
+      { filter === 'profile' ? <ProfileView/> : <TaskList/>}
+    </div>
   )
-}
-
-Home.propTypes = {
-  filter: PropTypes.string
 }
 
 export default Home

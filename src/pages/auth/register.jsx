@@ -1,11 +1,16 @@
-import React from 'react'
-import { Link, useNavigate } from 'react-router-dom'
+import { React } from 'react'
+import { useNavigate } from 'react-router-dom'
+import AuthMethods from './container/authMethods'
+import RegisterForm from './forms/registerForm'
 
 const Register = () => {
+  // Navigate to login
   const navigate = useNavigate()
+  // Handle login
   const handleLogin = () => {
     navigate('/login')
   }
+
   return (
     <div className='fixed inset-0 content-center background-auth bg-cover grid grid-cols-6 sm:grid-cols-7 md:grid-cols-8 lg:grid-cols-10 xl:grid-cols-12 p-6 sm:p-10 md:p-14 lg:p-16 gap-7'>
       <div className='h-auto grid grid-cols-2 col-span-7'>
@@ -20,31 +25,12 @@ const Register = () => {
             </button>
           </div>
         </div>
-        <div className='col-span-2 sm:col-span-1 flex flex-col justify-center bg-black bg-opacity-30 backdrop-blur-sm rounded-r-2xl p-8 gap-6 content-center'>
+        <div className='col-span-2 sm:col-span-1 flex flex-col items-center bg-black bg-opacity-30 backdrop-blur-sm rounded-l-2xl sm:rounded-l-none rounded-r-2xl p-8 gap-6'>
           <h1>Register</h1>
-          <div className='flex gap-5'>
-            <Link>
-              <i className="text-4xl bi bi-google"/>
-            </Link>
-            <Link>
-              <i className="text-4xl bi bi-facebook"/>
-            </Link>
-            <Link>
-              <i className="text-4xl bi bi-github"/>
-            </Link>
-          </div>
+          <AuthMethods/>
           <h4>Or use your email</h4>
-          <input type='text' className='input-auth' placeholder='Email'></input>
-          <input type='password' className='input-auth' placeholder='Password'></input>
-          <input type='password' className='input-auth' placeholder='Confirm password'></input>
-          <button className='btn'>
-            Login
-            <i className='bi bi-box-arrow-right ml-2 text-2xl'/>
-          </button>
-          <button className='btn sm:hidden'>
-            Sign up
-            <i className='bi bi-person-add ml-2 text-2xl'/>
-          </button>
+          <RegisterForm/>
+          <a className='underline decoratin-1 sm:hidden' onClick={handleLogin}>Already have an account?</a>
         </div>
       </div>
     </div>

@@ -4,10 +4,12 @@
   "homepage": "https://DeibydBarragan.github.io/Tasklist",
   "private": true,
   "dependencies": {
+    "@hookform/resolvers": "^3.0.0",
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
     "bootstrap-icons": "^1.10.2",
+    "firebase": "^9.18.0",
     "framer-motion": "^8.4.3",
     "moment": "^2.29.4",
     "prop-types": "^15.8.1",
@@ -16,7 +18,8 @@
     "react-hook-form": "^7.41.2",
     "react-router-dom": "^6.6.2",
     "react-scripts": "5.0.1",
-    "web-vitals": "^2.1.4"
+    "web-vitals": "^2.1.4",
+    "yup": "^1.0.2"
   },
   "scripts": {
     "start": "react-scripts start",

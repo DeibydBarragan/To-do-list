@@ -2,8 +2,8 @@
  * Home filters
  */
 export const FILTERS = {
-  ALL: 'All',
-  TODAY: 'Today',
-  NEXTSEVEN: 'Week',
-  COMPLETED: 'Completed'
+  ALL: 'all',
+  TODAY: 'today',
+  NEXTSEVEN: 'week',
+  COMPLETED: 'completed'
 }
