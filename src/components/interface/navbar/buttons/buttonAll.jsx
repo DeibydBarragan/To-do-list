@@ -12,7 +12,7 @@ const ButtonAll = () => {
   }
   return (
     <button className={`btn ${filter === FILTERS.ALL && 'btn-selected'}`} onClick={handleAll}>
-      <i className="bi bi-calendar3 mr-2 text-xl"></i>
+      <i className="bi bi-calendar3 text-xl"></i>
         All
     </button>
   )

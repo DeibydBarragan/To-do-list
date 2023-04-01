@@ -4,9 +4,9 @@ import PropTypes from 'prop-types'
 import { AuthContext } from '../components/context/authContext'
 
 const WithNameRoute = ({ children }) => {
-  const { userName, loading } = useContext(AuthContext)
+  const { user, loading } = useContext(AuthContext)
 
-  if (!userName && !loading) return <Navigate to='/choose-username'/>
+  if (!user.displayName && !loading) return <Navigate to='/choose-username'/>
 
   return children || <Outlet/>
 }

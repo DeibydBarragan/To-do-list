@@ -12,7 +12,7 @@ const ButtonWeek = () => {
   }
   return (
     <button className={`btn ${filter === FILTERS.NEXTSEVEN && 'btn-selected'}`} onClick={handleWeek}>
-      <i className="bi bi-calendar-date mr-2 text-xl"></i>
+      <i className="bi bi-calendar-date text-xl"></i>
         Next 7 days
     </button>
   )

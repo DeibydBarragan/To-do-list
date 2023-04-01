@@ -7,13 +7,13 @@
 }
 
 .btn {
-  @apply font-ptSans flex items-center justify-center outline outline-1 p-2 rounded-lg font-semibold text-lg transition ease-in-out active:scale-95 hover:bg-white hover:text-indigo-800;
+  @apply font-ptSans flex items-center gap-3 justify-center outline outline-1 p-2 rounded-lg font-semibold text-lg transition ease-in-out active:scale-95 hover:bg-white hover:text-indigo-800;
 }
 .btn-selected {
   @apply bg-white text-indigo-800;
 }
 .btn-settings {
-  @apply font-ptSans flex items-center justify-center p-2 rounded-lg font-semibold text-lg transition ease-in-out active:scale-95 hover:scale-105 bg-gradient-to-tr from-indigo-600 to-fuchsia-600 z-10;
+  @apply font-ptSans flex items-center justify-center p-2 rounded-lg font-semibold text-lg transition ease-in-out active:scale-95 hover:bg-indigo-900 bg-indigo-800 dark:bg-gray-800 dark:hover:bg-gray-700 z-10 gap-2;
 }
 .btn-icon {
   @apply hover:opacity-80

@@ -4,7 +4,7 @@ import { AuthContext } from '../../../context/authContext'
 
 const ProfileNav = () => {
   const navigate = useNavigate()
-  const { userName, userPhoto } = useContext(AuthContext)
+  const { user, userPhoto } = useContext(AuthContext)
   const handleViewProfile = () => {
     navigate('/home/profile')
   }
@@ -15,7 +15,7 @@ const ProfileNav = () => {
         : <img className='rounded-full w-12' alt='user photo' src={userPhoto} referrerPolicy='no-referrer'></img>
       }
       <h2 className='text-xl'>
-        { userName }
+        { user.displayName }
       </h2>
     </div>
   )

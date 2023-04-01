@@ -4,25 +4,23 @@ import { modalVariants } from '../../../components/animations/modalAnim'
 import { useForm } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
 import { chooseNameSchema } from '../../../components/forms/formSchema/chooseNameSchema'
-import { db } from '../../../firebase/firebase'
 import { AuthContext } from '../../../components/context/authContext'
-import { addDoc, collection } from 'firebase/firestore'
 import { useNavigate } from 'react-router-dom'
 import { FILTERS } from '../../../models/filters.enum'
 import Popover from '../../../components/forms/pure/popover'
+import { updateProfile } from 'firebase/auth'
 
 const ChooseUsername = () => {
   const navigate = useNavigate()
-  const { user, setUserName } = useContext(AuthContext)
+  const { user, setUser } = useContext(AuthContext)
   // Form validation
   const { register, formState: { errors }, handleSubmit } = useForm({
     resolver: yupResolver(chooseNameSchema)
   })
   // Submit form
   const onSubmit = async (data) => {
-    data.userId = user.uid
-    await addDoc(collection(db, 'usernames'), data)
-    setUserName(data.username)
+    await updateProfile(user, { displayName: data.username })
+    setUser({ ...user, displayName: data.username })
     navigate(`/home/${FILTERS.TODAY}`)
   }
 

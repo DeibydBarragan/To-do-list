@@ -1,24 +1,29 @@
 import { signOut } from 'firebase/auth'
-import React, { useContext } from 'react'
+import React, { useContext, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { auth } from '../../../../firebase/firebase'
 import { AuthContext } from '../../../context/authContext'
+import LoadingButton from '../../../forms/pure/loadingButton'
 
 const ButtonLogout = () => {
-  const { setUser, setLoading } = useContext(AuthContext)
+  const { setUser } = useContext(AuthContext)
+  const [formLoading, setFormLoading] = useState(false)
   const navigate = useNavigate()
 
   const handleLogout = async () => {
-    setLoading(true)
+    setFormLoading(true)
     setUser(null)
     await signOut(auth)
     navigate('/login')
-    setLoading(false)
+    setFormLoading(false)
   }
   return (
     <button className='btn col-span-3' onClick={handleLogout}>
       Logout
-      <i className="bi bi-box-arrow-right ml-2 text-xl"></i>
+      {formLoading
+        ? <LoadingButton/>
+        : <i className="bi bi-box-arrow-right text-xl"/>
+      }
     </button>
   )
 }

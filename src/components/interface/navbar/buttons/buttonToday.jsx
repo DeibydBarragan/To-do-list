@@ -12,8 +12,8 @@ const ButtonToday = () => {
   }
   return (
     <button className={`btn ${filter === FILTERS.TODAY && 'btn-selected'}`} onClick={handleToday}>
-      <i className="bi bi-calendar-day mr-2 text-xl"></i>
-            Today
+      <i className="bi bi-calendar-day text-xl"></i>
+      Today
     </button>
   )
 }

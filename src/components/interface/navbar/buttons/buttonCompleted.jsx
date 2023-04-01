@@ -14,7 +14,7 @@ const ButtonCompleted = () => {
 
   return (
     <button className={`btn ${filter === FILTERS.COMPLETED && 'btn-selected'}`} onClick={handleCompleted}>
-      <i className="bi-check2-square mr-2 text-xl"/>
+      <i className="bi-check2-square text-xl"/>
         Completed
     </button>
   )

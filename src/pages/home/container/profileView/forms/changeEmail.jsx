@@ -5,31 +5,43 @@ import { yupResolver } from '@hookform/resolvers/yup'
 import { useForm } from 'react-hook-form'
 import Modal from '../../../../../components/pure/modal/modal'
 import Popover from '../../../../../components/forms/pure/popover'
-import { passwordSchema } from './../../../../../components/forms/formSchema/passwordSchema'
 import LoadingButton from '../../../../../components/forms/pure/loadingButton'
-import { EmailAuthProvider, reauthenticateWithCredential, updatePassword } from 'firebase/auth'
+import { EmailAuthProvider, fetchSignInMethodsForEmail, reauthenticateWithCredential, updateEmail } from 'firebase/auth'
+import { auth } from '../../../../../firebase/firebase'
+import { changeEmailSchema } from '../../../../../components/forms/formSchema/changeEmailSchema'
 
-const ChangePassword = () => {
-  const { user } = useContext(AuthContext)
+const ChangeEmail = () => {
+  const { user, setUser } = useContext(AuthContext)
   const [showForm, setShowForm] = useState(false)
   const [formLoading, setFormLoading] = useState(false)
   // Form validation
   const { register, formState: { errors }, handleSubmit, reset, setError } = useForm({
-    resolver: yupResolver(passwordSchema)
+    resolver: yupResolver(changeEmailSchema)
   })
 
   const onSubmit = (data) => {
     setFormLoading(true)
+    // Get credential
     const credential = EmailAuthProvider.credential(user.email, data.actualPassword)
+    // Reauthenticate
     reauthenticateWithCredential(user, credential)
       .then(() => {
-        updatePassword(user, data.newPassword)
-          .then(() => {
-            setShowForm(false)
-          })
-          .catch(() => {
-            setError('confirmNewPassword', { message: 'Error changing password' })
-          })
+        // Check if email is already in use
+        fetchSignInMethodsForEmail(auth, data.newEmail).then((methods) => {
+          if (methods.length === 0) {
+            // Update email
+            updateEmail(user, data.newEmail)
+              .then(() => {
+                setUser({ ...user, email: data.newEmail })
+                setShowForm(false)
+              })
+              .catch(() => {
+                setError('newEmail', { message: 'Error changing email' })
+              })
+          } else {
+            setError('newEmail', { message: 'Email already in use' })
+          }
+        })
       })
       .catch(() => {
         setError('actualPassword', { message: 'Incorrect password' })
@@ -40,26 +52,29 @@ const ChangePassword = () => {
   }
 
   return (
-    <div className='flex items-center justify-between pt-4 pb-4'>
-      <h4 className='text-gray-900 dark:text-white'>Password</h4>
-      <button className='btn-settings'
-        onClick={() => {
+    <div className='flex flex-col pt-4 pb-4'>
+      <p className='text-gray-900 dark:text-white' >Email</p>
+      <div className='flex items-center justify-between'>
+        <h4 className='text-gray-900 dark:text-white text-sm md:text-xl'>{ user.email }</h4>
+        <button className='btn-settings' onClick={() => {
           setShowForm(true)
           reset()
         }}>
-        Change
-        <i className='bi bi-key text-2xl'/>
-      </button>
+          Change
+          <i className='bi bi-envelope text-2xl'/>
+        </button>
+      </div>
       <AnimatePresence>
         {showForm && (<Modal setShow={setShowForm}>
           <form className='flex flex-col gap-4' onSubmit={handleSubmit(onSubmit)}>
-            <h2 className='text-3xl sm:text-4xl'>Change password</h2>
+            <h2 className='text-3xl sm:text-4xl'>Change email</h2>
+            <h4>To change your email yo have to write your password</h4>
             {/** Actual password */}
             <div className='relative'>
               <input
                 type='password'
                 className='input-tasks w-full'
-                placeholder='Actual password'
+                placeholder='Your password'
                 maxLength='20'
                 {...register('actualPassword')}
               />
@@ -67,37 +82,22 @@ const ChangePassword = () => {
                 {errors.actualPassword && <Popover>{errors.actualPassword.message}</Popover>}
               </AnimatePresence>
             </div>
-            {/** New password */}
+            {/** New email */}
             <div className='relative'>
               <input
-                type='password'
                 className='input-tasks w-full'
-                placeholder='New password'
-                maxLength='20'
-                {...register('newPassword')}
+                placeholder='New email'
+                {...register('newEmail')}
               />
               <AnimatePresence>
-                {errors.newPassword && <Popover>{errors.newPassword.message}</Popover>}
-              </AnimatePresence>
-            </div>
-            {/** Confirm new password */}
-            <div className='relative'>
-              <input
-                type='password'
-                className='input-tasks w-full'
-                placeholder='Confirm new password'
-                maxLength='20'
-                {...register('confirmNewPassword')}
-              />
-              <AnimatePresence>
-                {errors.confirmNewPassword && <Popover>{errors.confirmNewPassword.message}</Popover>}
+                {errors.newEmail && <Popover>{errors.newEmail.message}</Popover>}
               </AnimatePresence>
             </div>
             <button className='btn' type='submit'>
                 Change
               {formLoading
                 ? <LoadingButton/>
-                : <i className='bi bi-key'/>
+                : <i className='bi bi-envelope'/>
               }
             </button>
           </form>
@@ -108,4 +108,4 @@ const ChangePassword = () => {
   )
 }
 
-export default ChangePassword
+export default ChangeEmail

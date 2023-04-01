@@ -32,7 +32,7 @@ const Login = () => {
             <h4>Create your account</h4>
             <button className='btn' onClick={handleRegister}>
               Register
-              <i className='bi bi-person-add ml-2 text-2xl'/>
+              <i className='bi bi-person-add text-2xl'/>
             </button>
           </div>
         </div>

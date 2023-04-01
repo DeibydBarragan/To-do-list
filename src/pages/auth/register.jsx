@@ -21,7 +21,7 @@ const Register = () => {
               onClick={handleLogin}
             >
               Sign in
-              <i className='bi bi-person-add ml-2 text-2xl'/>
+              <i className='bi bi-person-add text-2xl'/>
             </button>
           </div>
         </div>

@@ -1,4 +1,3 @@
-/* eslint-disable no-unused-vars */
 import { React, useContext, useState } from 'react'
 import { AuthContext } from '../../../../../components/context/authContext'
 import Modal from '../../../../../components/pure/modal/modal'
@@ -7,62 +6,70 @@ import { chooseNameSchema } from './../../../../../components/forms/formSchema/c
 import { useForm } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
 import Popover from '../../../../../components/forms/pure/popover'
-import { collection, doc, getDocs, query, updateDoc, where } from 'firebase/firestore'
-import { db } from '../../../../../firebase/firebase'
+import LoadingButton from '../../../../../components/forms/pure/loadingButton'
+import { updateProfile } from 'firebase/auth'
 
 const ChangeUsername = () => {
-  const { userName, user, setUserName } = useContext(AuthContext)
+  const { user, setUser } = useContext(AuthContext)
   const [showForm, setShowForm] = useState(false)
+  const [formLoading, setFormLoading] = useState(false)
   // Form validation
-  const { register, formState: { errors }, handleSubmit } = useForm({
+  const { register, formState: { errors }, handleSubmit, setError, reset } = useForm({
     resolver: yupResolver(chooseNameSchema)
   })
 
   const onSubmit = async (data) => {
-    // Query to get the document with the user id
-    const q = query(collection(db, 'usernames'), where('userId', '==', user?.uid))
+    setFormLoading(true)
     try {
-      // Get the document
-      const querySnapshot = await getDocs(q)
-      // Update the document
-      await updateDoc(querySnapshot.docs[0].ref, { username: data.username })
+      // Update the username
+      updateProfile(user, { displayName: data.username })
       // set the new username
-      setUserName(data.username)
+      setUser({ ...user, displayName: data.username })
+      setShowForm(false)
     } catch (e) {
-      console.error(e)
+      setError('username', { message: 'Error changing username' })
     }
+    setFormLoading(false)
+    reset()
   }
 
   return (
-    <div className='relative'>
-      <h4>
-        {userName}
-        <i onClick={() => setShowForm(!showForm)} className='bi bi-pencil-square text-2xl ml-2 cursor-pointer'/>
-        <AnimatePresence>
-          {showForm && <Modal setShow={setShowForm}>
-            <form className='flex flex-col gap-4' onSubmit={handleSubmit(onSubmit)}>
-              <h2 className='text-3xl sm:text-4xl'>Change username</h2>
-              <div className='relative'>
-                <input
-                  type='text'
-                  className='input-tasks w-full'
-                  placeholder='New username'
-                  autoComplete='off'
-                  maxLength='15'
-                  {...register('username')}
-                />
-                <AnimatePresence>
-                  {errors.username && <Popover>{errors.username.message}</Popover>}
-                </AnimatePresence>
-              </div>
-              <button className='btn' type='submit'>
-                Change
-                <i className='bi bi-pen ml-2'/>
-              </button>
-            </form>
-          </Modal>}
-        </AnimatePresence>
-      </h4>
+    <div className='flex flex-col pt-4 pb-4'>
+      <p className='text-gray-900 dark:text-white' >Username</p>
+      <div className='flex items-center justify-between'>
+        <h4 className='text-gray-900 dark:text-white'>{ user.displayName }</h4>
+        <button className='btn-settings' onClick={() => setShowForm(true)}>
+          Change
+          <i className='bi bi-pencil-square text-2xl'/>
+        </button>
+      </div>
+      <AnimatePresence>
+        {showForm && <Modal setShow={setShowForm}>
+          <form className='flex flex-col gap-4' onSubmit={handleSubmit(onSubmit)}>
+            <h2 className='text-3xl sm:text-4xl'>Change username</h2>
+            <div className='relative'>
+              <input
+                type='text'
+                className='input-tasks w-full'
+                placeholder='New username'
+                autoComplete='off'
+                maxLength='15'
+                {...register('username')}
+              />
+              <AnimatePresence>
+                {errors.username && <Popover>{errors.username.message}</Popover>}
+              </AnimatePresence>
+            </div>
+            <button className='btn' type='submit'>
+              Change
+              {formLoading
+                ? <LoadingButton/>
+                : <i className='bi bi-pen'/>
+              }
+            </button>
+          </form>
+        </Modal>}
+      </AnimatePresence>
     </div>
   )
 }

@@ -1,18 +1,15 @@
-import React, { useContext } from 'react'
+import React from 'react'
 import { auth, facebookProvider, googleProvider, githubProvider } from '../../../firebase/firebase'
 import { signInWithPopup } from 'firebase/auth'
 import { useNavigate } from 'react-router-dom'
 import { FILTERS } from '../../../models/filters.enum'
-import { AuthContext } from '../../../components/context/authContext'
 
 const AuthMethods = () => {
-  const { setLoading } = useContext(AuthContext)
   const navigate = useNavigate()
   // Sign in with google, facebook or github
   const signInWithMethod = async (provider) => {
     await signInWithPopup(auth, provider)
     navigate(`/home/${FILTERS.TODAY}`)
-    setLoading(true)
   }
   return (
     <div>
