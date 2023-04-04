@@ -9,6 +9,9 @@
 .btn {
   @apply font-ptSans flex items-center gap-3 justify-center outline outline-1 p-2 rounded-lg font-semibold text-lg transition ease-in-out active:scale-95 hover:bg-white hover:text-indigo-800;
 }
+.btn-modal {
+  @apply btn bg-indigo-700 text-white outline-none hover:bg-indigo-800 hover:text-white;
+}
 .btn-selected {
   @apply bg-white text-indigo-800;
 }
@@ -19,31 +22,39 @@
   @apply hover:opacity-80
 }
 h5 {
-  @apply text-lg font-semibold font-workSans;
+  @apply text-lg text-indigo-900 dark:text-white font-semibold font-workSans;
 }
 
 h4 {
-  @apply text-xl font-semibold font-workSans;
+  @apply text-xl text-black dark:text-white font-semibold font-workSans;
 }
 
 h3 {
-  @apply text-3xl font-semibold font-workSans;
+  @apply text-3xl text-slate-900 dark:text-white font-semibold font-workSans;
 }
 
 h2 {
-  @apply text-4xl font-semibold font-nunito;
+  @apply text-4xl text-indigo-900 dark:text-white font-semibold font-nunito;
 }
 
 h1 {
-  @apply text-5xl font-bold font-ptSans;
+  @apply text-5xl text-indigo-900 dark:text-white font-bold font-ptSans;
+}
+
+p {
+  @apply text-black dark:text-white
 }
 
 .input-tasks {
-  @apply rounded-md outline-none bg-slate-200 dark:bg-slate-800 placeholder:text-black dark:placeholder:text-gray-400 text-black dark:text-white p-2 shadow-lg;
+  @apply rounded-md outline-none bg-white dark:bg-slate-800 placeholder:text-gray-500 p-2 shadow-md border border-indigo-700 dark:border-none;
 }
 
 .input-auth {
   @apply bg-transparent border-b outline-none border-slate-400 text-lg w-full
+}
+
+.form-modal {
+  @apply flex flex-col gap-4 p-4
 }
 
 ::-webkit-scrollbar {

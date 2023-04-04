@@ -54,19 +54,9 @@ const TasksContextProvider = ({ children }) => {
    */
   const [tasks, dispatchTask] = useReducer(reducer, tasksList)
 
-  const [showedTask, setShowedTask] = useState(null)
-  /**
-   * useState for show the form to create a new task
-   */
-  const [showNewTask, setShowNewTask] = useState(false)
-  /**
-   * useState for show the form to edit a task
-   */
-  const [showEditTask, setShowEditTask] = useState(false)
-  /**
-   * useState for show the details of a task
-   */
-  const [showTask, setShowTask] = useState(false)
+  const [showTask, setShowTask] = useState(null)
+
+  const [showEditTask, setShowEditTask] = useState(null)
 
   return (
     <TasksContext.Provider value ={{
@@ -74,10 +64,6 @@ const TasksContextProvider = ({ children }) => {
       dispatchTask,
       showTask,
       setShowTask,
-      showedTask,
-      setShowedTask,
-      showNewTask,
-      setShowNewTask,
       showEditTask,
       setShowEditTask
     }}>

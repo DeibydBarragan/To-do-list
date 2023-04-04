@@ -6,22 +6,22 @@ import ChangePicture from '../forms/changePicture'
 import DeletePicture from '../forms/deletePicture'
 
 const PictureOptions = () => {
-  const { userPhoto } = useContext(AuthContext)
+  const { user } = useContext(AuthContext)
   const [showPhoto, setShowPhoto] = useState(false)
   return (
     <div className='flex gap-6 items-center pb-6'>
-      {userPhoto === null
-        ? <i className='text-7xl bi bi-person-circle'/>
+      {user.photoURL === null
+        ? <i className='text-7xl bi bi-person-circle text-indigo-800 dark:text-white'/>
         : <img
           className='w-20 sm:w-24 md:w-28 rounded-3xl cursor-pointer'
           alt='user photo'
-          src={userPhoto}
+          src={user.photoURL}
           referrerPolicy='no-referrer'
           onClick={() => setShowPhoto(true)}
         />
       }
       <div className='flex flex-col gap-2'>
-        <p className='text-gray-900 dark:text-white text-sm'>JPG, PNG or GIF, max weight of 1Mb</p>
+        <p>JPG, PNG or GIF, max weight of 1Mb</p>
         <div className='flex gap-4 w-full'>
           <ChangePicture/>
           <DeletePicture/>

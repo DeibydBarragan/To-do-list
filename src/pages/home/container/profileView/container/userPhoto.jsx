@@ -5,7 +5,7 @@ import { AuthContext } from '../../../../../components/context/authContext'
 import { modalVariants } from '../../../../../components/animations/modalAnim'
 
 const UserPhoto = ({ setShowPhoto }) => {
-  const { userPhoto } = useContext(AuthContext)
+  const { user } = useContext(AuthContext)
 
   const handleClick = (e) => {
     if (e.target.id === 'container') {
@@ -23,7 +23,7 @@ const UserPhoto = ({ setShowPhoto }) => {
       exit={{ opacity: 0 }}
     >
       <motion.img
-        src={ userPhoto }
+        src={ user.photoURL }
         className='rounded-2xl w-10/12 sm:w-8/12 md:w-6/12 xl:w-4/12'
         alt='user photo'
         variants={modalVariants}

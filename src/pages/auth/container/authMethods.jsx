@@ -1,15 +1,28 @@
-import React from 'react'
+import { React, useContext } from 'react'
 import { auth, facebookProvider, googleProvider, githubProvider } from '../../../firebase/firebase'
 import { signInWithPopup } from 'firebase/auth'
 import { useNavigate } from 'react-router-dom'
 import { FILTERS } from '../../../models/filters.enum'
+import { NotificationContext } from '../../../components/context/notificationContext'
+import { NotificationClass } from '../../../models/notification.class'
 
 const AuthMethods = () => {
+  const { setNotification } = useContext(NotificationContext)
   const navigate = useNavigate()
   // Sign in with google, facebook or github
-  const signInWithMethod = async (provider) => {
-    await signInWithPopup(auth, provider)
-    navigate(`/home/${FILTERS.TODAY}`)
+  const signInWithMethod = (provider) => {
+    signInWithPopup(auth, provider)
+      .then(() => {
+        navigate(`/home/${FILTERS.TODAY}`)
+      })
+      .catch((error) => {
+        console.log(error)
+        if (error.code === 'auth/account-exists-with-different-credential') {
+          setNotification(new NotificationClass('Error', 'You already have an account with this email, try with another method', 'error'))
+        } else if (error.code !== 'auth/popup-closed-by-user') {
+          setNotification(new NotificationClass('Error', 'Error signing in with this method', 'error'))
+        }
+      })
   }
   return (
     <div>

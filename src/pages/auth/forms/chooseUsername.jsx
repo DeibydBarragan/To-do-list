@@ -1,4 +1,4 @@
-import React, { useContext } from 'react'
+import React, { useContext, useState } from 'react'
 import { AnimatePresence, motion } from 'framer-motion'
 import { modalVariants } from '../../../components/animations/modalAnim'
 import { useForm } from 'react-hook-form'
@@ -9,19 +9,28 @@ import { useNavigate } from 'react-router-dom'
 import { FILTERS } from '../../../models/filters.enum'
 import Popover from '../../../components/forms/pure/popover'
 import { updateProfile } from 'firebase/auth'
+import LoadingButton from './../../../components/forms/pure/loadingButton'
 
 const ChooseUsername = () => {
   const navigate = useNavigate()
   const { user, setUser } = useContext(AuthContext)
+  const [formLoading, setFormLoading] = useState(false)
   // Form validation
-  const { register, formState: { errors }, handleSubmit } = useForm({
+  const { register, formState: { errors }, handleSubmit, setError } = useForm({
     resolver: yupResolver(chooseNameSchema)
   })
   // Submit form
-  const onSubmit = async (data) => {
-    await updateProfile(user, { displayName: data.username })
-    setUser({ ...user, displayName: data.username })
-    navigate(`/home/${FILTERS.TODAY}`)
+  const onSubmit = (data) => {
+    setFormLoading(true)
+    updateProfile(user, { displayName: data.username })
+      .then(() => {
+        setUser({ ...user, displayName: data.username })
+        navigate(`/home/${FILTERS.TODAY}`)
+      })
+      .catch(() => {
+        setError('username', { message: 'Error choosing your username' })
+      })
+      .finally(() => setFormLoading(false))
   }
 
   return (
@@ -47,7 +56,10 @@ const ChooseUsername = () => {
             {errors.username && <Popover>{errors.username.message}</Popover>}
           </AnimatePresence>
         </div>
-        <button className='btn justify-self-center' type='submit'>Accept</button>
+        <button className='btn justify-self-center' type='submit'>
+          Accept
+          {formLoading && <LoadingButton/>}
+        </button>
       </motion.form>
     </div>
   )

@@ -4,7 +4,7 @@ import moment from 'moment'
 
 const TodayDate = () => {
   return (
-    <h4 className=' text-gray-800 dark:text-white mt-2'>
+    <h4 className='mt-2'>
       {dayToString(moment().weekday())}, {monthToString(moment().month())},{' '}
       {moment().date()}
     </h4>

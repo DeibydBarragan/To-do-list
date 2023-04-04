@@ -1,13 +1,12 @@
 import React, { useContext } from 'react'
 import PropTypes from 'prop-types'
-import { Task } from '../../models/task.class'
-import { TasksContext } from '../context/tasksContext'
 import { LEVELS } from '../../models/levels.enum'
 import CompleteTask from '../forms/pure/completeTask'
 import DeleteTask from '../forms/pure/deleteTask'
 import EditTaskBtn from '../forms/pure/editTaskBtn'
 import { motion } from 'framer-motion'
 import { taskVariants } from '../animations/tasksAnim'
+import { TasksContext } from '../context/tasksContext'
 
 /**
  * Component that receives an instance of task and returns a card with the task information
@@ -15,12 +14,11 @@ import { taskVariants } from '../animations/tasksAnim'
  * @returns
  */
 const TaskComponent = ({ task }) => {
-  const { setShowTask, setShowedTask } = useContext(TasksContext)
+  const { setShowTask } = useContext(TasksContext)
 
   const handleOnClickTask = (e) => {
     if (e.target.localName !== 'i') {
-      setShowedTask(task.id)
-      setShowTask(true)
+      setShowTask(task)
     }
   }
 
@@ -35,27 +33,27 @@ const TaskComponent = ({ task }) => {
       } cursor-pointer rounded-2xl p-3 shadow-xl`}
     >
       <div className='mb-2'>
-        <h4 className='break-words'>
+        <h4 className='break-words text-white'>
           { task.name }
         </h4>
-        <p className='break-words'>
+        <p className='break-words text-white'>
           { task.endDate ? task.endDate : 'Sin fecha' }
         </p>
-        <p className='text-lg break-words'>
+        <p className='text-lg break-words text-white'>
           { task.description === ''
             ? 'Sin descripción'
             : task.description.length <= 80 ? task.description : task.description.slice(0, 80) + '...' }
         </p>
       </div>
       <div className='mt-auto'>
-        <h5 className={task.level === LEVELS.NORMAL ? 'text-gray-300' : ''}>
+        <h5 className={task.level === LEVELS.NORMAL ? 'text-gray-300' : 'text-white'}>
           { task.level }
         </h5>
         <div className='grid grid-cols-3 gap-2'>
           {/** Button to change the state of the taskt to complete */}
           <CompleteTask taskId={task.id}/>
           {/** Button to edit a task */}
-          <EditTaskBtn taskId={task.id}/>
+          <EditTaskBtn task={task}/>
           {/** Button to delete a task */}
           <DeleteTask taskId={task.id}/>
         </div>
@@ -68,8 +66,7 @@ const TaskComponent = ({ task }) => {
  * Task must be an instance of task
  */
 TaskComponent.propTypes = {
-  task: PropTypes.instanceOf(Task),
-  deleteTask: PropTypes.func
+  task: PropTypes.object.isRequired
 }
 
 export default TaskComponent

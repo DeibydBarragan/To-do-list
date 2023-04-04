@@ -44,7 +44,7 @@ const Navbar = () => {
       id='navbar' onClick={(e) => handleCloseNavbar(e)} className={`${navbarOpen ? 'inset-0 grid grid-cols-12' : ''} col-span-3 h-screen fixed lg:sticky z-20 lg:z-auto`}
     >
       <ButtonClose/>
-      <div className={`bg-gradient-to-tl from-emerald-600 via-indigo-800 to-fuchsia-700 gap-6 p-4 lg:p-8 top-0 w-auto ${navbarOpen ? 'flex col-span-8 sm:col-span-5 md:col-span-4' : 'hidden lg:flex'} flex-col h-screen fixed`}>
+      <div className={`bg-gradient-to-tl from-emerald-600 via-indigo-800 to-fuchsia-700 gap-6 p-4 lg:p-8 top-0 ${navbarOpen ? 'flex col-span-8 sm:col-span-5 md:col-span-4' : 'hidden lg:flex'} flex-col h-screen fixed`}>
         <ProfileNav/>
         <ButtonToday/>
         <ButtonAll/>

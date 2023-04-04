@@ -6,13 +6,10 @@ import Modal from '../pure/modal/modal'
 import { TYPES } from '../../models/taskActions'
 import Select from './pure/select'
 import Option from './pure/option'
+import PropTypes from 'prop-types'
 
-const NewTask = () => {
-  /**
-   * Brings createTask function from TasksContext
-   */
-  // eslint-disable-next-line no-unused-vars
-  const { dispatchTask, setShowNewTask } = useContext(TasksContext)
+const NewTask = ({ setShowForm, showForm }) => {
+  const { dispatchTask } = useContext(TasksContext)
 
   /**
    * Brings register to save the data form
@@ -38,7 +35,7 @@ const NewTask = () => {
      */
     data.level === null && (data.level = LEVELS.NORMAL)
     // Close de form
-    setShowNewTask(false)
+    setShowForm(false)
     // setShowNewTask(false)
     dispatchTask({
       type: TYPES.create,
@@ -47,8 +44,8 @@ const NewTask = () => {
   }
 
   return (
-    <Modal setShow={setShowNewTask}>
-      <form onSubmit={handleSubmit(onSubmit)} className='flex flex-col gap-3'>
+    <Modal setShow={setShowForm} show={showForm}>
+      <form onSubmit={handleSubmit(onSubmit)} className='form-modal'>
         <h2>New task</h2>
         <input
           className='input-tasks'
@@ -60,7 +57,7 @@ const NewTask = () => {
         />
         { errors.name?.type === 'required' && 'The name field is required'}
         <textarea
-          className='input-tasks'
+          className='input-tasks h-36'
           maxLength='200'
           autoComplete="off"
           placeholder='Description'
@@ -74,10 +71,15 @@ const NewTask = () => {
         <Select state={level} placeholder='Urgency'>
           {Object.values(LEVELS).map((props) => <Option key={props} set={setLevel}>{props}</Option>)}
         </Select>
-        <button type='submit' className='btn w-full'>Add task</button>
+        <button type='submit' className='btn-modal w-full'>Add task</button>
       </form>
     </Modal>
   )
+}
+
+NewTask.propTypes = {
+  setShowForm: PropTypes.func.isRequired,
+  showForm: PropTypes.bool.isRequired
 }
 
 export default NewTask

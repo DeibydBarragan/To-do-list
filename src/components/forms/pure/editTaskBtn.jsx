@@ -2,11 +2,10 @@ import React, { useContext } from 'react'
 import PropTypes from 'prop-types'
 import { TasksContext } from '../../context/tasksContext'
 
-const EditTaskBtn = ({ taskId }) => {
-  const { setShowedTask, setShowEditTask } = useContext(TasksContext)
+const EditTaskBtn = ({ task }) => {
+  const { setShowEditTask } = useContext(TasksContext)
   const handleOnClick = () => {
-    setShowedTask(taskId)
-    setShowEditTask(true)
+    setShowEditTask(task)
   }
   return (
     <button onClick={handleOnClick} className='col-start-11 btn-icon'>
@@ -19,6 +18,6 @@ const EditTaskBtn = ({ taskId }) => {
  * Task must be an instance of task
  */
 EditTaskBtn.propTypes = {
-  taskId: PropTypes.number
+  task: PropTypes.any
 }
 export default EditTaskBtn

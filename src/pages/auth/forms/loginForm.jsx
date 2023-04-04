@@ -24,7 +24,10 @@ const LoginForm = () => {
       await signInWithEmailAndPassword(auth, data.email, data.password)
       navigate(`/home/${FILTERS.TODAY}`)
     } catch (error) {
-      setError('password', { message: 'Email or password incorrect' })
+      console.log(error)
+      if (error.code === 'auth/wrong-password') setError('password', { message: 'Incorrect password' })
+      else if (error.code === 'auth/user-not-found') setError('email', { message: 'User not found' })
+      else setError('email', { message: 'Something went wrong' })
     }
     setFormLoading(false)
   }

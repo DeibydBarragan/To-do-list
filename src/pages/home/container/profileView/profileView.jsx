@@ -8,16 +8,21 @@ import ChangeEmail from './forms/changeEmail'
 import MethodSignIn from './forms/methodSignIn'
 import { motion } from 'framer-motion'
 import { AuthContext } from '../../../../components/context/authContext'
+import { NavbarContext } from '../../../../components/context/navbarContext'
+import SetPassword from './forms/setPassword'
 
 const ProfileView = () => {
-  const { user } = useContext(AuthContext)
+  const { methods } = useContext(AuthContext)
+  const { navbarOpen } = useContext(NavbarContext)
+
   return (
-    <motion.section className='col-span-12 lg:col-span-8 m-6 lg:w-5/6'
+    <motion.section className={`col-span-12 lg:col-span-8 m-6 lg:w-5/6 ${navbarOpen ? 'blur-sm' : ''}`}
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
     >
       <div className='pb-4 border-b-2 border-purple-500'>
-        <h1 className="text-5xl font-bold text-gray-800 dark:text-white">
+        <h1 className="text-5xl font-bold">
           Profile
         </h1>
         <TodayDate/>
@@ -28,12 +33,14 @@ const ProfileView = () => {
         {/** Username */}
         <ChangeUsername/>
         {/** Email */}
-        {user.providerData[0].providerId === 'password' && <ChangeEmail/>}
+        {methods.includes('Password') && <ChangeEmail/>}
         {/** Password */}
-        {user.providerData[0].providerId === 'password' && <ChangePassword/>}
+        {methods.includes('Password') && <ChangePassword/>}
+        {/** Set password */}
+        {!methods.includes('Password') && <SetPassword/>}
+        {/** Services you use to sign in */}
         {/** Delete account */}
         <DeleteUser/>
-        {/** Services you use to sign in */}
         <MethodSignIn/>
       </div>
     </motion.section>
