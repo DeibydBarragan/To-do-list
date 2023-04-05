@@ -5,10 +5,19 @@ import { createPortal } from 'react-dom'
 import NewTask from '../../../forms/newTask'
 import { NavbarContext } from '../../../context/navbarContext'
 
+/**
+ * This component returns a button that opens a modal for creating a new task
+ * @returns returns a button that opens a modal for creating a new task
+ */
 const NewTaskButton = () => {
+  /**
+   * This state controls the visibility of the modal for creating a new task
+   */
   const [showForm, setShowForm] = useState(false)
   const { navbarOpen } = useContext(NavbarContext)
-  // Open modal for creating a new task
+  /**
+   * This function opens the modal for creating a new task
+   */
   const handleClickNewTask = () => {
     setShowForm(true)
   }

@@ -2,9 +2,16 @@ import React, { useContext } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { AuthContext } from '../../../context/authContext'
 
+/**
+ * This component returns a div with the user photo and name
+ * @returns returns a div with the user photo and name
+ */
 const ProfileNav = () => {
   const navigate = useNavigate()
   const { user } = useContext(AuthContext)
+  /**
+   * This function navigates to the profile page
+   */
   const handleViewProfile = () => {
     navigate('/home/profile')
   }

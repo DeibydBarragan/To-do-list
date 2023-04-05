@@ -6,19 +6,30 @@ import { FILTERS } from '../../../models/filters.enum'
 import { NotificationContext } from '../../../components/context/notificationContext'
 import { NotificationClass } from '../../../models/notification.class'
 
+/**
+ * This component returns the auth methods
+ * @returns returns the auth methods
+ */
 const AuthMethods = () => {
   const { setNotification } = useContext(NotificationContext)
   const navigate = useNavigate()
-  // Sign in with google, facebook or github
+  /**
+   * This function signs in with the provider
+   */
   const signInWithMethod = (provider) => {
     signInWithPopup(auth, provider)
       .then(() => {
         navigate(`/home/${FILTERS.TODAY}`)
       })
       .catch((error) => {
-        console.log(error)
+        /**
+         * If the user already has an account with this email, try with another method
+         */
         if (error.code === 'auth/account-exists-with-different-credential') {
           setNotification(new NotificationClass('Error', 'You already have an account with this email, try with another method', 'error'))
+        /**
+         * If the user closes the popup, do nothing
+         */
         } else if (error.code !== 'auth/popup-closed-by-user') {
           setNotification(new NotificationClass('Error', 'Error signing in with this method', 'error'))
         }

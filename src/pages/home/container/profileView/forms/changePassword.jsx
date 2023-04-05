@@ -11,21 +11,39 @@ import { NotificationContext } from '../../../../../components/context/notificat
 import { auth } from '../../../../../firebase/firebase'
 import { NotificationClass } from '../../../../../models/notification.class'
 
+/**
+ * This component returns the change password form
+ * @returns returns the change password form
+ */
 const ChangePassword = () => {
   const { user } = useContext(AuthContext)
   const { setNotification } = useContext(NotificationContext)
   const [showForm, setShowForm] = useState(false)
   const [formLoading, setFormLoading] = useState(false)
-  // Form validation
+  /**
+   * This function manages the change password form
+   */
   const { register, formState: { errors }, handleSubmit, reset, setError, clearErrors } = useForm({
     resolver: yupResolver(passwordSchema)
   })
-
+  /**
+   * This function manages the change password form
+   * @param {object} data - Data from the form
+   */
   const onSubmit = (data) => {
     setFormLoading(true)
+    /**
+     * Get credential
+     */
     const credential = EmailAuthProvider.credential(user.email, data.actualPassword)
+    /**
+      * Reauthenticate user with given credential
+      */
     reauthenticateWithCredential(auth.currentUser, credential)
       .then(() => {
+        /**
+         * Update password
+         */
         updatePassword(auth.currentUser, data.newPassword)
           .then(() => {
             setShowForm(false)
@@ -33,10 +51,16 @@ const ChangePassword = () => {
             setNotification(new NotificationClass('Password changed', 'Your password has been changed', 'success'))
           })
           .catch(() => {
+            /**
+             * Something went wrong
+             */
             setError('confirmNewPassword', { message: 'Error changing password' })
           })
       })
       .catch(() => {
+        /**
+         * Incorrect password
+         */
         setError('actualPassword', { message: 'Incorrect password' })
       })
       .finally(() => {
@@ -88,6 +112,7 @@ const ChangePassword = () => {
             />
             <Popover show={errors.confirmNewPassword?.message} clear={clearErrors} fieldName='confirmNewPassword'/>
           </div>
+          {/** Button to submit the form */}
           <button className='btn-modal' type='submit'>
                 Change
             {formLoading

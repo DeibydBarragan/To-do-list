@@ -2,6 +2,10 @@ import { React, useContext } from 'react'
 import { NavbarContext } from '../../../context/navbarContext'
 import { createPortal } from 'react-dom'
 
+/**
+ * This component returns a button that closes the navbar
+ * @returns returns a button that closes the navbar
+ */
 const ButtonCloseNav = () => {
   const { navbarOpen, setNavBarOpen } = useContext(NavbarContext)
 

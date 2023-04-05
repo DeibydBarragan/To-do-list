@@ -11,11 +11,17 @@ import { auth } from '../../../firebase/firebase'
 import { NotificationContext } from '../../../components/context/notificationContext'
 import { NotificationClass } from '../../../models/notification.class'
 
+/**
+  * This component returns the reset password form
+  * @returns returns the reset password form
+  */
 const ResetPassword = () => {
   const [showForm, setShowForm] = useState(false)
   const [formLoading, setFormLoading] = useState(false)
   const { setNotification } = useContext(NotificationContext)
-  // Form validation
+  /**
+   * This function manages the reset password form
+   */
   const { register, formState: { errors }, handleSubmit, reset, setError, clearErrors } = useForm({
     resolver: yupResolver(resetEmail)
   })
@@ -23,6 +29,9 @@ const ResetPassword = () => {
   const onSubmit = async (data) => {
     setFormLoading(true)
     try {
+      /**
+       * Send email to reset password
+       */
       await sendPasswordResetEmail(auth, data.email)
       setShowForm(false)
       setNotification(new NotificationClass('Email sent', 'Check your email to reset your password', 'success'))

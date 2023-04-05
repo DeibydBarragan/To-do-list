@@ -11,28 +11,44 @@ import Popover from '../../../../../components/forms/pure/popover'
 import { AuthContext } from '../../../../../components/context/authContext'
 import { registerSchema } from './../../../../../components/forms/formSchema/registerSchema'
 
+/**
+ * This component returns the set password form
+ * @returns returns the set password form
+ */
 const SetPassword = () => {
   const { user, setUser, setMethods, methods } = useContext(AuthContext)
   const { setNotification } = useContext(NotificationContext)
   const [formLoading, setFormLoading] = useState(false)
   const [showForm, setShowForm] = useState(false)
 
-  // Form validation
+  /**
+   * This function manages the set password form
+   */
   const { register, formState: { errors }, handleSubmit, reset, setError, clearErrors } = useForm({
     resolver: yupResolver(registerSchema)
   })
-
+  /**
+   * When the form is submitted withouth errors
+   * @param {object} data - The data from the form
+   */
   const onSubmit = (data) => {
     setFormLoading(true)
-    // Check if email is already in use
+    /**
+     * Check if the form email is different from the current one
+     */
     if (user.email !== data.email) {
+      /**
+       * Check if the email is already in use
+       */
       fetchSignInMethodsForEmail(auth, data.email)
         .then((res) => {
           if (res.length > 0) {
+            // Email already in use
             setError('email', { message: 'Email already in use' })
           } else {
-            // Add email and password
-            // Update email
+            /**
+             * Add email, password and update states
+             */
             updateEmail(auth.currentUser, data.email)
               .then(() => {
                 // Update password
@@ -48,25 +64,41 @@ const SetPassword = () => {
                   })
                   .catch((e) => {
                     console.log(e)
+                    /**
+                     * Something went wrong
+                     */
                     setError('password', { message: 'Error adding password' })
                   })
               })
               .catch((e) => {
-                console.log(e)
+                /**
+                 * If the user needs to reauthenticate
+                 */
                 if (e.code === 'auth/requires-recent-login') setError('email', { message: 'For security you need to reauthenticate to set password and email' })
+                /**
+                 * Something went wrong
+                 */
                 else setError('email', { message: 'Error adding email' })
               })
           }
         })
         .catch((e) => {
-          console.log(e)
+          /**
+           * Something went wrong
+           */
           setError('email', { message: 'Error verifying email' })
         })
         .finally(() => {
           setFormLoading(false)
         })
+    /**
+     * If the email is the same as the current one
+     */
     } else {
-      // Add password
+      /**
+       * Only add password
+       * Update password and update states
+       */
       updatePassword(auth.currentUser, data.password)
         .then(() => {
           // Update states
@@ -78,8 +110,13 @@ const SetPassword = () => {
         })
         .catch((e) => {
           console.log(e)
-          // Check if user needs to reauthenticate
+          /**
+           * If the user needs to reauthenticate
+           */
           if (e.code === 'auth/requires-recent-login') setError('password', { message: 'You need to reauthenticate to add a password' })
+          /**
+           * Something went wrong
+           */
           else setError('password', { message: 'Error adding password' })
         })
         .finally(() => {

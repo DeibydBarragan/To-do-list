@@ -3,9 +3,15 @@ import { createPortal } from 'react-dom'
 import { NotificationContext } from '../context/notificationContext'
 import { AnimatePresence, motion } from 'framer-motion'
 
+/**
+ * This component returns a notification
+ * @returns returns a notification
+ */
 const Notification = () => {
   const { notification, setNotification } = useContext(NotificationContext)
-
+  /**
+   * This function removes the notification after 8 seconds
+   */
   useEffect(() => {
     if (notification) {
       setTimeout(() => {

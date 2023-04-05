@@ -5,24 +5,22 @@ import { TasksContext } from '../../../context/tasksContext'
 import { useSortTasks } from './../../../../hooks/useSortTasks'
 import TodayDate from '../pure/todayDate'
 
+/**
+ * This component returns the date and the number of tasks
+ * @returns returns the date and the number of tasks
+ */
 const Date = () => {
   const { tasks } = useContext(TasksContext)
   const { filter } = useContext(FiltersContext)
+  /**
+   * This function sorts the tasks by the filter
+   */
   const sortedTasks = useSortTasks(tasks, filter)
-  const container = {
-    hidden: { opacity: 0 },
-    show: {
-      opacity: 1,
-      transition: {
-        duration: 0.2
-      }
-    }
-  }
+
   return (
     <motion.div
-      variants={ container }
-      initial='hidden'
-      animate='show'
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
       className='border-b-2 border-purple-500'
     >
       <h1 className="text-5xl">

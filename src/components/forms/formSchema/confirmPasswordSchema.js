@@ -1,5 +1,7 @@
 import * as yup from 'yup'
-
+/**
+ * Schema for confirm password form
+ */
 export const confirmPasswordSchema = yup.object().shape({
   actualPassword: yup
     .string()

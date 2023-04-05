@@ -9,10 +9,16 @@ import { useForm } from 'react-hook-form'
 import Popover from '../../../components/forms/pure/popover'
 import LoadingButton from '../../../components/forms/pure/loadingButton'
 
+/**
+ * This component returns the register form
+ * @returns returns the register form
+ */
 const RegisterForm = () => {
   const [formLoading, setFormLoading] = useState(false)
   const navigate = useNavigate()
-  // Form validation
+  /**
+   * This function manages the register form
+   */
   const { register, formState: { errors }, handleSubmit, setError, clearErrors } = useForm({
     resolver: yupResolver(registerSchema)
   })
@@ -20,19 +26,37 @@ const RegisterForm = () => {
   const onSubmit = async (data) => {
     setFormLoading(true)
     try {
+      /**
+       * Check if email is already in use
+       */
       const methods = await fetchSignInMethodsForEmail(auth, data.email)
       if (methods.length > 0) {
+        /**
+         * Email already in use
+         */
         setError('email', { message: 'Email already in use' })
         return setFormLoading(false)
       }
     } catch (error) {
+      /**
+       * Error verifying email
+       */
       setError('email', { message: 'Error verifying email' })
       return setFormLoading(false)
     }
     try {
+      /**
+       * Create user with email and password
+       */
       await createUserWithEmailAndPassword(auth, data.email, data.password)
+      /**
+       * Navigate to home page
+       */
       navigate(`/home/${FILTERS.TODAY}`)
     } catch (error) {
+      /**
+       * Failed to register
+       */
       setError('confirmPassword', { message: 'Failed to register' })
     }
     setFormLoading(false)

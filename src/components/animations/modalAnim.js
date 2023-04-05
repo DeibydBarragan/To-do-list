@@ -1,3 +1,6 @@
+/**
+ * @fileoverview Modal animations
+ */
 export const modalVariants = {
   key: 'box',
   hidden: {

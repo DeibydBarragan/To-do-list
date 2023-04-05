@@ -1,5 +1,7 @@
 import * as yup from 'yup'
-
+/**
+ * Schema for reset password form
+ */
 export const resetEmail = yup.object().shape({
   email: yup
     .string()

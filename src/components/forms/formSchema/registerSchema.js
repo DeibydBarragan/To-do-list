@@ -1,5 +1,7 @@
 import * as yup from 'yup'
-
+/**
+ * Schema for register form
+ */
 export const registerSchema = yup.object().shape({
   password: yup
     .string()

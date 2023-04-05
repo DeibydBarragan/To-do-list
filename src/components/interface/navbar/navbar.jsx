@@ -9,17 +9,18 @@ import ButtonLogout from './buttons/buttonLogout'
 import ButtonTheme from './buttons/buttonTheme'
 import ProfileNav from './container/profileNav'
 /**
- *
+ * This component returns the side navbar
  * @returns the side navbar
  */
 const Navbar = () => {
   // Active filter
   const { navbarOpen, setNavBarOpen } = useContext(NavbarContext)
 
-  // Close the navbar when the window is resized
+  /**
+   * This function closes the navbar when the window is resized
+   */
   const [width, setWidth] = useState(window.innerWidth)
 
-  // Listener to close navbar
   window.addEventListener('resize', () => {
     setWidth(window.innerWidth)
   })
@@ -28,6 +29,11 @@ const Navbar = () => {
     setNavBarOpen(false)
   }, [width])
 
+  /**
+   * This function closes the navbar when the user clicks outside of it
+   * @param {Event} e - The event
+   * @returns closes the navbar
+   */
   const handleCloseNavbar = (e) => {
     if (e.target.id === 'navbar') {
       setNavBarOpen(false)

@@ -4,6 +4,9 @@ import PropTypes from 'prop-types'
 const NavbarContext = createContext()
 
 const NavbarContextProvider = ({ children }) => {
+  /**
+   * State for the navbar
+   */
   const [navbarOpen, setNavBarOpen] = useState(false)
 
   return (

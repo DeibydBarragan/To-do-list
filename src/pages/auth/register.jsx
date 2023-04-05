@@ -3,10 +3,16 @@ import { useNavigate } from 'react-router-dom'
 import AuthMethods from './container/authMethods'
 import RegisterForm from './forms/registerForm'
 
+/**
+ * This component returns the register page
+ * @returns returns the register page
+ */
 const Register = () => {
-  // Navigate to login
   const navigate = useNavigate()
-  // Handle login
+  /**
+   * This function handles the login button
+   * Redirects to login page
+   */
   const handleLogin = () => {
     navigate('/login')
   }

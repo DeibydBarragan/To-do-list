@@ -5,15 +5,24 @@ import { auth } from '../../../../firebase/firebase'
 import { AuthContext } from '../../../context/authContext'
 import LoadingButton from '../../../forms/pure/loadingButton'
 
+/**
+ * This component returns a button that logs out the user
+ * @returns returns a button that logs out the user
+ */
 const ButtonLogout = () => {
   const { setUser } = useContext(AuthContext)
+  /**
+   * This state is used to show a loading button
+   */
   const [formLoading, setFormLoading] = useState(false)
   const navigate = useNavigate()
-
+  /**
+   * This function logs out the user and navigates to the login page
+   */
   const handleLogout = async () => {
     setFormLoading(true)
-    setUser(null)
     await signOut(auth)
+    setUser(null)
     navigate('/login')
     setFormLoading(false)
   }

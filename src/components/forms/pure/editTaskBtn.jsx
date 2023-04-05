@@ -2,8 +2,16 @@ import React, { useContext } from 'react'
 import PropTypes from 'prop-types'
 import { TasksContext } from '../../context/tasksContext'
 
+/**
+ * This component returns a button that edits the task
+ * @param {task} param0 task is the task to edit
+ * @returns returns a button that edits the task
+ */
 const EditTaskBtn = ({ task }) => {
   const { setShowEditTask } = useContext(TasksContext)
+  /**
+   * On click, set the task to edit
+   */
   const handleOnClick = () => {
     setShowEditTask(task)
   }
@@ -14,10 +22,7 @@ const EditTaskBtn = ({ task }) => {
   )
 }
 
-/**
- * Task must be an instance of task
- */
 EditTaskBtn.propTypes = {
-  task: PropTypes.any
+  task: PropTypes.object
 }
 export default EditTaskBtn

@@ -4,11 +4,19 @@ import { FILTERS } from '../../models/filters.enum'
 import { motion } from 'framer-motion'
 import { modalVariants } from './../../components/animations/modalAnim'
 
+/**
+ * Component that returns the 404 page
+ * @returns returns the 404 page
+ */
 const NotFound = () => {
   const navigate = useNavigate()
+  /**
+   * This function navigates to the home page
+   */
   const backHandler = () => {
     navigate(`/home/${FILTERS.TODAY}`)
   }
+
   return (
     <div className='h-screen background-auth grid place-content-center'>
       <motion.div

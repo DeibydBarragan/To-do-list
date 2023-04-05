@@ -10,10 +10,14 @@ import EditTask from './../../forms/editTask'
 
 /**
  * Component that returns the list of tasks
+ * @returns returns the list of tasks
  */
 const TaskList = () => {
   const { tasks } = useContext(TasksContext)
   const { filter } = useContext(FiltersContext)
+  /**
+   * This function sorts the tasks by the filter
+   */
   const sortedTasks = useSortTasks(tasks, filter)
 
   return (

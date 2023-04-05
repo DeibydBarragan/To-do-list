@@ -6,6 +6,10 @@ import ProfileView from './container/profileView/profileView'
 import Notification from '../../components/pure/notification'
 import { AnimatePresence } from 'framer-motion'
 import ButtonCloseNav from '../../components/interface/navbar/buttons/buttonCloseNav'
+/**
+ * This component returns the home page
+ * @returns returns the home page
+ */
 const Home = () => {
   const { filter } = useContext(FiltersContext)
   return (

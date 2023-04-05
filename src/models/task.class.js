@@ -1,3 +1,6 @@
+/**
+ * Task class
+ */
 export class Task {
   id
   name

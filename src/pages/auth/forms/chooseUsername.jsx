@@ -11,17 +11,32 @@ import { updateProfile } from 'firebase/auth'
 import LoadingButton from './../../../components/forms/pure/loadingButton'
 import { motion } from 'framer-motion'
 
+/**
+ * This component returns the choose username form
+ * @returns returns the choose username form
+ */
 const ChooseUsername = () => {
   const navigate = useNavigate()
   const { user, setUser } = useContext(AuthContext)
+  /**
+   * This state controls the loading of the form
+   */
   const [formLoading, setFormLoading] = useState(false)
-  // Form validation
+  /**
+   * This function submits the form
+   */
   const { register, formState: { errors }, handleSubmit, setError, clearErrors } = useForm({
     resolver: yupResolver(chooseNameSchema)
   })
-  // Submit form
+  /*
+    * This function submits the form
+    * @param {object} data - data of the form
+    */
   const onSubmit = (data) => {
     setFormLoading(true)
+    /**
+     * This function updates the user profile
+     */
     updateProfile(user, { displayName: data.username })
       .then(() => {
         setUser({ ...user, displayName: data.username })

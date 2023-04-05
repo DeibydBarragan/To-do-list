@@ -9,24 +9,47 @@ import { useNavigate } from 'react-router-dom'
 import { FILTERS } from '../../../models/filters.enum'
 import LoadingButton from '../../../components/forms/pure/loadingButton'
 
+/**
+ * This component returns the login form
+ * @returns returns the login form
+ */
 const LoginForm = () => {
   const navigate = useNavigate()
   const [formLoading, setFormLoading] = useState(false)
-  // Form validation
+  /**
+   * This function manages the login form
+   */
   const { register, formState: { errors }, handleSubmit, setError, clearErrors } = useForm({
     resolver: yupResolver(loginSchema)
   })
 
-  // on submit form
+  /**
+   * This function handles the login form submit
+   */
   const onSubmit = async (data) => {
     setFormLoading(true)
     try {
+      /**
+       * Sign in with email and password
+       */
       await signInWithEmailAndPassword(auth, data.email, data.password)
+      /**
+       * Navigate to home page
+       */
       navigate(`/home/${FILTERS.TODAY}`)
     } catch (error) {
       console.log(error)
+      /**
+       * Wrong password
+       */
       if (error.code === 'auth/wrong-password') setError('password', { message: 'Incorrect password' })
+      /**
+       * User not found
+       */
       else if (error.code === 'auth/user-not-found') setError('email', { message: 'User not found' })
+      /**
+       * Something went wrong
+       */
       else setError('email', { message: 'Something went wrong' })
     }
     setFormLoading(false)

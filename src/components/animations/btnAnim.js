@@ -1,3 +1,6 @@
+/**
+ * @fileoverview new task button animation variants for framer-motion
+ */
 export const btnVariants = {
   hidden: {
     y: 50,

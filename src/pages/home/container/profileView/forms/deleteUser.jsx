@@ -12,24 +12,39 @@ import { auth } from '../../../../../firebase/firebase'
 import { NotificationClass } from '../../../../../models/notification.class'
 import FloatForm from '../container/floatForm'
 
+/**
+ * This component returns the delete user form
+ * @returns returns the delete user form
+ */
 const DeleteUser = () => {
   const { user, methods } = useContext(AuthContext)
   const { setNotification } = useContext(NotificationContext)
   const [showForm, setShowForm] = useState(false)
   const [formLoading, setFormLoading] = useState(false)
-  // Form validation
+  /**
+   * This function manages the delete user form
+   */
   const { register, formState: { errors }, handleSubmit, reset, setError, clearErrors } = useForm({
     resolver: yupResolver(confirmPasswordSchema)
   })
-  // When form is submitted
-  // When user has a password
+  /**
+   * When the form is submitted withouth errors
+   * @param {object} data - The data from the form
+   */
   const onSubmit = (data) => {
     setFormLoading(true)
-    // Reauthenticate user
+    /**
+     * Get the user credential
+     */
     const credential = EmailAuthProvider.credential(user.email, data.actualPassword)
+    /**
+     * Reauthenticate the user
+     */
     reauthenticateWithCredential(auth.currentUser, credential)
       .then(() => {
-        // Delete user
+        /**
+         * Delete the user
+         */
         deleteUser(auth.currentUser)
           .then(() => {
             setShowForm(false)
@@ -42,17 +57,27 @@ const DeleteUser = () => {
           })
       })
       .catch((e) => {
+        /**
+         * If the password is wrong
+         */
         if (e.code === 'auth/wrong-password') setError('actualPassword', { message: 'Incorrect password' })
+        /**
+         * Something went wrong
+         */
         else setError('actualPassword', { message: 'Error deleting your account' })
       })
       .finally(() => {
         setFormLoading(false)
       })
   }
-  // This function delete the user without asking for the password
-  // It's used when the user has no password
+  /**
+   * This function deletes the user without password
+   */
   const handleDeleteUser = () => {
     setFormLoading(true)
+    /**
+     * Delete the user
+     */
     deleteUser(auth.currentUser)
       .then(() => {
         setShowForm(false)
@@ -60,7 +85,13 @@ const DeleteUser = () => {
         setNotification(new NotificationClass('Account deleted', 'Your account has been deleted', 'success'))
       })
       .catch((e) => {
+        /**
+         * If the user has to reauthenticate
+         */
         if (e.code === 'auth/requires-recent-login') setNotification(new NotificationClass('Error', 'For security you have to reauthenticate before deleting your account', 'error'))
+        /**
+         * Something went wrong
+         */
         else setNotification(new NotificationClass('Error', 'Error deleting your account', 'error'))
       })
       .finally(() => {

@@ -18,8 +18,7 @@ const EditTask = () => {
     setLevel(showEditTask?.level)
   }, [showEditTask])
   /**
-   * Brings register to save the data form
-   * errors to manage errors
+   * Brings register to save the data form the form
    * handleSubmit is the name of the function that manage the form when it is submitted
    */
   const { register, formState: { errors }, handleSubmit } = useForm()
@@ -29,9 +28,10 @@ const EditTask = () => {
     data.description === '' && (data.description = showEditTask?.description)
     // i declare a new propertie to save the level because it doesn't work if i use level directly (i don't know why)
     data.level = level
-    // Close de form
     setShowEditTask(false)
-    // setShowNewTask(false)
+    /**
+     * Dispatch the action to the reducer
+     */
     dispatchTask({
       type: TYPES.edit,
       payload: { id: showEditTask?.id, name: data.name, description: data.description, level: data.level, endDate: data.endDate }

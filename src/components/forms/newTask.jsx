@@ -8,6 +8,11 @@ import Select from './pure/select'
 import Option from './pure/option'
 import PropTypes from 'prop-types'
 
+/**
+ * This component returns a form to create a new task
+ * @param {setShowForm} param0 setShowForm is a function to set the state of the form to show or not
+ * @returns returns a form to create a new task
+ */
 const NewTask = ({ setShowForm, showForm }) => {
   const { dispatchTask } = useContext(TasksContext)
 
@@ -19,7 +24,7 @@ const NewTask = ({ setShowForm, showForm }) => {
   const { register, formState: { errors }, handleSubmit } = useForm()
 
   /**
-   * state for the level of the task
+   * state for task level
    */
   const [level, setLevel] = useState(null)
 
@@ -34,9 +39,10 @@ const NewTask = ({ setShowForm, showForm }) => {
      * if the user doesn't choose a level, it will be normal
      */
     data.level === null && (data.level = LEVELS.NORMAL)
-    // Close de form
     setShowForm(false)
-    // setShowNewTask(false)
+    /**
+     * Dispatch the action to the reducer
+     */
     dispatchTask({
       type: TYPES.create,
       payload: { name: data.name, description: data.description, level: data.level, endDate: data.endDate }

@@ -1,3 +1,6 @@
+/**
+ * Notification class
+ */
 export class NotificationClass {
   title
   message

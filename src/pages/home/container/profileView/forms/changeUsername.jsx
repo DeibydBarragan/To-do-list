@@ -16,13 +16,20 @@ const ChangeUsername = () => {
   const { setNotification } = useContext(NotificationContext)
   const [showForm, setShowForm] = useState(false)
   const [formLoading, setFormLoading] = useState(false)
-  // Form validation
+  /**
+   * This function manages the change username form
+   */
   const { register, formState: { errors }, handleSubmit, setError, reset, clearErrors } = useForm({
     resolver: yupResolver(chooseNameSchema)
   })
-
+  /**
+   * On submit function
+   */
   const onSubmit = (data) => {
     setFormLoading(true)
+    /**
+     * Update user profile
+     */
     updateProfile(auth.currentUser, { displayName: data.username })
       .then(() => {
         setUser({ ...user, displayName: data.username })
@@ -32,6 +39,9 @@ const ChangeUsername = () => {
       })
       .catch((e) => {
         console.log(e)
+        /**
+         * Something went wrong
+         */
         setError('username', { message: 'Error changing username' })
       })
       .finally(() => {
@@ -52,6 +62,7 @@ const ChangeUsername = () => {
       <Modal setShow={setShowForm} show={showForm} reset={reset}>
         <form className='form-modal' onSubmit={handleSubmit(onSubmit)}>
           <h2 className='text-3xl sm:text-4xl'>Change username</h2>
+          {/** New username */}
           <div className='relative'>
             <input
               type='text'

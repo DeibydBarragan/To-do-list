@@ -11,7 +11,15 @@ import { AuthContext } from '../../../../components/context/authContext'
 import SetPassword from './forms/setPassword'
 import VerifyEmail from './forms/verifyEmail'
 
+/**
+ * This component returns the profile view
+ * @returns returns the profile view
+ */
 const ProfileView = () => {
+  /**
+   * This context stores the user data
+   * and the methods to sign in
+   */
   const { methods, user } = useContext(AuthContext)
 
   return (

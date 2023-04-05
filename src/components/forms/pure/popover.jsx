@@ -2,16 +2,32 @@ import React, { useEffect } from 'react'
 import propTypes from 'prop-types'
 import { AnimatePresence, motion } from 'framer-motion'
 
+/**
+ * This component returns a popover
+ * @param {show} param0 show is the message to show
+ * @param {setShow} param1 setShow is the function to set the message to show
+ * @param {clear} param2 clear is the function to clear the errors of the form
+ * @param {fieldName} param3 fieldName is the name of the field of the form to clear its errors
+ */
 const Popover = ({ show, setShow, clear, fieldName }) => {
   useEffect(() => {
+    /**
+     * If setShow is defined, set a timeout to clear the message
+     */
     if (setShow) {
       const timeout = setTimeout(() => {
         setShow(null)
       }, 8000)
       return () => clearTimeout(timeout)
     }
+    /**
+     * If clear is defined, set a timeout to clear the errors of the form
+     */
     if (clear) {
       const timeout = setTimeout(() => {
+        /**
+         * If fieldName is defined, clear the errors of the field
+         */
         fieldName ? clear(fieldName) : clear()
       }, 8000)
       return () => clearTimeout(timeout)

@@ -1,6 +1,10 @@
 import React from 'react'
 import Charging from '../../components/pure/charging'
 
+/**
+ * This component returns the loading page
+ * @returns returns the loading page
+ */
 const Loading = () => {
   return (
     <div className='fixed inset-0 content-center background-auth bg-cover grid grid-cols-6 sm:grid-cols-7 md:grid-cols-8 lg:grid-cols-10 xl:grid-cols-12 p-6 sm:p-10 md:p-14 lg:p-16 gap-7'>

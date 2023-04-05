@@ -5,6 +5,10 @@ import DeleteTask from '../forms/pure/deleteTask'
 import EditTaskBtn from '../forms/pure/editTaskBtn'
 import { TasksContext } from '../context/tasksContext'
 
+/**
+ * This component returns a modal with the information of a task
+ * @returns returns a modal with the information of a task
+ */
 const ShowTaskComponent = () => {
   const { setShowTask, showTask } = useContext(TasksContext)
   return (

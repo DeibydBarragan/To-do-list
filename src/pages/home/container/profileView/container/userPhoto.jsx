@@ -4,9 +4,16 @@ import { createPortal } from 'react-dom'
 import { AuthContext } from '../../../../../components/context/authContext'
 import { modalVariants } from '../../../../../components/animations/modalAnim'
 
+/**
+ * This component returns the user photo in a modal
+ * @param {function} setShowPhoto function to set the show photo state
+ */
 const UserPhoto = ({ setShowPhoto }) => {
   const { user } = useContext(AuthContext)
-
+  /**
+   * This function closes the modal when the user clicks outside the image
+   * @param {Object} e event
+   */
   const handleClick = (e) => {
     if (e.target.id === 'container') {
       setShowPhoto(false)

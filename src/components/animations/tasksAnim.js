@@ -1,3 +1,6 @@
+/**
+ * @fileoverview Task component animations variants
+ */
 export const taskVariants = {
   hidden: {
     opacity: 0,

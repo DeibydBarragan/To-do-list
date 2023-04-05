@@ -2,25 +2,37 @@
 @tailwind components;
 @tailwind utilities;
 
+/* This is for the background in login, register, choose username and loading pages */
 .background-auth {
   background-image: url(../public/background.svg);
 }
 
+/** This is for the principal button in the app */
 .btn {
   @apply font-ptSans flex items-center gap-3 justify-center outline outline-1 p-2 rounded-lg font-semibold text-lg transition ease-in-out active:scale-95 hover:bg-white hover:text-indigo-800;
 }
+
+/** This is for the button in the modal */
 .btn-modal {
   @apply btn bg-indigo-700 text-white outline-none hover:bg-indigo-800 hover:text-white;
 }
+
+/** This is for the button when is selected */
 .btn-selected {
   @apply bg-white text-indigo-800;
 }
+
+/** This is for the button in the profile page */
 .btn-settings {
   @apply font-ptSans flex items-center justify-center p-2 rounded-lg font-semibold text-lg transition ease-in-out active:scale-95 hover:bg-indigo-900 bg-indigo-800 dark:bg-gray-800 dark:hover:bg-gray-700 z-10 gap-2;
 }
+
+/** This is for the icon buttons */
 .btn-icon {
   @apply hover:opacity-80
 }
+
+/** Tittles configuration */
 h5 {
   @apply text-lg text-indigo-900 dark:text-white font-semibold font-workSans;
 }
@@ -45,18 +57,22 @@ p {
   @apply text-black dark:text-white
 }
 
+/** This is for the inputs in the forms to change tasks */
 .input-tasks {
   @apply rounded-md outline-none bg-white dark:bg-slate-800 placeholder:text-gray-500 p-2 shadow-md border border-indigo-700 dark:border-none;
 }
 
+/** This is for the inputs in the forms of register or login*/
 .input-auth {
   @apply bg-transparent border-b outline-none border-slate-400 text-lg w-full pb-2
 }
 
+/** This is for the forms inside a modal */
 .form-modal {
   @apply flex flex-col gap-4 p-4
 }
 
+/** This is for the scroll bar styles */
 ::-webkit-scrollbar {
   @apply w-auto
 }

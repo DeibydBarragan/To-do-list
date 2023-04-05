@@ -3,6 +3,9 @@ import PropTypes from 'prop-types'
 
 const NotificationContext = createContext()
 const NotificationContextProvider = ({ children }) => {
+  /**
+   * State for the notifications
+   */
   const [notification, setNotification] = useState(null)
   return (
     <NotificationContext.Provider

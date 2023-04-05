@@ -1,10 +1,19 @@
 import React, { useContext, useEffect, useState } from 'react'
 import { AuthContext } from '../../../../../components/context/authContext'
 
+/**
+ * This component returns the method the user uses to sign in
+ * @returns returns the methods the user uses to sign in
+ */
 const MethodSignIn = () => {
   const { methods } = useContext(AuthContext)
+  /**
+   * This state stores the icons
+   */
   const [icons, setIcons] = useState([])
-  /// This is to get the icon name
+  /**
+   * This effect sets the icons
+   */
   useEffect(() => {
     setIcons(methods.map((method) => method === 'Google' ? 'google' : method === 'Facebook' ? 'facebook' : method === 'Github' ? 'github' : 'envelope-at'))
   }, [methods])

@@ -4,8 +4,15 @@ import { useNavigate } from 'react-router-dom'
 import { FiltersContext } from '../../../context/filtersContext'
 
 const ButtonWeek = () => {
+  /**
+   * This component returns a button that filters the tasks by next 7 days
+   * @returns returns a button that filters the tasks by next 7 days
+   */
   const { filter, setFilter } = useContext(FiltersContext)
   const navigate = useNavigate()
+  /**
+   * This function sets the filter to next 7 days and navigates to the home page with the filter next 7 days
+   */
   const handleWeek = () => {
     setFilter(FILTERS.NEXTSEVEN)
     navigate(`/home/${FILTERS.NEXTSEVEN}`)

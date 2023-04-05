@@ -6,10 +6,17 @@ import AuthMethods from './container/authMethods'
 import ResetPassword from './forms/resetPassword'
 import Notification from '../../components/pure/notification'
 
+/**
+ * This component returns the login page
+ * @returns returns the login page
+ */
 const Login = () => {
   const navigate = useNavigate()
 
-  // Handle register
+  /**
+   * This function handles the register button click
+   * Redirects to the register page
+   */
   const handleRegister = () => {
     navigate('/register')
   }

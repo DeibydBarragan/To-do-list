@@ -16,6 +16,10 @@ import { TasksContext } from '../context/tasksContext'
 const TaskComponent = ({ task }) => {
   const { setShowTask } = useContext(TasksContext)
 
+  /**
+   * This function shows the task information in a modal
+   * @param {InstanceType} e event
+   */
   const handleOnClickTask = (e) => {
     if (e.target.localName !== 'i') {
       setShowTask(task)
@@ -62,9 +66,6 @@ const TaskComponent = ({ task }) => {
   )
 }
 
-/**
- * Task must be an instance of task
- */
 TaskComponent.propTypes = {
   task: PropTypes.object.isRequired
 }

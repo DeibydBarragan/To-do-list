@@ -5,8 +5,15 @@ import { AnimatePresence } from 'framer-motion'
 import ChangePicture from '../forms/changePicture'
 import DeletePicture from '../forms/deletePicture'
 
+/**
+ * This component returns the picture options to show, change or delete the user picture
+ * @returns returns the picture options
+ */
 const PictureOptions = () => {
   const { user } = useContext(AuthContext)
+  /**
+   * Show photo state
+   */
   const [showPhoto, setShowPhoto] = useState(false)
   return (
     <div className='flex gap-6 items-center pb-6'>

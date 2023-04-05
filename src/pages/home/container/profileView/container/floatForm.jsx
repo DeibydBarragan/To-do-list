@@ -2,6 +2,13 @@ import React from 'react'
 import { AnimatePresence, motion } from 'framer-motion'
 import propTypes from 'prop-types'
 
+/**
+ * This component returns the float form
+ * @param {Object} props
+ * @param {Boolean} props.show to show or not the form
+ * @param {Function} props.setShow to set the show state
+ * @param {ReactNode} props.children
+ */
 const FloatForm = ({ show, setShow, children }) => {
   return (
     <AnimatePresence>

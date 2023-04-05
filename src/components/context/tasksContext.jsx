@@ -53,9 +53,13 @@ const TasksContextProvider = ({ children }) => {
    * useReducer for the tasklist as an array that contains the tasks
    */
   const [tasks, dispatchTask] = useReducer(reducer, tasksList)
-
+  /**
+   * Showtask is the task that is going to be shown in the modal in showTask component
+   */
   const [showTask, setShowTask] = useState(false)
-
+  /**
+   * ShowEditTask is the task that is going to be shown in the modal in EditTask component
+   */
   const [showEditTask, setShowEditTask] = useState(false)
 
   return (

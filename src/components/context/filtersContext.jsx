@@ -4,8 +4,14 @@ import { useLocation } from 'react-router-dom'
 
 const FiltersContext = createContext()
 const FiltersContextProvider = ({ children }) => {
+  /**
+   * Filter is the current filter to filter the tasks
+   */
   const location = useLocation()
   const [filter, setFilter] = useState(null)
+  /**
+   * Set the filter when the location changes
+   */
   useEffect(() => {
     setFilter(location.pathname.split('/')[2]?.toLowerCase())
   }, [location])

@@ -1,5 +1,7 @@
 import * as yup from 'yup'
-
+/**
+ * Schema for login form
+ */
 export const loginSchema = yup.object().shape({
   password: yup
     .string()

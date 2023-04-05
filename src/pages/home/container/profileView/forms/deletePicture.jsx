@@ -8,16 +8,24 @@ import LoadingButton from './../../../../../components/forms/pure/loadingButton'
 import FloatForm from '../container/floatForm'
 import { deleteObject, ref } from 'firebase/storage'
 
+/**
+ * This component returns the delete picture form
+ * @returns returns the delete picture form
+ */
 const DeletePicture = () => {
   const { user, setUser } = useContext(AuthContext)
   const [formLoading, setFormLoading] = useState(false)
   const { setNotification } = useContext(NotificationContext)
   const [showForm, setShowForm] = useState(false)
 
-  // Function to delete picture
+  /**
+   * This function deletes the user picture
+   */
   const deletePicture = async () => {
     setFormLoading(true)
-    // Function to update user profile
+    /**
+     * This function updates the user profile
+     */
     const updateUserProfile = () => {
       updateProfile(auth.currentUser, { photoURL: '' })
         .then(() => {
@@ -26,19 +34,32 @@ const DeletePicture = () => {
           setNotification(new NotificationClass('Success', 'Picture deleted', 'success'))
         })
         .catch(() => {
+          /**
+           * something went wrong
+           */
           setNotification(new NotificationClass('Error', 'Error deleting picture', 'error'))
         })
     }
-    // Get storage reference
+    /**
+     * Get storage reference
+     */
     const storageRef = ref(storage, `userphotos/${user.uid}`)
-    // Delete file
+    /**
+     * Delete file
+     */
     deleteObject(storageRef)
       .then(() => {
         updateUserProfile()
       })
       .catch((error) => {
+        /**
+         * If file doesn't exist, only update user profile
+         */
         if (error.code === 'storage/object-not-found') {
           updateUserProfile()
+          /**
+           * Something went wrong
+           */
         } else setNotification(new NotificationClass('Error', 'Error deleting picture', 'error'))
       })
       .finally(() => {

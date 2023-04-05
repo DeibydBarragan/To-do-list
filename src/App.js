@@ -8,6 +8,11 @@ import { ThemeContextProvider } from './components/context/themeContext'
 import { AuthContextProvider } from './components/context/authContext'
 import { NotificationContextProvider } from './components/context/notificationContext'
 
+/**
+ * This is the main component of the app
+ * Here we are using the context providers to wrap the app
+ * @returns {JSX.Element}
+ */
 function App () {
   return (
     <NotificationContextProvider>

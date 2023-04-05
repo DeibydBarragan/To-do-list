@@ -1,5 +1,7 @@
 import * as yup from 'yup'
-
+/**
+ * Schema for choose name form
+ */
 export const chooseNameSchema = yup.object().shape({
   username: yup
     .string()
