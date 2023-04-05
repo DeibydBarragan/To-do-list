@@ -1,7 +1,6 @@
 import { React, useContext, useState } from 'react'
 import { AuthContext } from '../../../../../components/context/authContext'
 import Modal from '../../../../../components/pure/modal/modal'
-import { AnimatePresence } from 'framer-motion'
 import { chooseNameSchema } from './../../../../../components/forms/formSchema/chooseNameSchema'
 import { useForm } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
@@ -18,7 +17,7 @@ const ChangeUsername = () => {
   const [showForm, setShowForm] = useState(false)
   const [formLoading, setFormLoading] = useState(false)
   // Form validation
-  const { register, formState: { errors }, handleSubmit, setError, reset } = useForm({
+  const { register, formState: { errors }, handleSubmit, setError, reset, clearErrors } = useForm({
     resolver: yupResolver(chooseNameSchema)
   })
 
@@ -28,6 +27,7 @@ const ChangeUsername = () => {
       .then(() => {
         setUser({ ...user, displayName: data.username })
         setShowForm(false)
+        reset()
         setNotification(new NotificationClass('Username changed', 'Your username has been changed', 'success'))
       })
       .catch((e) => {
@@ -44,15 +44,12 @@ const ChangeUsername = () => {
       <p>Username</p>
       <div className='flex items-center justify-between'>
         <h4>{ user.displayName }</h4>
-        <button className='btn-settings' onClick={() => {
-          setShowForm(true)
-          reset()
-        }}>
+        <button className='btn-settings' onClick={() => setShowForm(true)}>
           Change
           <i className='bi bi-pencil-square text-2xl'/>
         </button>
       </div>
-      <Modal setShow={setShowForm} show={showForm}>
+      <Modal setShow={setShowForm} show={showForm} reset={reset}>
         <form className='form-modal' onSubmit={handleSubmit(onSubmit)}>
           <h2 className='text-3xl sm:text-4xl'>Change username</h2>
           <div className='relative'>
@@ -64,9 +61,7 @@ const ChangeUsername = () => {
               maxLength='15'
               {...register('username')}
             />
-            <AnimatePresence>
-              {errors.username && <Popover>{errors.username.message}</Popover>}
-            </AnimatePresence>
+            <Popover show={errors.username?.message} clear={clearErrors}/>
           </div>
           <button className='btn-modal' type='submit'>
               Change

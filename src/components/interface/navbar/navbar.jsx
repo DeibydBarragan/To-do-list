@@ -1,7 +1,6 @@
 import React, { useContext, useEffect, useState } from 'react'
 import { NavbarContext } from '../../context/navbarContext'
-import { motion } from 'framer-motion'
-import { navbarVariants } from '../../animations/navbarAnim'
+import { AnimatePresence, motion } from 'framer-motion'
 import ButtonToday from './buttons/buttonToday'
 import ButtonWeek from './buttons/buttonWeek'
 import ButtonAll from './buttons/buttonAll'
@@ -9,7 +8,6 @@ import ButtonCompleted from './buttons/buttonCompleted'
 import ButtonLogout from './buttons/buttonLogout'
 import ButtonTheme from './buttons/buttonTheme'
 import ProfileNav from './container/profileNav'
-import ButtonClose from './buttons/buttonClose'
 /**
  *
  * @returns the side navbar
@@ -37,25 +35,30 @@ const Navbar = () => {
   }
 
   return (
-    <motion.nav
-      variants={ navbarVariants }
-      initial='hidden'
-      animate='show'
-      id='navbar' onClick={(e) => handleCloseNavbar(e)} className={`${navbarOpen ? 'inset-0 grid grid-cols-12' : ''} col-span-3 h-screen fixed lg:sticky z-20 lg:z-auto`}
-    >
-      <ButtonClose/>
-      <div className={`bg-gradient-to-tl from-emerald-600 via-indigo-800 to-fuchsia-700 gap-6 p-4 lg:p-8 top-0 ${navbarOpen ? 'flex col-span-8 sm:col-span-5 md:col-span-4' : 'hidden lg:flex'} flex-col h-screen fixed`}>
-        <ProfileNav/>
-        <ButtonToday/>
-        <ButtonAll/>
-        <ButtonWeek/>
-        <ButtonCompleted/>
-        <div className='mt-auto grid grid-cols-4 gap-3'>
-          <ButtonTheme/>
-          <ButtonLogout/>
-        </div>
-      </div>
-    </motion.nav>
+    <AnimatePresence>
+      { (navbarOpen || width > 1023) &&
+        <nav
+          id='navbar' onClick={(e) => handleCloseNavbar(e)} className={`${navbarOpen ? 'inset-0 grid grid-cols-12 backdrop-blur-sm' : ''} col-span-3 h-screen fixed lg:sticky z-20 lg:z-auto`}
+        >
+          <motion.div
+            className='bg-gradient-to-tl from-emerald-600 via-indigo-800 to-fuchsia-700 gap-6 p-4 lg:p-8 top-0 flex col-span-8 sm:col-span-5 md:col-span-4 flex-col h-screen fixed z-50'
+            initial={{ x: -270 }}
+            animate={{ x: 0 }}
+            transition={{ duration: 0.3 }}
+            exit={{ x: -270 }}
+          >
+            <ProfileNav/>
+            <ButtonToday/>
+            <ButtonAll/>
+            <ButtonWeek/>
+            <ButtonCompleted/>
+            <div className='mt-auto grid grid-cols-4 gap-3'>
+              <ButtonTheme/>
+              <ButtonLogout/>
+            </div>
+          </motion.div>
+        </nav>}
+    </AnimatePresence>
   )
 }
 

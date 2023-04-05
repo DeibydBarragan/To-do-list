@@ -5,6 +5,7 @@ import { FiltersContext } from '../../components/context/filtersContext'
 import ProfileView from './container/profileView/profileView'
 import Notification from '../../components/pure/notification'
 import { AnimatePresence } from 'framer-motion'
+import ButtonCloseNav from '../../components/interface/navbar/buttons/buttonCloseNav'
 const Home = () => {
   const { filter } = useContext(FiltersContext)
   return (
@@ -13,6 +14,7 @@ const Home = () => {
       <AnimatePresence>
         { filter === 'profile' ? <ProfileView/> : <TaskList/>}
       </AnimatePresence>
+      <ButtonCloseNav/>
       <Notification/>
     </div>
   )

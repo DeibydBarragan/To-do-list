@@ -54,9 +54,9 @@ const TasksContextProvider = ({ children }) => {
    */
   const [tasks, dispatchTask] = useReducer(reducer, tasksList)
 
-  const [showTask, setShowTask] = useState(null)
+  const [showTask, setShowTask] = useState(false)
 
-  const [showEditTask, setShowEditTask] = useState(null)
+  const [showEditTask, setShowEditTask] = useState(false)
 
   return (
     <TasksContext.Provider value ={{

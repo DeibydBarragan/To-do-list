@@ -11,8 +11,8 @@ const ProfileNav = () => {
   return (
     <div className='flex flex-row gap-4 items-center justify-center cursor-pointer' onClick={handleViewProfile}>
       {user.photoURL === null
-        ? <i className='text-4xl bi bi-person-circle'/>
-        : <img className='rounded-full w-12' alt='user photo' src={user.photoURL} referrerPolicy='no-referrer'></img>
+        ? <i className='text-5xl bi bi-person-circle'/>
+        : <img className='rounded-full w-12 h-12 object-cover' alt='user photo' src={user.photoURL} referrerPolicy='no-referrer'/>
       }
       <h2 className='text-xl text-white max-w-min'>
         { user.displayName.split(' ')[0] }

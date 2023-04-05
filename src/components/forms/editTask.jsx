@@ -39,7 +39,7 @@ const EditTask = () => {
   }
 
   return (
-    <Modal show={showEditTask} setShow={setShowEditTask}>
+    <Modal setShow={setShowEditTask} show={showEditTask}>
       <form onSubmit={handleSubmit(onSubmit)} className='form-modal'>
         <h2>Edit task</h2>
         <input

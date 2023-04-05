@@ -13,7 +13,7 @@ const LoginForm = () => {
   const navigate = useNavigate()
   const [formLoading, setFormLoading] = useState(false)
   // Form validation
-  const { register, formState: { errors }, handleSubmit, setError } = useForm({
+  const { register, formState: { errors }, handleSubmit, setError, clearErrors } = useForm({
     resolver: yupResolver(loginSchema)
   })
 
@@ -32,7 +32,7 @@ const LoginForm = () => {
     setFormLoading(false)
   }
   return (
-    <form onSubmit={handleSubmit(onSubmit)} className='w-full'>
+    <form onSubmit={handleSubmit(onSubmit)} className='w-full flex flex-col gap-5'>
       <div className='relative'>
         <input
           type='text'
@@ -41,9 +41,9 @@ const LoginForm = () => {
           autoComplete='off'
           {...register('email')}
         />
-        {errors.email && <Popover>{errors.email.message}</Popover>}
+        <Popover show={errors.email?.message} clear={clearErrors} fieldName='email'/>
       </div>
-      <div className='relative mt-6'>
+      <div className='relative'>
         <input
           type='password'
           className='input-auth'
@@ -51,10 +51,10 @@ const LoginForm = () => {
           maxLength='20'
           {...register('password')}
         />
-        {errors.password && <Popover>{errors.password.message}</Popover>}
+        <Popover show={errors.password?.message} clear={clearErrors} fieldName='password'/>
       </div>
       <button
-        className='btn mt-6 w-full'
+        className='btn w-full'
         type='submit'
         {...(formLoading && { disabled: true })} // disable button if form is loading
       >

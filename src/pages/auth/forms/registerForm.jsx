@@ -13,7 +13,7 @@ const RegisterForm = () => {
   const [formLoading, setFormLoading] = useState(false)
   const navigate = useNavigate()
   // Form validation
-  const { register, formState: { errors }, handleSubmit, setError } = useForm({
+  const { register, formState: { errors }, handleSubmit, setError, clearErrors } = useForm({
     resolver: yupResolver(registerSchema)
   })
 
@@ -39,7 +39,7 @@ const RegisterForm = () => {
   }
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)} className='w-full'>
+    <form onSubmit={handleSubmit(onSubmit)} className='w-full flex flex-col gap-5'>
       {/** Email input */}
       <div className='relative'>
         <input
@@ -49,20 +49,20 @@ const RegisterForm = () => {
           autoComplete='off'
           {...register('email')}
         />
-        {errors.email && <Popover>{errors.email.message}</Popover>}
+        <Popover show={errors.email?.message} clear={clearErrors} fieldName='email'/>
       </div>
       {/** Password input */}
-      <div className='relative mt-6'>
+      <div className='relative'>
         <input
           type='password'
           className='input-auth'
           placeholder='Password'
           {...register('password')}
         />
-        {errors.password && <Popover>{errors.password.message}</Popover>}
+        <Popover show={errors.password?.message} clear={clearErrors} fieldName='password'/>
       </div>
       {/** Confirm password input */}
-      <div className='relative mt-6'>
+      <div className='relative'>
         <input
           type='password'
           className='input-auth'
@@ -70,10 +70,10 @@ const RegisterForm = () => {
           maxLength='20'
           {...register('confirmPassword')}
         />
-        {errors.confirmPassword && <Popover>{errors.confirmPassword.message}</Popover>}
+        <Popover show={errors.confirmPassword?.message} clear={clearErrors} fieldName='confirmPassword'/>
       </div>
       <button
-        className='btn w-full mt-6'
+        className='btn w-full'
         type='submit'
         {...(formLoading && { disabled: true })} // disable button if form is loading
       >

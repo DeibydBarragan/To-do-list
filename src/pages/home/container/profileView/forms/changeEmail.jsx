@@ -1,4 +1,3 @@
-import { AnimatePresence } from 'framer-motion'
 import React, { useContext, useState } from 'react'
 import { AuthContext } from '../../../../../components/context/authContext'
 import { yupResolver } from '@hookform/resolvers/yup'
@@ -18,7 +17,7 @@ const ChangeEmail = () => {
   const [showForm, setShowForm] = useState(false)
   const [formLoading, setFormLoading] = useState(false)
   // Form validation
-  const { register, formState: { errors }, handleSubmit, reset, setError } = useForm({
+  const { register, formState: { errors }, handleSubmit, reset, setError, clearErrors } = useForm({
     resolver: yupResolver(changeEmailSchema)
   })
 
@@ -37,6 +36,7 @@ const ChangeEmail = () => {
               .then(() => {
                 setUser({ ...user, email: data.newEmail })
                 setShowForm(false)
+                reset()
                 setNotification(new NotificationClass('Email changed', 'Your email has been changed', 'success'))
               })
               .catch(() => {
@@ -60,15 +60,12 @@ const ChangeEmail = () => {
       <p>Email</p>
       <div className='flex items-center justify-between'>
         <h4 className='text-gray-900 dark:text-white text-sm md:text-xl'>{ user.email }</h4>
-        <button className='btn-settings' onClick={() => {
-          setShowForm(true)
-          reset()
-        }}>
+        <button className='btn-settings' onClick={() => setShowForm(true)}>
           Change
           <i className='bi bi-envelope text-2xl'/>
         </button>
       </div>
-      <Modal setShow={setShowForm} show={showForm}>
+      <Modal setShow={setShowForm} show={showForm} reset={reset}>
         <form className='form-modal' onSubmit={handleSubmit(onSubmit)}>
           <h2 className='text-3xl sm:text-4xl'>Change email</h2>
           <h4>To change your email yo have to write your password</h4>
@@ -81,20 +78,17 @@ const ChangeEmail = () => {
               maxLength='20'
               {...register('actualPassword')}
             />
-            <AnimatePresence>
-              {errors.actualPassword && <Popover>{errors.actualPassword.message}</Popover>}
-            </AnimatePresence>
+            <Popover show={errors.actualPassword?.message} clear={clearErrors} fieldName='actualPassword'/>
           </div>
           {/** New email */}
           <div className='relative'>
             <input
               className='input-tasks w-full'
+              autoComplete='off'
               placeholder='New email'
               {...register('newEmail')}
             />
-            <AnimatePresence>
-              {errors.newEmail && <Popover>{errors.newEmail.message}</Popover>}
-            </AnimatePresence>
+            <Popover show={errors.newEmail?.message} clear={clearErrors} fieldName='newEmail'/>
           </div>
           <button className='btn-modal' type='submit'>
                 Change

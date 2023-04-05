@@ -1,4 +1,3 @@
-import { AnimatePresence } from 'framer-motion'
 import React, { useContext, useState } from 'react'
 import { AuthContext } from '../../../../../components/context/authContext'
 import { yupResolver } from '@hookform/resolvers/yup'
@@ -18,7 +17,7 @@ const ChangePassword = () => {
   const [showForm, setShowForm] = useState(false)
   const [formLoading, setFormLoading] = useState(false)
   // Form validation
-  const { register, formState: { errors }, handleSubmit, reset, setError } = useForm({
+  const { register, formState: { errors }, handleSubmit, reset, setError, clearErrors } = useForm({
     resolver: yupResolver(passwordSchema)
   })
 
@@ -30,6 +29,7 @@ const ChangePassword = () => {
         updatePassword(auth.currentUser, data.newPassword)
           .then(() => {
             setShowForm(false)
+            reset()
             setNotification(new NotificationClass('Password changed', 'Your password has been changed', 'success'))
           })
           .catch(() => {
@@ -48,14 +48,11 @@ const ChangePassword = () => {
     <div className='flex items-center justify-between pt-4 pb-4'>
       <h4>Password</h4>
       <button className='btn-settings'
-        onClick={() => {
-          setShowForm(true)
-          reset()
-        }}>
+        onClick={() => setShowForm(true)}>
         Change
         <i className='bi bi-key text-2xl'/>
       </button>
-      <Modal setShow={setShowForm} show={showForm}>
+      <Modal setShow={setShowForm} show={showForm} reset={reset}>
         <form className='form-modal' onSubmit={handleSubmit(onSubmit)}>
           <h2 className='text-3xl sm:text-4xl'>Change password</h2>
           {/** Actual password */}
@@ -67,9 +64,7 @@ const ChangePassword = () => {
               maxLength='20'
               {...register('actualPassword')}
             />
-            <AnimatePresence>
-              {errors.actualPassword && <Popover>{errors.actualPassword.message}</Popover>}
-            </AnimatePresence>
+            <Popover show={errors.actualPassword?.message} clear={clearErrors} fieldName='actualPassword'/>
           </div>
           {/** New password */}
           <div className='relative'>
@@ -80,9 +75,7 @@ const ChangePassword = () => {
               maxLength='20'
               {...register('newPassword')}
             />
-            <AnimatePresence>
-              {errors.newPassword && <Popover>{errors.newPassword.message}</Popover>}
-            </AnimatePresence>
+            <Popover show={errors.newPassword?.message} clear={clearErrors} fieldName='newPassword'/>
           </div>
           {/** Confirm new password */}
           <div className='relative'>
@@ -93,9 +86,7 @@ const ChangePassword = () => {
               maxLength='20'
               {...register('confirmNewPassword')}
             />
-            <AnimatePresence>
-              {errors.confirmNewPassword && <Popover>{errors.confirmNewPassword.message}</Popover>}
-            </AnimatePresence>
+            <Popover show={errors.confirmNewPassword?.message} clear={clearErrors} fieldName='confirmNewPassword'/>
           </div>
           <button className='btn-modal' type='submit'>
                 Change

@@ -10,19 +10,19 @@ import { NotificationContextProvider } from './components/context/notificationCo
 
 function App () {
   return (
-    <AuthContextProvider>
-      <ThemeContextProvider>
-        <TasksContextProvider>
-          <NavbarContextProvider>
-            <NotificationContextProvider>
+    <NotificationContextProvider>
+      <AuthContextProvider>
+        <ThemeContextProvider>
+          <TasksContextProvider>
+            <NavbarContextProvider>
               <div className="App dark:bg-gray-900 gap-5 text-white bg-white font-montserrat">
                 <AppRoutes/>
               </div>
-            </NotificationContextProvider>
-          </NavbarContextProvider>
-        </TasksContextProvider>
-      </ThemeContextProvider>
-    </AuthContextProvider>
+            </NavbarContextProvider>
+          </TasksContextProvider>
+        </ThemeContextProvider>
+      </AuthContextProvider>
+    </NotificationContextProvider>
   )
 }
 

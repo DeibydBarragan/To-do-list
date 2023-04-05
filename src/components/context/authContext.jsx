@@ -1,13 +1,16 @@
-import React, { createContext, useEffect, useState } from 'react'
+import React, { createContext, useContext, useEffect, useState } from 'react'
 import propTypes from 'prop-types'
 import { onAuthStateChanged, updateProfile } from 'firebase/auth'
 import { auth } from '../../firebase/firebase'
+import { NotificationContext } from './notificationContext'
+import { NotificationClass } from '../../models/notification.class'
 
 const AuthContext = createContext()
 const AuthContextProvider = ({ children }) => {
   const [user, setUser] = useState(null)
   const [loading, setLoading] = useState(true)
   const [methods, setMethods] = useState([])
+  const { setNotification } = useContext(NotificationContext)
 
   useEffect(() => {
     if (user) {
@@ -29,9 +32,14 @@ const AuthContextProvider = ({ children }) => {
     onAuthStateChanged(auth, (currentUser) => {
       if (currentUser) {
         setUser(currentUser)
+        if (currentUser.emailVerified) {
+          console.log('Email not verified')
+          setNotification(new NotificationClass('Verify your email', 'Please verify your email', 'error'))
+        }
       } else {
         setUser(null)
         setMethods([])
+        setNotification(null)
       }
       setLoading(false)
     })

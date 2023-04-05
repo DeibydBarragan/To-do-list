@@ -17,8 +17,8 @@ const NotFound = () => {
         initial='hidden'
         animate='visible'
       >
-        <h1 className='text-9xl justify-self-center'>404</h1>
-        <h1 className='text-4xl sm:text-5xl'>Page not found</h1>
+        <h1 className='text-9xl text-white justify-self-center'>404</h1>
+        <h1 className='text-4xl text-white sm:text-5xl'>Page not found</h1>
         <button className='btn justify-self-center mt-5' onClick={backHandler}>Back to home</button>
       </motion.div>
     </div>

@@ -8,15 +8,14 @@ import ChangeEmail from './forms/changeEmail'
 import MethodSignIn from './forms/methodSignIn'
 import { motion } from 'framer-motion'
 import { AuthContext } from '../../../../components/context/authContext'
-import { NavbarContext } from '../../../../components/context/navbarContext'
 import SetPassword from './forms/setPassword'
+import VerifyEmail from './forms/verifyEmail'
 
 const ProfileView = () => {
-  const { methods } = useContext(AuthContext)
-  const { navbarOpen } = useContext(NavbarContext)
+  const { methods, user } = useContext(AuthContext)
 
   return (
-    <motion.section className={`col-span-12 lg:col-span-8 m-6 lg:w-5/6 ${navbarOpen ? 'blur-sm' : ''}`}
+    <motion.section className='col-span-12 lg:col-span-8 m-6 lg:w-5/6'
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
@@ -34,6 +33,8 @@ const ProfileView = () => {
         <ChangeUsername/>
         {/** Email */}
         {methods.includes('Password') && <ChangeEmail/>}
+        {/** Verify email */}
+        {!user.emailVerified && <VerifyEmail/>}
         {/** Password */}
         {methods.includes('Password') && <ChangePassword/>}
         {/** Set password */}

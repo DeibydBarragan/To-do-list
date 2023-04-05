@@ -1,5 +1,4 @@
 import React, { useContext, useState } from 'react'
-import { AnimatePresence, motion } from 'framer-motion'
 import { modalVariants } from '../../../components/animations/modalAnim'
 import { useForm } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
@@ -10,13 +9,14 @@ import { FILTERS } from '../../../models/filters.enum'
 import Popover from '../../../components/forms/pure/popover'
 import { updateProfile } from 'firebase/auth'
 import LoadingButton from './../../../components/forms/pure/loadingButton'
+import { motion } from 'framer-motion'
 
 const ChooseUsername = () => {
   const navigate = useNavigate()
   const { user, setUser } = useContext(AuthContext)
   const [formLoading, setFormLoading] = useState(false)
   // Form validation
-  const { register, formState: { errors }, handleSubmit, setError } = useForm({
+  const { register, formState: { errors }, handleSubmit, setError, clearErrors } = useForm({
     resolver: yupResolver(chooseNameSchema)
   })
   // Submit form
@@ -41,8 +41,8 @@ const ChooseUsername = () => {
         animate='visible'
         onSubmit={handleSubmit(onSubmit)}
       >
-        <h1>Welcome</h1>
-        <h3>Choose Username</h3>
+        <h1 className='text-white'>Welcome</h1>
+        <h3 className='text-white'>Choose Username</h3>
         <div className='relative'>
           <input
             type='text'
@@ -52,9 +52,7 @@ const ChooseUsername = () => {
             maxLength='15'
             {...register('username')}
           />
-          <AnimatePresence>
-            {errors.username && <Popover>{errors.username.message}</Popover>}
-          </AnimatePresence>
+          <Popover show={errors.username?.message} clear={clearErrors}/>
         </div>
         <button className='btn justify-self-center' type='submit'>
           Accept

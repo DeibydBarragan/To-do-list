@@ -11,9 +11,9 @@ const PictureOptions = () => {
   return (
     <div className='flex gap-6 items-center pb-6'>
       {user.photoURL === null
-        ? <i className='text-7xl bi bi-person-circle text-indigo-800 dark:text-white'/>
+        ? <i className='text-7xl sm:text-8xl bi bi-person-circle text-indigo-800 dark:text-white'/>
         : <img
-          className='w-20 sm:w-24 md:w-28 rounded-3xl cursor-pointer'
+          className='w-20 sm:w-28 aspect-square object-cover rounded-3xl cursor-pointer'
           alt='user photo'
           src={user.photoURL}
           referrerPolicy='no-referrer'
@@ -24,7 +24,7 @@ const PictureOptions = () => {
         <p>JPG, PNG or GIF, max weight of 1Mb</p>
         <div className='flex gap-4 w-full'>
           <ChangePicture/>
-          <DeletePicture/>
+          {user.photoURL && <DeletePicture/>}
         </div>
       </div>
       <AnimatePresence>

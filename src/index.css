@@ -50,7 +50,7 @@ p {
 }
 
 .input-auth {
-  @apply bg-transparent border-b outline-none border-slate-400 text-lg w-full
+  @apply bg-transparent border-b outline-none border-slate-400 text-lg w-full pb-2
 }
 
 .form-modal {

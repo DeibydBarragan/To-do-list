@@ -6,7 +6,6 @@ import { NotificationContext } from '../../../../../components/context/notificat
 import { NotificationClass } from '../../../../../models/notification.class'
 import { useForm } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
-import { AnimatePresence } from 'framer-motion'
 import Modal from '../../../../../components/pure/modal/modal'
 import Popover from '../../../../../components/forms/pure/popover'
 import { AuthContext } from '../../../../../components/context/authContext'
@@ -19,7 +18,7 @@ const SetPassword = () => {
   const [showForm, setShowForm] = useState(false)
 
   // Form validation
-  const { register, formState: { errors }, handleSubmit, reset, setError } = useForm({
+  const { register, formState: { errors }, handleSubmit, reset, setError, clearErrors } = useForm({
     resolver: yupResolver(registerSchema)
   })
 
@@ -45,6 +44,7 @@ const SetPassword = () => {
                     // Send a successful notification
                     setNotification(new NotificationClass('Email and password added', 'Your email and password have been added', 'success'))
                     setShowForm(false)
+                    reset()
                   })
                   .catch((e) => {
                     console.log(e)
@@ -92,15 +92,11 @@ const SetPassword = () => {
     <div className='flex items-center justify-between pt-4 pb-4'>
       <h4>Set email and password</h4>
       <button className='btn-settings'
-        onClick={() => {
-          setShowForm(true)
-          reset()
-        }}
-      >
+        onClick={() => setShowForm(true)}>
         Add
         <i className='bi bi-envelope text-2xl'/>
       </button>
-      <Modal setShow={setShowForm} show={showForm}>
+      <Modal setShow={setShowForm} show={showForm} reset={reset}>
         <form className='form-modal' onSubmit={handleSubmit(onSubmit)}>
           <h2 className='text-2xl sm:text-3xl'>Set your email and password</h2>
           {/** email */}
@@ -112,9 +108,7 @@ const SetPassword = () => {
               autoComplete='off'
               {...register('email')}
             />
-            <AnimatePresence>
-              {errors.email && <Popover>{errors.email.message}</Popover>}
-            </AnimatePresence>
+            <Popover show={errors.email?.message} clear={clearErrors} fieldName='email'/>
           </div>
           {/** password */}
           <div className='relative'>
@@ -125,9 +119,7 @@ const SetPassword = () => {
               maxLength='20'
               {...register('password')}
             />
-            <AnimatePresence>
-              {errors.password && <Popover>{errors.password.message}</Popover>}
-            </AnimatePresence>
+            <Popover show={errors.password?.message} clear={clearErrors} fieldName='password'/>
           </div>
           {/** Confirm password */}
           <div className='relative'>
@@ -138,9 +130,7 @@ const SetPassword = () => {
               maxLength='20'
               {...register('confirmPassword')}
             />
-            <AnimatePresence>
-              {errors.confirmPassword && <Popover>{errors.confirmPassword.message}</Popover>}
-            </AnimatePresence>
+            <Popover show={errors.confirmPassword?.message} clear={clearErrors} fieldName='cofirmPassword'/>
           </div>
           <button className='btn-modal' type='submit'>
             Set password

@@ -1,4 +1,3 @@
-import { AnimatePresence } from 'framer-motion'
 import React, { useContext, useState } from 'react'
 import { AuthContext } from '../../../../../components/context/authContext'
 import { yupResolver } from '@hookform/resolvers/yup'
@@ -19,7 +18,7 @@ const DeleteUser = () => {
   const [showForm, setShowForm] = useState(false)
   const [formLoading, setFormLoading] = useState(false)
   // Form validation
-  const { register, formState: { errors }, handleSubmit, reset, setError } = useForm({
+  const { register, formState: { errors }, handleSubmit, reset, setError, clearErrors } = useForm({
     resolver: yupResolver(confirmPasswordSchema)
   })
   // When form is submitted
@@ -34,6 +33,7 @@ const DeleteUser = () => {
         deleteUser(auth.currentUser)
           .then(() => {
             setShowForm(false)
+            reset()
             // Send a successful notification
             setNotification(new NotificationClass('Account deleted', 'Your account has been deleted', 'success'))
           })
@@ -41,8 +41,9 @@ const DeleteUser = () => {
             setError('actualPassword', { message: 'Error deleting your account' })
           })
       })
-      .catch(() => {
-        setError('actualPassword', { message: 'Incorrect password' })
+      .catch((e) => {
+        if (e.code === 'auth/wrong-password') setError('actualPassword', { message: 'Incorrect password' })
+        else setError('actualPassword', { message: 'Error deleting your account' })
       })
       .finally(() => {
         setFormLoading(false)
@@ -85,7 +86,7 @@ const DeleteUser = () => {
          * If the user has a password, it will ask for the password
         */}
         {methods.includes('Password')
-          ? <Modal setShow={setShowForm} show={showForm}>
+          ? <Modal setShow={setShowForm} show={showForm} reset={reset}>
             <form className='flex flex-col gap-4 p-4' onSubmit={handleSubmit(onSubmit)}>
               <h2 className='text-3xl sm:text-4xl'>Delete account</h2>
               <h4>To delete your account you have to write your password</h4>
@@ -98,9 +99,7 @@ const DeleteUser = () => {
                   maxLength='20'
                   {...register('actualPassword')}
                 />
-                <AnimatePresence>
-                  {errors.actualPassword && <Popover>{errors.actualPassword.message}</Popover>}
-                </AnimatePresence>
+                <Popover show={errors.actualPassword?.message} clear={clearErrors} fieldName='actualPassword'/>
               </div>
               <button className='btn bg-red-700 outline-none hover:bg-red-800 text-white hover:text-white' type='submit'>
                   Delete

@@ -1,30 +1,45 @@
 import { updateProfile } from 'firebase/auth'
 import { React, useContext, useState } from 'react'
 import { AuthContext } from '../../../../../components/context/authContext'
-import { auth } from '../../../../../firebase/firebase'
+import { auth, storage } from '../../../../../firebase/firebase'
 import { NotificationContext } from '../../../../../components/context/notificationContext'
 import { NotificationClass } from '../../../../../models/notification.class'
 import LoadingButton from './../../../../../components/forms/pure/loadingButton'
 import FloatForm from '../container/floatForm'
+import { deleteObject, ref } from 'firebase/storage'
 
 const DeletePicture = () => {
   const { user, setUser } = useContext(AuthContext)
   const [formLoading, setFormLoading] = useState(false)
   const { setNotification } = useContext(NotificationContext)
   const [showForm, setShowForm] = useState(false)
+
   // Function to delete picture
-  const deletePicture = () => {
+  const deletePicture = async () => {
     setFormLoading(true)
-    updateProfile(auth.currentUser, { photoURL: '' })
+    // Function to update user profile
+    const updateUserProfile = () => {
+      updateProfile(auth.currentUser, { photoURL: '' })
+        .then(() => {
+          setUser({ ...user, photoURL: null })
+          setShowForm(false)
+          setNotification(new NotificationClass('Success', 'Picture deleted', 'success'))
+        })
+        .catch(() => {
+          setNotification(new NotificationClass('Error', 'Error deleting picture', 'error'))
+        })
+    }
+    // Get storage reference
+    const storageRef = ref(storage, `userphotos/${user.uid}`)
+    // Delete file
+    deleteObject(storageRef)
       .then(() => {
-        console.log('Picture deleted')
-        setUser({ ...user, photoURL: null })
-        setShowForm(false)
-        setNotification(new NotificationClass('Success', 'Picture deleted', 'success'))
+        updateUserProfile()
       })
       .catch((error) => {
-        console.log(error)
-        setNotification(new NotificationClass('Error', 'Error deleting picture', 'error'))
+        if (error.code === 'storage/object-not-found') {
+          updateUserProfile()
+        } else setNotification(new NotificationClass('Error', 'Error deleting picture', 'error'))
       })
       .finally(() => {
         setFormLoading(false)

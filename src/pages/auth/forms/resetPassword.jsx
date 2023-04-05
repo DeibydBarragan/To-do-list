@@ -16,7 +16,7 @@ const ResetPassword = () => {
   const [formLoading, setFormLoading] = useState(false)
   const { setNotification } = useContext(NotificationContext)
   // Form validation
-  const { register, formState: { errors }, handleSubmit, reset, setError } = useForm({
+  const { register, formState: { errors }, handleSubmit, reset, setError, clearErrors } = useForm({
     resolver: yupResolver(resetEmail)
   })
 
@@ -33,13 +33,10 @@ const ResetPassword = () => {
   }
   return (
     <div>
-      <a className='underline decoration-1 hover:cursor-pointer' onClick={() => {
-        setShowForm(true)
-        reset()
-      }}>
+      <a className='underline decoration-1 hover:cursor-pointer' onClick={() => setShowForm(true)}>
         Forgot your password?
       </a>
-      <Modal setShow={setShowForm} show={showForm}>
+      <Modal setShow={setShowForm} show={showForm} reset={reset}>
         <form className='flex flex-col gap-4' onSubmit={handleSubmit(onSubmit)}>
           <h2 className='text-3xl sm:text-4xl'>Reset your password</h2>
           <h4>To reset your password you have to write your email</h4>
@@ -52,7 +49,7 @@ const ResetPassword = () => {
               {...register('email')}
             />
             <AnimatePresence>
-              {errors.email && <Popover>{errors.email.message}</Popover>}
+              <Popover show={errors.email?.message} clear={clearErrors} fieldName='email'/>
             </AnimatePresence>
           </div>
           <button className='btn-modal' type='submit'>
