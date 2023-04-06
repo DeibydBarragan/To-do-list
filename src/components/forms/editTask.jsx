@@ -90,15 +90,17 @@ const EditTask = () => {
     <Modal setShow={setShowEditTask} show={showEditTask}>
       <form onSubmit={handleSubmit(onSubmit)} className='form-modal'>
         <h2>Edit task</h2>
-        <input
-          className='input-tasks'
-          autoComplete="off"
-          type='text'
-          maxLength='50'
-          placeholder={showEditTask?.name}
-          {...register('name')}
-        />
-        <Popover show={errors.name?.message} clear={clearErrors} fieldName='name'/>
+        <div className='relative'>
+          <input
+            className='input-tasks'
+            autoComplete="off"
+            type='text'
+            maxLength='50'
+            placeholder={showEditTask?.name}
+            {...register('name')}
+          />
+          <Popover show={errors.name?.message} clear={clearErrors} fieldName='name'/>
+        </div>
         <textarea
           className='input-tasks h-36'
           maxLength='200'

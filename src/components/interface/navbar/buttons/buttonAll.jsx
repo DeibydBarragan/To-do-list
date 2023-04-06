@@ -14,7 +14,7 @@ const ButtonAll = () => {
    */
   const handleAll = () => {
     setFilter(FILTERS.ALL)
-    navigate(`/home/${FILTERS.ALL}`)
+    navigate(`Tasklist/home/${FILTERS.ALL}`)
   }
   return (
     <button className={`btn ${filter === FILTERS.ALL && 'btn-selected'}`} onClick={handleAll}>

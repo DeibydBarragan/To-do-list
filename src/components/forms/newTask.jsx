@@ -75,15 +75,17 @@ const NewTask = ({ setShowForm, showForm }) => {
     <Modal setShow={setShowForm} show={showForm}>
       <form onSubmit={handleSubmit(onSubmit)} className='form-modal'>
         <h2>New task</h2>
-        <input
-          className='input-tasks'
-          autoComplete="off"
-          type='text'
-          maxLength='50'
-          placeholder='Name'
-          {...register('name')}
-        />
-        <Popover show={errors.name?.message} clear={clearErrors} fieldName='name'/>
+        <div className='relative'>
+          <input
+            className='input-tasks'
+            autoComplete="off"
+            type='text'
+            maxLength='50'
+            placeholder='Name'
+            {...register('name')}
+          />
+          <Popover show={errors.name?.message} clear={clearErrors} fieldName='name'/>
+        </div>
         <textarea
           className='input-tasks h-36'
           maxLength='200'

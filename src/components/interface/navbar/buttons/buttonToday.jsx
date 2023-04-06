@@ -15,7 +15,7 @@ const ButtonToday = () => {
    */
   const handleToday = () => {
     setFilter(FILTERS.TODAY)
-    navigate(`/home/${FILTERS.TODAY}`)
+    navigate(`/Tasklist/home/${FILTERS.TODAY}`)
   }
   return (
     <button className={`btn ${filter === FILTERS.TODAY && 'btn-selected'}`} onClick={handleToday}>

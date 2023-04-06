@@ -36,7 +36,7 @@ const LoginForm = () => {
       /**
        * Navigate to home page
        */
-      navigate(`/home/${FILTERS.TODAY}`)
+      navigate(`/Tasklist/home/${FILTERS.TODAY}`)
     } catch (error) {
       /**
        * Wrong password

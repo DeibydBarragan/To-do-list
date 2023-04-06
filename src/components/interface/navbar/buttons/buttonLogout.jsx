@@ -23,7 +23,7 @@ const ButtonLogout = () => {
     setFormLoading(true)
     await signOut(auth)
     setUser(null)
-    navigate('/login')
+    navigate('/Tasklist/login')
     setFormLoading(false)
   }
   return (

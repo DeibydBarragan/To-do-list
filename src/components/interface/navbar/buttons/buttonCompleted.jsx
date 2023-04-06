@@ -15,7 +15,7 @@ const ButtonCompleted = () => {
    */
   const handleCompleted = () => {
     setFilter(FILTERS.COMPLETED)
-    navigate(`/home/${FILTERS.COMPLETED}`)
+    navigate(`/Tasklist/home/${FILTERS.COMPLETED}`)
   }
 
   return (

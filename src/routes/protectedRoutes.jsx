@@ -20,7 +20,7 @@ const ProtectedRoutes = ({ children }) => {
    * This effect redirects to login page when the user is not logged in
    */
   if (!user) {
-    return <Navigate to='/login'/>
+    return <Navigate to='/Tasklist/login'/>
   }
   /**
    * This returns the children or the outlet

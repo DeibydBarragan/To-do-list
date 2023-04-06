@@ -15,7 +15,7 @@ const ButtonWeek = () => {
    */
   const handleWeek = () => {
     setFilter(FILTERS.NEXTSEVEN)
-    navigate(`/home/${FILTERS.NEXTSEVEN}`)
+    navigate(`/Tasklist/home/${FILTERS.NEXTSEVEN}`)
   }
   return (
     <button className={`btn ${filter === FILTERS.NEXTSEVEN && 'btn-selected'}`} onClick={handleWeek}>

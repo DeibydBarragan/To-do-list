@@ -12,7 +12,7 @@ const WithNameRoute = ({ children }) => {
   /**
    * This effect redirects to choose username page when the user doesn't have an username
    */
-  if (!user.displayName && !loading) return <Navigate to='/choose-username'/>
+  if (!user.displayName && !loading) return <Navigate to='/Tasklist/choose-username'/>
   /**
    * This returns the children or the outlet
    */

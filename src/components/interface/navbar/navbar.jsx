@@ -44,7 +44,7 @@ const Navbar = () => {
     <AnimatePresence>
       { (navbarOpen || width > 1023) &&
         <nav
-          id='navbar' onClick={(e) => handleCloseNavbar(e)} className={`${navbarOpen ? 'inset-0 grid grid-cols-12 backdrop-blur-sm' : ''} col-span-3 h-screen fixed lg:sticky z-20 lg:z-auto`}
+          id='navbar' onClick={(e) => handleCloseNavbar(e)} className={`${navbarOpen ? 'inset-0 grid grid-cols-12 backdrop-blur-sm' : 'h-screen'} col-span-3 fixed lg:sticky z-20 lg:z-auto`}
         >
           <motion.div
             className='bg-gradient-to-tl from-emerald-600 via-indigo-800 to-fuchsia-700 gap-6 p-4 lg:p-8 top-0 flex col-span-8 sm:col-span-5 md:col-span-4 flex-col h-screen fixed z-50'

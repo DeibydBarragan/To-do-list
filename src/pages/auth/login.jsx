@@ -18,7 +18,7 @@ const Login = () => {
    * Redirects to the register page
    */
   const handleRegister = () => {
-    navigate('/register')
+    navigate('/Tasklist/register')
   }
 
   return (
