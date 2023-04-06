@@ -21,7 +21,7 @@ const AppRoutes = () => {
     <BrowserRouter>
       <FiltersContextProvider>
         <Routes>
-          <Route path='Tasklist/'>
+          <Route exact path='/'>
             {/**
              * This routes are for the routes that need the user to be authenticated
              */}
