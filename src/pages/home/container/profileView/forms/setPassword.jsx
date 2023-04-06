@@ -62,8 +62,7 @@ const SetPassword = () => {
                     setShowForm(false)
                     reset()
                   })
-                  .catch((e) => {
-                    console.log(e)
+                  .catch(() => {
                     /**
                      * Something went wrong
                      */
@@ -109,7 +108,6 @@ const SetPassword = () => {
           setShowForm(false)
         })
         .catch((e) => {
-          console.log(e)
           /**
            * If the user needs to reauthenticate
            */

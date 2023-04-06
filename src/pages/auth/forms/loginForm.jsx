@@ -38,7 +38,6 @@ const LoginForm = () => {
        */
       navigate(`/home/${FILTERS.TODAY}`)
     } catch (error) {
-      console.log(error)
       /**
        * Wrong password
        */

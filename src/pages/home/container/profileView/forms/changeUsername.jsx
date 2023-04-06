@@ -37,8 +37,7 @@ const ChangeUsername = () => {
         reset()
         setNotification(new NotificationClass('Username changed', 'Your username has been changed', 'success'))
       })
-      .catch((e) => {
-        console.log(e)
+      .catch(() => {
         /**
          * Something went wrong
          */

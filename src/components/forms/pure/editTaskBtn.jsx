@@ -23,6 +23,6 @@ const EditTaskBtn = ({ task }) => {
 }
 
 EditTaskBtn.propTypes = {
-  task: PropTypes.object
+  task: PropTypes.any
 }
 export default EditTaskBtn

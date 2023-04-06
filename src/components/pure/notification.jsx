@@ -24,7 +24,7 @@ const Notification = () => {
     <AnimatePresence>
       {notification &&
         <motion.div
-          className={`fixed z-20 bottom-0 right-0 mb-4 mx-4 lg:mb-16 lg:mx-20 bg-white border ${notification.type === 'error' ? 'border-red-700' : notification.type === 'success' ? 'border-green-700' : ''} dark:bg-slate-900 text-black dark:text-white rounded-lg shadow-lg p-4 w-9/12 md:w-6/12 lg:w-4/12 xl:w-3/12 2xl:w-2/12}`}
+          className={`fixed z-50 bottom-0 right-0 mb-4 mx-4 lg:mb-16 lg:mx-20 bg-white border ${notification.type === 'error' ? 'border-red-700' : notification.type === 'success' ? 'border-green-700' : ''} dark:bg-slate-900 text-black dark:text-white rounded-lg shadow-lg p-4 w-9/12 md:w-6/12 lg:w-4/12 xl:w-3/12 2xl:w-2/12}`}
           initial={{ opacity: 0, x: 50 }}
           animate={{ opacity: 1, x: 0 }}
           exit={{ opacity: 0, x: 50, transition: { type: 'spring', duration: 0.1, stiffness: 300, damping: 18 } }}

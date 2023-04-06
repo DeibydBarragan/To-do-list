@@ -55,11 +55,11 @@ const TaskComponent = ({ task }) => {
         </h5>
         <div className='grid grid-cols-3 gap-2'>
           {/** Button to change the state of the taskt to complete */}
-          <CompleteTask taskId={task.id}/>
+          <CompleteTask task={task}/>
           {/** Button to edit a task */}
           <EditTaskBtn task={task}/>
           {/** Button to delete a task */}
-          <DeleteTask taskId={task.id}/>
+          <DeleteTask task={task}/>
         </div>
       </div>
     </motion.div>

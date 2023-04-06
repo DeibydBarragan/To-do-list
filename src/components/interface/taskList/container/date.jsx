@@ -1,4 +1,4 @@
-import { React, useContext } from 'react'
+import { React, useContext, useEffect, useState } from 'react'
 import { motion } from 'framer-motion'
 import { FiltersContext } from '../../../context/filtersContext'
 import { TasksContext } from '../../../context/tasksContext'
@@ -10,12 +10,17 @@ import TodayDate from '../pure/todayDate'
  * @returns returns the date and the number of tasks
  */
 const Date = () => {
-  const { tasks } = useContext(TasksContext)
+  const { tasks, loadingTasks } = useContext(TasksContext)
   const { filter } = useContext(FiltersContext)
+  const [sortedTasks, setSortedTasks] = useState([])
   /**
    * This function sorts the tasks by the filter
    */
-  const sortedTasks = useSortTasks(tasks, filter)
+  useEffect(() => {
+    if (tasks) {
+      setSortedTasks(useSortTasks(tasks, filter))
+    }
+  }, [tasks, filter])
 
   return (
     <motion.div
@@ -29,7 +34,11 @@ const Date = () => {
       {/** weekday and month as strings */}
       <TodayDate/>
       <h2 className='mb-3 text-slate-900'>
-        {sortedTasks.length === 0 ? 'You don\'t have any task' : `You have ${sortedTasks.length} task(s)`}
+        {
+          loadingTasks
+            ? 'Loading...'
+            : sortedTasks.length === 0 ? 'You don\'t have any task' : `You have ${sortedTasks.length} task(s)`
+        }
       </h2>
     </motion.div>
   )

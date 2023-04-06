@@ -7,6 +7,13 @@ import { TYPES } from '../../models/taskActions'
 import Select from './pure/select'
 import Option from './pure/option'
 import PropTypes from 'prop-types'
+import { yupResolver } from '@hookform/resolvers/yup'
+import { newTaskSchema } from './formSchema/newTaskSchema'
+import Popover from './pure/popover'
+import LoadingButton from './pure/loadingButton'
+import { addDoc, collection } from 'firebase/firestore'
+import { db } from '../../firebase/firebase'
+import { AuthContext } from '../context/authContext'
 
 /**
  * This component returns a form to create a new task
@@ -15,13 +22,14 @@ import PropTypes from 'prop-types'
  */
 const NewTask = ({ setShowForm, showForm }) => {
   const { dispatchTask } = useContext(TasksContext)
-
+  const { user } = useContext(AuthContext)
+  const [formLoading, setFormLoading] = useState(false)
   /**
-   * Brings register to save the data form
-   * errors to manage errors
-   * handleSubmit is to manage the form when it is submitted
+   * This manages the form
    */
-  const { register, formState: { errors }, handleSubmit } = useForm()
+  const { register, formState: { errors }, handleSubmit, reset, clearErrors } = useForm({
+    resolver: yupResolver(newTaskSchema)
+  })
 
   /**
    * state for task level
@@ -32,21 +40,35 @@ const NewTask = ({ setShowForm, showForm }) => {
    *This function is ejected when te user submit the form
    * @param {InstanceType} data of the form
    */
-  const onSubmit = (data) => {
-    // i declare a new propertie to save the level because it doesn't work if i use level directly (i don't know why)
-    data.level = level
-    /**
-     * if the user doesn't choose a level, it will be normal
-     */
-    data.level === null && (data.level = LEVELS.NORMAL)
-    setShowForm(false)
-    /**
-     * Dispatch the action to the reducer
-     */
-    dispatchTask({
-      type: TYPES.create,
-      payload: { name: data.name, description: data.description, level: data.level, endDate: data.endDate }
-    })
+  const onSubmit = async (data) => {
+    setFormLoading(true)
+
+    const taskLevel = level || LEVELS.NORMAL
+
+    const task = {
+      name: data.name,
+      description: data.description,
+      level: taskLevel,
+      endDate: data.endDate,
+      isCompleted: false
+    }
+
+    try {
+      const tasksRef = collection(db, 'tasks', user.uid, 'userTasks')
+      const snapshot = await addDoc(tasksRef, task)
+      task.id = snapshot.id
+      dispatchTask({
+        type: TYPES.create,
+        payload: task
+      })
+      setShowForm(false)
+      reset()
+    } catch (error) {
+      console.error('Error adding task to database:', error)
+      // Show an error message to the user or log the error
+    } finally {
+      setFormLoading(false)
+    }
   }
 
   return (
@@ -59,9 +81,9 @@ const NewTask = ({ setShowForm, showForm }) => {
           type='text'
           maxLength='50'
           placeholder='Name'
-          {...register('name', { required: true })}
+          {...register('name')}
         />
-        { errors.name?.type === 'required' && 'The name field is required'}
+        <Popover show={errors.name?.message} clear={clearErrors} fieldName='name'/>
         <textarea
           className='input-tasks h-36'
           maxLength='200'
@@ -77,7 +99,13 @@ const NewTask = ({ setShowForm, showForm }) => {
         <Select state={level} placeholder='Urgency'>
           {Object.values(LEVELS).map((props) => <Option key={props} set={setLevel}>{props}</Option>)}
         </Select>
-        <button type='submit' className='btn-modal w-full'>Add task</button>
+        <button type='submit' className='btn-modal w-full'>
+          Add task
+          {formLoading
+            ? <LoadingButton/>
+            : <i className='bi bi-plus-circle text-2xl'/>
+          }
+        </button>
       </form>
     </Modal>
   )

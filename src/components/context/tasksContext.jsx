@@ -1,66 +1,83 @@
-import React, { createContext, useReducer, useState } from 'react'
-import { tasksList } from '../../helpers/taskExamples'
+import React, { createContext, useContext, useEffect, useReducer, useState } from 'react'
 import PropTypes from 'prop-types'
+import { AuthContext } from './authContext'
+import { useReduceTasks } from '../../hooks/useReduceTasks'
+import { collection, getDocs } from 'firebase/firestore'
+import { db } from '../../firebase/firebase'
+import { NotificationClass } from '../../models/notification.class'
 import { Task } from '../../models/task.class'
-import { TYPES } from '../../models/taskActions'
 
 const TasksContext = createContext()
 
 const TasksContextProvider = ({ children }) => {
-  /**
-   * This function executes different modifications on the tasklist state
-   * @param {task} state of the tasks array
-   * @param {type} action is the type of the action to execute
-   * @returns new state of the array of tasks
-   */
-  const reducer = (state, action) => {
-    switch (action.type) {
-    /**
-      * Delete the task of the state
-      */
-    case TYPES.delete: {
-      return state.filter(task => task.id !== action.payload)
-    }
-    /**
-      * push a new instance of the task class into the array
-      */
-    case TYPES.create: {
-      return [...state, new Task(Math.random(), action.payload.name, action.payload.description, action.payload.level, action.payload.endDate, false)]
-    }
-    /**
-       * complete a task
-       */
-    case TYPES.complete: {
-      return state.map(task => {
-        if (task.id === action.payload) {
-          return new Task(task.id, task.name, task.description, task.level, task.endDate, !task.isCompleted)
-        }
-        return new Task(task.id, task.name, task.description, task.level, task.endDate, task.isCompleted)
-      })
-    }
-    case TYPES.edit: {
-      return state.map(task => {
-        if (task.id === action.payload.id) {
-          return new Task(task.id, action.payload.name, action.payload.description, action.payload.level, action.payload.endDate, task.isCompleted)
-        }
-        return new Task(task.id, task.name, task.description, task.level, task.endDate, task.isCompleted)
-      })
-    }
-    default: return state
-    }
-  }
+  const { user } = useContext(AuthContext)
+  const { setNotification } = useContext(AuthContext)
+
+  const [loadingTasks, setLoadingTasks] = useState(false)
+
   /**
    * useReducer for the tasklist as an array that contains the tasks
    */
-  const [tasks, dispatchTask] = useReducer(reducer, tasksList)
+  const [tasks, dispatchTask] = useReducer(useReduceTasks, [], user?.uid)
   /**
    * Showtask is the task that is going to be shown in the modal in showTask component
    */
-  const [showTask, setShowTask] = useState(false)
+  const [showTask, setShowTask] = useState(null)
   /**
    * ShowEditTask is the task that is going to be shown in the modal in EditTask component
    */
-  const [showEditTask, setShowEditTask] = useState(false)
+  const [showEditTask, setShowEditTask] = useState(null)
+
+  /**
+   * This useEffect is going to be executed when the user is logged
+   */
+  useEffect(() => {
+    const getTasks = async () => {
+      /**
+       * If the user is logged, get the tasks from the database
+       */
+      if (user) {
+        setLoadingTasks(true)
+        try {
+          /**
+           * Query the database to get the tasks that belongs to the user
+           */
+          const ref = collection(db, 'tasks', user.uid, 'userTasks')
+          const querySnapshot = await getDocs(ref)
+          /**
+           * Map the querySnapshot to an array of tasks
+           */
+          const docs = querySnapshot.docs.map((doc) => {
+            return new Task(
+              doc.id,
+              doc.data().name,
+              doc.data().description,
+              doc.data().level,
+              doc.data().endDate,
+              doc.data().isCompleted
+            )
+          })
+          /**
+           * Dispatch the load action to the reducer
+           */
+          dispatchTask({ type: 'load', payload: docs })
+        } catch {
+          /**
+           * Something went wrong, set the notification
+           */
+          setNotification(new NotificationClass('error', 'Error', 'Error loading your tasks'))
+        } finally {
+          setLoadingTasks(false)
+        }
+        /**
+         * If the user is not logged, set the tasks to an empty array
+         */
+      } else {
+        dispatchTask({ type: 'load', payload: [] })
+      }
+    }
+    getTasks()
+  }, [user])
 
   return (
     <TasksContext.Provider value ={{
@@ -69,7 +86,9 @@ const TasksContextProvider = ({ children }) => {
       showTask,
       setShowTask,
       showEditTask,
-      setShowEditTask
+      setShowEditTask,
+      loadingTasks,
+      setLoadingTasks
     }}>
       { children }
     </TasksContext.Provider>

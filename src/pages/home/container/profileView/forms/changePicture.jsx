@@ -43,8 +43,7 @@ const ChangePicture = () => {
         try {
           await uploadBytes(storageRef, file)
           setNotification(new NotificationClass('Photo updated', 'Your photo have been uploaded', 'success'))
-        } catch (error) {
-          console.log(error)
+        } catch {
           /**
            * something went wrong
            */

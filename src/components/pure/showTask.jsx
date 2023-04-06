@@ -25,14 +25,17 @@ const ShowTaskComponent = () => {
             ? 'Sin descripción'
             : showTask?.description }
         </h4>
+        <h4 className='mt-2 break-words'>
+          { showTask?.level && showTask?.level }
+        </h4>
       </div>
       <div className='grid grid-cols-3 gap-2 text-indigo-900 dark:text-white'>
         {/** Button to change the state of the taskt to complete */}
-        <CompleteTask taskId={showTask?.id}/>
+        <CompleteTask task={showTask}/>
         {/** Button to edit a task */}
         <EditTaskBtn task={showTask}/>
         {/** Button to delete a task */}
-        <DeleteTask taskId={showTask?.id}/>
+        <DeleteTask task={showTask}/>
       </div>
     </Modal>
   )
