@@ -21,7 +21,7 @@ const FilterButton = ({ filter, icon }) => {
   return (
     <NavLink
       className={({ isActive }) => isActive ? 'btn-selected' : 'btn'}
-      to={`/todolist/home/${filter}`}
+      to={`/home/${filter}`}
       onClick={handleOnClick}>
       <i className={`bi bi-${icon} text-xl`}></i>
       {toUpperFirstChar(filter)}

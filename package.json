@@ -1,7 +1,7 @@
 {
   "name": "todolist",
   "version": "0.1.0",
-  "homepage": "https://DeibydBarragan.github.io/todolist/home/today",
+  "homepage": "https://DeibydBarragan.github.io/To-do-list",
   "private": true,
   "dependencies": {
     "@hookform/resolvers": "^3.0.0",

@@ -21,33 +21,31 @@ const AppRoutes = () => {
     <BrowserRouter>
       <FiltersContextProvider>
         <Routes>
-          <Route path='todolist/'>
-            {/**
+          {/**
                * This routes are for the routes that need the user to be authenticated
                */}
-            <Route element={<ProtectedRoutes/>}>
-              {/** This route is for the rotes that need the user to have an username */}
-              <Route path='home/' element={<WithNameRoute/>}>
-                {/**
+          <Route element={<ProtectedRoutes/>}>
+            {/** This route is for the rotes that need the user to have an username */}
+            <Route path='home/' element={<WithNameRoute/>}>
+              {/**
                    * This routes are for the filters
                    */}
-                {Object.values(FILTERS).map((filter) => (<Route key={filter} path={`${filter}`} element={<Home filter={filter}/>}/>))}
-                {/** This route is for the profile view */}
-                <Route path='profile' element={<Home/>}/>
-              </Route>
-              {/** This route redirect to chooseUsername page when the user doesn't have one */}
-              <Route element={<NotNameRoute/>}>
-                <Route path='choose-username' element={<ChooseUsername/>}/>
-              </Route>
+              {Object.values(FILTERS).map((filter) => (<Route key={filter} path={`${filter}`} element={<Home filter={filter}/>}/>))}
+              {/** This route is for the profile view */}
+              <Route path='profile' element={<Home/>}/>
             </Route>
-            {/** This routes are for the routes that don't need the user to be authenticated */}
-            <Route element={<UnauthenticatedRoutes/>}>
-              <Route path='login' element={<Login/>}/>
-              <Route path='register' element={<Register/>}/>
+            {/** This route redirect to chooseUsername page when the user doesn't have one */}
+            <Route element={<NotNameRoute/>}>
+              <Route path='choose-username' element={<ChooseUsername/>}/>
             </Route>
-            {/** This route is for the 404 page */}
-            <Route path='*' element={<NotFound/>}/>
           </Route>
+          {/** This routes are for the routes that don't need the user to be authenticated */}
+          <Route element={<UnauthenticatedRoutes/>}>
+            <Route path='login' element={<Login/>}/>
+            <Route path='register' element={<Register/>}/>
+          </Route>
+          {/** This route is for the 404 page */}
+          <Route path='*' element={<NotFound/>}/>
         </Routes>
       </FiltersContextProvider>
     </BrowserRouter>

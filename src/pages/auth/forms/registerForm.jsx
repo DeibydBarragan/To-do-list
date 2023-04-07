@@ -52,7 +52,7 @@ const RegisterForm = () => {
       /**
        * Navigate to home page
        */
-      navigate(`/todolist/home/${FILTERS.TODAY}`)
+      navigate(`/home/${FILTERS.TODAY}`)
     } catch (error) {
       /**
        * Failed to register

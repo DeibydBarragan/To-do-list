@@ -13,7 +13,7 @@ const ProfileNav = () => {
    * This function navigates to the profile page
    */
   const handleViewProfile = () => {
-    navigate('/todolist/home/profile')
+    navigate('/home/profile')
   }
   return (
     <div className='flex flex-row gap-4 items-center justify-center cursor-pointer' onClick={handleViewProfile}>

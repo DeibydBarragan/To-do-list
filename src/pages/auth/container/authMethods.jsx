@@ -19,7 +19,7 @@ const AuthMethods = () => {
   const signInWithMethod = (provider) => {
     signInWithPopup(auth, provider)
       .then(() => {
-        navigate(`/todolist/home/${FILTERS.TODAY}`)
+        navigate(`/home/${FILTERS.TODAY}`)
       })
       .catch((error) => {
         console.log(error)

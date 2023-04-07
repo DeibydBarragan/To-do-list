@@ -13,7 +13,7 @@ const NotNameRoute = ({ children }) => {
   /**
    * This effect redirects to home page when the user has an username
    */
-  if (user.displayName && !loading) return <Navigate to={`/todolist/home/${FILTERS.TODAY}`}/>
+  if (user.displayName && !loading) return <Navigate to={`/home/${FILTERS.TODAY}`}/>
 
   return children || <Outlet/>
 }
