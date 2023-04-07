@@ -14,7 +14,7 @@ const Register = () => {
         <div className='hidden sm:grid grid-cols-1 gap-4 content-center rounded-l-2xl p-8 bg-gradient-to-br from-purple-800 to-orange-500'>
           <h1 className='text-white'>Already have an account?</h1>
           <div className='flex flex-col gap-2 mb-20'>
-            <NavLink className='btn' to='/login'>
+            <NavLink className='btn' to='/todolist/login'>
               Sign in
               <i className='bi bi-person-add text-2xl'/>
             </NavLink>
@@ -25,7 +25,7 @@ const Register = () => {
           <AuthMethods/>
           <h4 className='text-white'>Or use your email</h4>
           <RegisterForm/>
-          <Link className='underline decoratin-1 sm:hidden' to='/login'>Already have an account?</Link>
+          <Link className='underline decoratin-1 sm:hidden' to='/todolist/login'>Already have an account?</Link>
         </div>
       </div>
     </div>

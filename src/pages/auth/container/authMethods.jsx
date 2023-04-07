@@ -19,9 +19,10 @@ const AuthMethods = () => {
   const signInWithMethod = (provider) => {
     signInWithPopup(auth, provider)
       .then(() => {
-        navigate(`/home/${FILTERS.TODAY}`)
+        navigate(`/todolist/home/${FILTERS.TODAY}`)
       })
       .catch((error) => {
+        console.log(error)
         /**
          * If the user already has an account with this email, try with another method
          */

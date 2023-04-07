@@ -1,7 +1,7 @@
 {
-  "name": "my-app",
+  "name": "todolist",
   "version": "0.1.0",
-  "homepage": "https://DeibydBarragan.github.io/Tasklist",
+  "homepage": "https://DeibydBarragan.github.io/todolist/home/today",
   "private": true,
   "dependencies": {
     "@hookform/resolvers": "^3.0.0",
@@ -58,5 +58,23 @@
     "gh-pages": "^4.0.0",
     "postcss": "^8.4.19",
     "tailwindcss": "^3.2.4"
+  },
+  "description": "This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).",
+  "main": "postcss.config.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/DeibydBarragan/Tasklist.git"
+  },
+  "keywords": [
+    "Task",
+    "list",
+    "to",
+    "do",
+    "list"
+  ],
+  "author": "Deibyd Barragan",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/DeibydBarragan/Tasklist/issues"
   }
 }

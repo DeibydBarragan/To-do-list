@@ -23,13 +23,13 @@ const Login = () => {
           <h4 className='text-white'>Or use your email</h4>
           <LoginForm/>
           <ResetPassword/>
-          <Link className='underline decoration-1 sm:hidden' to='/register'>Don&apos;t have an account?</Link>
+          <Link className='underline decoration-1 sm:hidden' to='/todolist/register'>Don&apos;t have an account?</Link>
         </div>
         <div className='hidden sm:grid grid-cols-1 gap-4 content-center rounded-r-2xl p-8 bg-gradient-to-tr from-purple-800 to-orange-500'>
           <h1 className='text-white'>Welcome!</h1>
           <div className='flex flex-col gap-2 mb-20'>
             <h4 className='text-white'>Create your account</h4>
-            <NavLink className='btn' to='/register'>
+            <NavLink className='btn' to='/todolist/register'>
               Register
               <i className='bi bi-person-add text-2xl'/>
             </NavLink>
