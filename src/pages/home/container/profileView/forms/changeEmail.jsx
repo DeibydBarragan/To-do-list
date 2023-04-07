@@ -89,7 +89,7 @@ const ChangeEmail = () => {
 
   return (
     <div className='flex flex-col pt-4 pb-4'>
-      <p>Email</p>
+      <label>Email</label>
       <div className='flex items-center justify-between'>
         <h4 className='text-gray-900 dark:text-white text-sm md:text-xl'>{ user.email }</h4>
         <button className='btn-settings' onClick={() => setShowForm(true)}>
@@ -102,6 +102,7 @@ const ChangeEmail = () => {
           <h2 className='text-3xl sm:text-4xl'>Change email</h2>
           <h4>To change your email yo have to write your password</h4>
           {/** Actual password */}
+          <label>Your actual password</label>
           <div className='relative'>
             <input
               type='password'
@@ -113,6 +114,7 @@ const ChangeEmail = () => {
             <Popover show={errors.actualPassword?.message} clear={clearErrors} fieldName='actualPassword'/>
           </div>
           {/** New email */}
+          <label>New email</label>
           <div className='relative'>
             <input
               className='input-tasks w-full'

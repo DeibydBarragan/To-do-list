@@ -42,7 +42,7 @@ const Popover = ({ show, setShow, clear, fieldName }) => {
           animate={{ opacity: 1, y: 0, transition: { duration: 0.2 } }}
           exit={{ opacity: 0, y: -10, transition: { duration: 0.2 } }}
         >
-          <p className='text-red-600 dark:text-red-600 font-semibold break-words'>{ show }</p>
+          <p className='text-red-600 dark:text-red-600 font-semibold break-words text-md'>{ show }</p>
         </motion.div>)}
     </AnimatePresence>
   )

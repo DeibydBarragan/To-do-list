@@ -14,7 +14,7 @@ const NotFound = () => {
    * This function navigates to the home page
    */
   const backHandler = () => {
-    navigate(`/Tasklist/home/${FILTERS.TODAY}`)
+    navigate(`/home/${FILTERS.TODAY}`)
   }
 
   return (

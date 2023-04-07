@@ -8,7 +8,7 @@ const FiltersContextProvider = ({ children }) => {
    * Filter is the current filter to filter the tasks
    */
   const location = useLocation()
-  const [filter, setFilter] = useState(null)
+  const [filter, setFilter] = useState('')
   /**
    * Set the filter when the location changes
    */

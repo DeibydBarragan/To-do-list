@@ -1,6 +1,6 @@
 import React, { useState, useRef } from 'react'
 import PropTypes from 'prop-types'
-import { motion } from 'framer-motion'
+import { AnimatePresence, motion } from 'framer-motion'
 
 const Select = ({ children, state, placeholder }) => {
   /**
@@ -23,15 +23,27 @@ const Select = ({ children, state, placeholder }) => {
   })
   return (
     <div>
-      <div ref = {drop} className={`text-black dark:text-white ${state === null && 'dark:text-gray-400'} bg-slate-200 dark:bg-slate-800 rounded-lg p-2 flex items-center justify-between cursor-pointer transition ease-in-out hover:scale-105 hover:shadow-xl`}
+      <div ref = {drop} className={`text-black dark:text-white ${!state && 'dark:text-gray-400'} bg-white dark:bg-slate-800 rounded-lg p-2 flex items-center justify-between cursor-pointer transition ease-in-out border border-indigo-700 dark:border-none`}
         onClick={() => setOpen(!open)} >
         {state || placeholder}
-        <i ref={icon} className={`bi bi-caret-down-fill text-xl ${open && 'transition duration-300 ease-in-out rotate-180'}`}/>
+        <i ref={icon} className={`bi bi-caret-down-fill text-indigo-700 dark:text-white text-xl ${open && 'transition duration-300 ease-in-out rotate-180'}`}/>
       </div>
       <motion.div className='mt-2 divide-y-2'>
-        <ul className={`bg-slate-200 dark:bg-slate-800 absolute divide-y divide-indigo-500 z-10 w-48 rounded-md shadow-xl ${!open && 'hidden'}`}>
-          {children}
-        </ul>
+        <AnimatePresence>
+          { open &&
+            <motion.ul
+              className='bg-white border border-indigo-700 dark:bg-slate-800 absolute divide-y divide-indigo-500 z-10 w-48 rounded-md shadow-xl'
+              initial={{ opacity: 0, y: -10 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{
+                opacity: 0,
+                y: -20,
+                transition: { duration: 0.2 }
+              }}
+            >
+              {children}
+            </motion.ul>}
+        </AnimatePresence>
       </motion.div>
     </div>
   )

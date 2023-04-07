@@ -46,7 +46,7 @@ const ResetPassword = () => {
         Forgot your password?
       </a>
       <Modal setShow={setShowForm} show={showForm} reset={reset}>
-        <form className='flex flex-col gap-4' onSubmit={handleSubmit(onSubmit)}>
+        <form className='flex flex-col gap-4 p-3' onSubmit={handleSubmit(onSubmit)}>
           <h2 className='text-3xl sm:text-4xl'>Reset your password</h2>
           <h4>To reset your password you have to write your email</h4>
           {/** New email */}

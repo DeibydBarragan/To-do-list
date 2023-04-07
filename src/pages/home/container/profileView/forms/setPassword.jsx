@@ -135,6 +135,7 @@ const SetPassword = () => {
         <form className='form-modal' onSubmit={handleSubmit(onSubmit)}>
           <h2 className='text-2xl sm:text-3xl'>Set your email and password</h2>
           {/** email */}
+          <label>Your email</label>
           <div className='relative'>
             <input
               className='input-tasks w-full'
@@ -146,6 +147,7 @@ const SetPassword = () => {
             <Popover show={errors.email?.message} clear={clearErrors} fieldName='email'/>
           </div>
           {/** password */}
+          <label>Your password</label>
           <div className='relative'>
             <input
               type='password'
@@ -157,6 +159,7 @@ const SetPassword = () => {
             <Popover show={errors.password?.message} clear={clearErrors} fieldName='password'/>
           </div>
           {/** Confirm password */}
+          <label>Confirm your password</label>
           <div className='relative'>
             <input
               type='password'

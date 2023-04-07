@@ -18,7 +18,7 @@ const UnauthenticatedRoutes = ({ children }) => {
   /**
    * This effect redirects to home page when the user is logged in
    */
-  if (user) return <Navigate to={`Tasklist/home/${FILTERS.TODAY}`}/>
+  if (user) return <Navigate to={`/home/${FILTERS.TODAY}`}/>
   /**
    * This returns the children or the outlet
    */

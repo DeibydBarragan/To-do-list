@@ -80,6 +80,7 @@ const ChangePassword = () => {
         <form className='form-modal' onSubmit={handleSubmit(onSubmit)}>
           <h2 className='text-3xl sm:text-4xl'>Change password</h2>
           {/** Actual password */}
+          <label>Your actual password</label>
           <div className='relative'>
             <input
               type='password'
@@ -91,6 +92,7 @@ const ChangePassword = () => {
             <Popover show={errors.actualPassword?.message} clear={clearErrors} fieldName='actualPassword'/>
           </div>
           {/** New password */}
+          <label>Your new password</label>
           <div className='relative'>
             <input
               type='password'
@@ -102,6 +104,7 @@ const ChangePassword = () => {
             <Popover show={errors.newPassword?.message} clear={clearErrors} fieldName='newPassword'/>
           </div>
           {/** Confirm new password */}
+          <label>Confirm your new password</label>
           <div className='relative'>
             <input
               type='password'

@@ -75,9 +75,11 @@ const NewTask = ({ setShowForm, showForm }) => {
     <Modal setShow={setShowForm} show={showForm}>
       <form onSubmit={handleSubmit(onSubmit)} className='form-modal'>
         <h2>New task</h2>
+        {/** Task name */}
+        <label>Name</label>
         <div className='relative'>
           <input
-            className='input-tasks'
+            className='input-tasks w-full'
             autoComplete="off"
             type='text'
             maxLength='50'
@@ -86,6 +88,8 @@ const NewTask = ({ setShowForm, showForm }) => {
           />
           <Popover show={errors.name?.message} clear={clearErrors} fieldName='name'/>
         </div>
+        {/** Task description */}
+        <label>Description</label>
         <textarea
           className='input-tasks h-36'
           maxLength='200'
@@ -93,14 +97,19 @@ const NewTask = ({ setShowForm, showForm }) => {
           placeholder='Description'
           {...register('description')}
         />
+        {/** Task end date */}
+        <label>End date</label>
         <input
           type='date'
-          className='input-tasks'
+          className='input-tasks w-full'
           {...register('endDate')}
         />
+        {/** Task level */}
+        <label>Urgency</label>
         <Select state={level} placeholder='Urgency'>
           {Object.values(LEVELS).map((props) => <Option key={props} set={setLevel}>{props}</Option>)}
         </Select>
+        {/** Submit button */}
         <button type='submit' className='btn-modal w-full'>
           Add task
           {formLoading

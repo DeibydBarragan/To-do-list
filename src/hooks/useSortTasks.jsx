@@ -48,7 +48,7 @@ export const useSortTasks = (tasks, filter) => {
     case FILTERS.NEXTSEVEN: {
       const taskDate = moment(task.endDate)
       const difference = taskDate.diff(moment(), 'days')
-      return difference <= 7 && difference >= 0
+      return difference <= 7 && difference >= 0 && !task.isCompleted
     }
     }
   }

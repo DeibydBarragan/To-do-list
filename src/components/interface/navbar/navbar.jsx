@@ -1,13 +1,11 @@
 import React, { useContext, useEffect, useState } from 'react'
 import { NavbarContext } from '../../context/navbarContext'
 import { AnimatePresence, motion } from 'framer-motion'
-import ButtonToday from './buttons/buttonToday'
-import ButtonWeek from './buttons/buttonWeek'
-import ButtonAll from './buttons/buttonAll'
-import ButtonCompleted from './buttons/buttonCompleted'
 import ButtonLogout from './buttons/buttonLogout'
 import ButtonTheme from './buttons/buttonTheme'
 import ProfileNav from './container/profileNav'
+import FilterButton from './buttons/filterButton'
+import { FILTERS } from '../../../models/filters.enum'
 /**
  * This component returns the side navbar
  * @returns the side navbar
@@ -54,10 +52,14 @@ const Navbar = () => {
             exit={{ x: -270 }}
           >
             <ProfileNav/>
-            <ButtonToday/>
-            <ButtonAll/>
-            <ButtonWeek/>
-            <ButtonCompleted/>
+            {/** Today tasks button */}
+            <FilterButton filter={FILTERS.TODAY} icon='calendar-day'/>
+            {/** Next seven days tasks button */}
+            <FilterButton filter={FILTERS.ALL} icon='calendar3'/>
+            {/** All tasks button */}
+            <FilterButton filter={FILTERS.NEXTSEVEN} icon='calendar-date'/>
+            {/** Completed tasks button */}
+            <FilterButton filter={FILTERS.COMPLETED} icon='check2-square'/>
             <div className='mt-auto grid grid-cols-4 gap-3'>
               <ButtonTheme/>
               <ButtonLogout/>

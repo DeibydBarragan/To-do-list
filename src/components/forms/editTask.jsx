@@ -90,34 +90,42 @@ const EditTask = () => {
     <Modal setShow={setShowEditTask} show={showEditTask}>
       <form onSubmit={handleSubmit(onSubmit)} className='form-modal'>
         <h2>Edit task</h2>
-        <div className='relative'>
+        {/** Task name */}
+        <label>Name</label>
+        <div className='relative w-full'>
           <input
-            className='input-tasks'
+            className='input-tasks w-full'
             autoComplete="off"
             type='text'
             maxLength='50'
-            placeholder={showEditTask?.name}
+            defaultValue={showEditTask?.name}
             {...register('name')}
           />
           <Popover show={errors.name?.message} clear={clearErrors} fieldName='name'/>
         </div>
+        {/** Task description */}
+        <label>Description</label>
         <textarea
           className='input-tasks h-36'
           maxLength='200'
           autoComplete="off"
-          placeholder={showEditTask?.description}
+          defaultValue={showEditTask?.description}
           {...register('description')}
         />
-
+        {/** Task end date */}
+        <label>End Date</label>
         <input
           type='date'
-          placeholder={showEditTask?.endDate}
           className='input-tasks'
+          defaultValue={showEditTask?.endDate}
           {...register('endDate')}
         />
+        {/** Task level */}
+        <label>Urgency</label>
         <Select state={level} placeholder='Urgency'>
           {Object.values(LEVELS).map((props) => <Option key={props} set={setLevel}>{props}</Option>)}
         </Select>
+        {/** Task save button */}
         <button type='submit' className='btn-modal w-full'>
           Save
           {formLoading

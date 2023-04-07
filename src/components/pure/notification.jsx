@@ -37,7 +37,7 @@ const Notification = () => {
             <i className='bi bi-x-lg text-gray-500 dark:text-gray-700 cursor-pointer text-2xl opacity-70 hover:opacity-90' onClick={() => setNotification(null)} />
           </div>
           <div>
-            <p>{notification?.message}</p>
+            <p className='text-md'>{notification?.message}</p>
           </div>
         </motion.div>}
     </AnimatePresence>

@@ -14,12 +14,12 @@
 
 /** This is for the button in the modal */
 .btn-modal {
-  @apply btn bg-indigo-700 text-white outline-none hover:bg-indigo-800 hover:text-white;
+  @apply btn mt-2 bg-indigo-700 text-white outline-none hover:bg-indigo-800 hover:text-white;
 }
 
 /** This is for the button when is selected */
 .btn-selected {
-  @apply bg-white text-indigo-800;
+  @apply btn bg-white text-indigo-800;
 }
 
 /** This is for the button in the profile page */
@@ -57,6 +57,10 @@ p {
   @apply text-black dark:text-white
 }
 
+label {
+  @apply text-black dark:text-white font-semibold text-base;
+}
+
 /** This is for the inputs in the forms to change tasks */
 .input-tasks {
   @apply rounded-md outline-none bg-white dark:bg-slate-800 placeholder:text-gray-500 p-2 shadow-md border border-indigo-700 dark:border-none;
@@ -69,7 +73,7 @@ p {
 
 /** This is for the forms inside a modal */
 .form-modal {
-  @apply flex flex-col gap-4 p-4
+  @apply flex flex-col gap-2 p-4
 }
 
 /** This is for the scroll bar styles */

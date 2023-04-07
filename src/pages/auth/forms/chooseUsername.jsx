@@ -40,7 +40,7 @@ const ChooseUsername = () => {
     updateProfile(user, { displayName: data.username })
       .then(() => {
         setUser({ ...user, displayName: data.username })
-        navigate(`/Tasklist/home/${FILTERS.TODAY}`)
+        navigate(`/home/${FILTERS.TODAY}`)
       })
       .catch(() => {
         setError('username', { message: 'Error choosing your username' })

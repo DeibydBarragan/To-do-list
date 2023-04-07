@@ -62,6 +62,7 @@ const ChangeUsername = () => {
         <form className='form-modal' onSubmit={handleSubmit(onSubmit)}>
           <h2 className='text-3xl sm:text-4xl'>Change username</h2>
           {/** New username */}
+          <label>Your new username</label>
           <div className='relative'>
             <input
               type='text'

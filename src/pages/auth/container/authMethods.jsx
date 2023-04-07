@@ -19,7 +19,7 @@ const AuthMethods = () => {
   const signInWithMethod = (provider) => {
     signInWithPopup(auth, provider)
       .then(() => {
-        navigate(`/Tasklist/home/${FILTERS.TODAY}`)
+        navigate(`/home/${FILTERS.TODAY}`)
       })
       .catch((error) => {
         /**
@@ -31,6 +31,7 @@ const AuthMethods = () => {
          * If the user closes the popup, do nothing
          */
         } else if (error.code !== 'auth/popup-closed-by-user') {
+          console.log(error)
           setNotification(new NotificationClass('Error', 'Error signing in with this method', 'error'))
         }
       })

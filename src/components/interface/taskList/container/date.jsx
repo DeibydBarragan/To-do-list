@@ -4,6 +4,7 @@ import { FiltersContext } from '../../../context/filtersContext'
 import { TasksContext } from '../../../context/tasksContext'
 import { useSortTasks } from './../../../../hooks/useSortTasks'
 import TodayDate from '../pure/todayDate'
+import { toUpperFirstChar } from '../../../../helpers/upperFirstChar'
 
 /**
  * This component returns the date and the number of tasks
@@ -29,7 +30,7 @@ const Date = () => {
       className='border-b-2 border-purple-500'
     >
       <h1 className="text-5xl">
-        {(filter?.charAt(0)?.toUpperCase() + filter?.slice(1)).toString()}
+        {filter && toUpperFirstChar(filter)}
       </h1>
       {/** weekday and month as strings */}
       <TodayDate/>

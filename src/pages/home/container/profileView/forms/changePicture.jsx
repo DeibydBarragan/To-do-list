@@ -92,7 +92,7 @@ const ChangePicture = () => {
         id='uploadPhoto'
         onChange={onSubmit}
       />
-      <label htmlFor='uploadPhoto' className='btn-settings cursor-pointer'>
+      <label htmlFor='uploadPhoto' className='btn-settings cursor-pointer text-white'>
         { user.photoURL
           ? 'Change photo'
           : 'Add photo'
