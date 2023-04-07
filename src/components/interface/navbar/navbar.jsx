@@ -42,25 +42,27 @@ const Navbar = () => {
     <AnimatePresence>
       { (navbarOpen || width > 1023) &&
         <nav
-          id='navbar' onClick={(e) => handleCloseNavbar(e)} className={`${navbarOpen ? 'inset-0 grid grid-cols-12 backdrop-blur-sm' : 'h-screen'} col-span-3 fixed lg:sticky z-20 lg:z-auto`}
+          id='navbar' onClick={(e) => handleCloseNavbar(e)} className={`${navbarOpen ? 'inset-0 grid grid-cols-12 backdrop-blur-sm' : ''} col-span-3 fixed lg:sticky z-20 lg:z-auto`}
         >
           <motion.div
-            className='bg-gradient-to-tl from-emerald-600 via-indigo-800 to-fuchsia-700 gap-6 p-4 lg:p-8 top-0 flex col-span-8 sm:col-span-5 md:col-span-4 flex-col h-screen fixed z-50'
+            className='bg-gradient-to-tl from-emerald-600 via-indigo-800 to-fuchsia-700 p-4 lg:p-8 top-0 bottom-0 flex flex-col justify-between col-span-8 sm:col-span-5 md:col-span-4 fixed z-50'
             initial={{ x: -270 }}
             animate={{ x: 0 }}
             transition={{ duration: 0.3 }}
             exit={{ x: -270 }}
           >
-            <ProfileNav/>
-            {/** Today tasks button */}
-            <FilterButton filter={FILTERS.TODAY} icon='calendar-day'/>
-            {/** Next seven days tasks button */}
-            <FilterButton filter={FILTERS.ALL} icon='calendar3'/>
-            {/** All tasks button */}
-            <FilterButton filter={FILTERS.NEXTSEVEN} icon='calendar-date'/>
-            {/** Completed tasks button */}
-            <FilterButton filter={FILTERS.COMPLETED} icon='check2-square'/>
-            <div className='mt-auto grid grid-cols-4 gap-3'>
+            <div className='flex flex-col gap-5'>
+              <ProfileNav/>
+              {/** Today tasks button */}
+              <FilterButton filter={FILTERS.TODAY} icon='calendar-day'/>
+              {/** Next seven days tasks button */}
+              <FilterButton filter={FILTERS.ALL} icon='calendar3'/>
+              {/** All tasks button */}
+              <FilterButton filter={FILTERS.NEXTSEVEN} icon='calendar-date'/>
+              {/** Completed tasks button */}
+              <FilterButton filter={FILTERS.COMPLETED} icon='check2-square'/>
+            </div>
+            <div className='grid grid-cols-4 gap-3'>
               <ButtonTheme/>
               <ButtonLogout/>
             </div>
