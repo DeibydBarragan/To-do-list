@@ -1,7 +1,5 @@
 import React from 'react'
-import { Routes, Route, HashRouter } from 'react-router-dom'
-import Login from '../pages/auth/login'
-import Register from '../pages/auth/register'
+import { Routes, Route, HashRouter, Navigate } from 'react-router-dom'
 import Home from '../pages/home/home'
 import NotFound from '../pages/404/notFound'
 import { FILTERS } from '../models/filters.enum'
@@ -11,6 +9,7 @@ import NotNameRoute from './notNameRoute'
 import WithNameRoute from './withNameRoute'
 import UnauthenticatedRoutes from './unauthenticadedRoutes'
 import { FiltersContextProvider } from '../components/context/filtersContext'
+import Auth from '../pages/auth/auth'
 
 /**
  * This component returns the app routes
@@ -41,11 +40,12 @@ const AppRoutes = () => {
           </Route>
           {/** This routes are for the routes that don't need the user to be authenticated */}
           <Route element={<UnauthenticatedRoutes/>}>
-            <Route path='login' element={<Login/>}/>
-            <Route path='register' element={<Register/>}/>
+            <Route path='login' element={<Auth path='login'/>}/>
+            <Route path='register' element={<Auth path='register'/>}/>
           </Route>
           {/** This route is for the 404 page */}
           <Route path='*' element={<NotFound/>}/>
+          <Route path='/To-do-list' element={<Navigate to='/login'/>}/>
         </Routes>
       </FiltersContextProvider>
     </HashRouter>

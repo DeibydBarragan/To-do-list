@@ -32,7 +32,7 @@ const TaskList = () => {
       {/** If the tasks are loading, return a loading message */}
       {loadingTasks
         ? <div className='flex flex-col items-center mt-5'>
-          <Charging/>
+          <Charging colorPath='#4338ca'/>
         </div>
         : <div
           className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 2xl:grid-cols-4 gap-4">

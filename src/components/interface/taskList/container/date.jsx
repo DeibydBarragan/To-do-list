@@ -36,7 +36,7 @@ const Date = () => {
       <TodayDate/>
       {
         loadingTasks
-          ? <div className="animate-pulse h-9 mb-4 mt-1 bg-slate-700 w-fit rounded-full"><h2 className='opacity-0'>You  don´t have any task</h2></div>
+          ? <div className="animate-pulse h-9 mb-4 mt-1 bg-gray-300 dark:bg-slate-700 w-fit rounded-full"><h2 className='opacity-0'>You  don´t have any task</h2></div>
           : <h2 className='mb-3 mt-1 text-slate-900'>{sortedTasks.length === 0 ? 'You don\'t have any task' : `You have ${sortedTasks.length} task(s)`}</h2>
       }
 
