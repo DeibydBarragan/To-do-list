@@ -41,7 +41,7 @@ const TaskComponent = ({ task }) => {
           { task.name }
         </h4>
         <p className='break-words text-white'>
-          { task.endDate ? task.endDate : 'Sin fecha' }
+          { task.endDate ? task.endDate : 'No end date' }
         </p>
         <p className='text-lg break-words text-white'>
           { task.description === ''

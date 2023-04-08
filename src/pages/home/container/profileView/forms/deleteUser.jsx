@@ -11,6 +11,7 @@ import { NotificationContext } from '../../../../../components/context/notificat
 import { auth } from '../../../../../firebase/firebase'
 import { NotificationClass } from '../../../../../models/notification.class'
 import FloatForm from '../container/floatForm'
+import TitleForm from '../../../../../components/forms/pure/titleForm'
 
 /**
  * This component returns the delete user form
@@ -119,7 +120,7 @@ const DeleteUser = () => {
         {methods.includes('Password')
           ? <Modal setShow={setShowForm} show={showForm} reset={reset}>
             <form className='flex flex-col gap-4 p-4' onSubmit={handleSubmit(onSubmit)}>
-              <h2 className='text-3xl sm:text-4xl'>Delete account</h2>
+              <TitleForm>Delete account</TitleForm>
               <h4>To delete your account you have to write your password</h4>
               {/** Actual password */}
               <div className='relative'>

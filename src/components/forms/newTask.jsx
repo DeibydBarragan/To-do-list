@@ -14,6 +14,8 @@ import LoadingButton from './pure/loadingButton'
 import { addDoc, collection } from 'firebase/firestore'
 import { db } from '../../firebase/firebase'
 import { AuthContext } from '../context/authContext'
+import CalendarComponent from './pure/calendarComponent'
+import TitleForm from './pure/titleForm'
 
 /**
  * This component returns a form to create a new task
@@ -24,6 +26,7 @@ const NewTask = ({ setShowForm, showForm }) => {
   const { dispatchTask } = useContext(TasksContext)
   const { user } = useContext(AuthContext)
   const [formLoading, setFormLoading] = useState(false)
+  const [date, setDate] = useState('')
   /**
    * This manages the form
    */
@@ -49,7 +52,7 @@ const NewTask = ({ setShowForm, showForm }) => {
       name: data.name,
       description: data.description,
       level: taskLevel,
-      endDate: data.endDate,
+      endDate: date,
       isCompleted: false
     }
 
@@ -74,7 +77,7 @@ const NewTask = ({ setShowForm, showForm }) => {
   return (
     <Modal setShow={setShowForm} show={showForm}>
       <form onSubmit={handleSubmit(onSubmit)} className='form-modal'>
-        <h2>New task</h2>
+        <TitleForm>New task</TitleForm>
         {/** Task name */}
         <label>Name</label>
         <div className='relative'>
@@ -99,10 +102,9 @@ const NewTask = ({ setShowForm, showForm }) => {
         />
         {/** Task end date */}
         <label>End date</label>
-        <input
-          type='date'
-          className='input-tasks w-full'
-          {...register('endDate')}
+        <CalendarComponent
+          date={date}
+          setDate={setDate}
         />
         {/** Task level */}
         <label>Urgency</label>

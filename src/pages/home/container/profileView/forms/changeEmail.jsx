@@ -10,6 +10,7 @@ import { auth } from '../../../../../firebase/firebase'
 import { changeEmailSchema } from '../../../../../components/forms/formSchema/changeEmailSchema'
 import { NotificationContext } from '../../../../../components/context/notificationContext'
 import { NotificationClass } from '../../../../../models/notification.class'
+import TitleForm from '../../../../../components/forms/pure/titleForm'
 
 /**
  * This component returns the change email form
@@ -99,7 +100,7 @@ const ChangeEmail = () => {
       </div>
       <Modal setShow={setShowForm} show={showForm} reset={reset}>
         <form className='form-modal' onSubmit={handleSubmit(onSubmit)}>
-          <h2 className='text-3xl sm:text-4xl'>Change email</h2>
+          <TitleForm>Change email</TitleForm>
           <h4>To change your email yo have to write your password</h4>
           {/** Actual password */}
           <label>Your actual password</label>

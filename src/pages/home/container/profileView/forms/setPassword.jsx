@@ -10,6 +10,7 @@ import Modal from '../../../../../components/pure/modal/modal'
 import Popover from '../../../../../components/forms/pure/popover'
 import { AuthContext } from '../../../../../components/context/authContext'
 import { registerSchema } from './../../../../../components/forms/formSchema/registerSchema'
+import TitleForm from '../../../../../components/forms/pure/titleForm'
 
 /**
  * This component returns the set password form
@@ -133,7 +134,7 @@ const SetPassword = () => {
       </button>
       <Modal setShow={setShowForm} show={showForm} reset={reset}>
         <form className='form-modal' onSubmit={handleSubmit(onSubmit)}>
-          <h2 className='text-2xl sm:text-3xl'>Set your email and password</h2>
+          <TitleForm>Set your email and password</TitleForm>
           {/** email */}
           <label>Your email</label>
           <div className='relative'>

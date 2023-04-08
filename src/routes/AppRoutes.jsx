@@ -10,6 +10,7 @@ import WithNameRoute from './withNameRoute'
 import UnauthenticatedRoutes from './unauthenticadedRoutes'
 import { FiltersContextProvider } from '../components/context/filtersContext'
 import Auth from '../pages/auth/auth'
+import Cookies from '../pages/cookies'
 
 /**
  * This component returns the app routes
@@ -45,7 +46,8 @@ const AppRoutes = () => {
           </Route>
           {/** This route is for the 404 page */}
           <Route path='*' element={<NotFound/>}/>
-          <Route path='/To-do-list' element={<Navigate to='/login'/>}/>
+          <Route path='/cookies' element={<Cookies/>}/>
+          <Route path='/' element={<Navigate to='/login'/>}/>
         </Routes>
       </FiltersContextProvider>
     </HashRouter>

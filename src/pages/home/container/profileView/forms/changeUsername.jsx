@@ -10,6 +10,7 @@ import { updateProfile } from 'firebase/auth'
 import { NotificationContext } from '../../../../../components/context/notificationContext'
 import { auth } from '../../../../../firebase/firebase'
 import { NotificationClass } from '../../../../../models/notification.class'
+import TitleForm from '../../../../../components/forms/pure/titleForm'
 
 const ChangeUsername = () => {
   const { user, setUser } = useContext(AuthContext)
@@ -60,7 +61,7 @@ const ChangeUsername = () => {
       </div>
       <Modal setShow={setShowForm} show={showForm} reset={reset}>
         <form className='form-modal' onSubmit={handleSubmit(onSubmit)}>
-          <h2 className='text-3xl sm:text-4xl'>Change username</h2>
+          <TitleForm>Change username</TitleForm>
           {/** New username */}
           <label>Your new username</label>
           <div className='relative'>

@@ -53,7 +53,7 @@ const Modal = ({ setShow, show, children, reset }) => {
             initial='hidden'
             animate='visible'
             exit='exit'
-            className='relative my-10 h-auto overflow-y-auto w-10/12 sm:w-8/12 md:w-6/12 xl:w-4/12 p-5 rounded-xl shadow-2xl bg-white text-slate-900 dark:text-white dark:bg-slate-900'>
+            className='relative my-10 h-auto w-10/12 sm:w-8/12 md:w-6/12 xl:w-4/12 p-5 rounded-xl shadow-2xl bg-white text-slate-900 dark:text-white dark:bg-slate-900'>
             <i className='bi bi-x text-4xl text-indigo-900 dark:text-gray-500 hover:opacity-80 absolute top-3 right-3 cursor-pointer' onClick={handleClickClose}/>
             {children}
           </motion.div>

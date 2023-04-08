@@ -13,20 +13,23 @@ const ShowTaskComponent = () => {
   const { setShowTask, showTask } = useContext(TasksContext)
   return (
     <Modal setShow={setShowTask} show={showTask}>
-      <div className='grid grid-cols-1 border-b border-gray-400 dark:border-gray-700 mb-3 pb-3 p-4'>
-        <h2 className='break-words'>
+      <div className='grid grid-cols-1 border-b border-gray-300 dark:border-gray-800 mb-3 pb-3 p-4'>
+        <h2 className='break-words border-b pb-2 border-b-gray-300 dark:border-gray-800'>
           {showTask?.name}
         </h2>
-        <h4 className='break-words'>
-          { showTask?.endDate }
-        </h4>
         <h4 className='mt-2 break-words'>
           { showTask?.description === ''
             ? 'Sin descripción'
             : showTask?.description }
         </h4>
+        <h4 className='break-words'>
+          { showTask?.endDate
+            ? `End date: ${showTask?.endDate}`
+            : 'Without end date'
+          }
+        </h4>
         <h4 className='mt-2 break-words'>
-          { showTask?.level && showTask?.level }
+          { showTask?.level && `Urgency: ${showTask?.level}` }
         </h4>
       </div>
       <div className='grid grid-cols-3 gap-2 text-indigo-900 dark:text-white'>

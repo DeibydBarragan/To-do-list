@@ -15,6 +15,8 @@ import { db } from '../../firebase/firebase'
 import { AuthContext } from '../context/authContext'
 import { NotificationContext } from '../context/notificationContext'
 import { NotificationClass } from '../../models/notification.class'
+import CalendarComponent from './pure/calendarComponent'
+import TitleForm from './pure/titleForm'
 
 const EditTask = () => {
   const { dispatchTask, showEditTask, setShowEditTask, showTask, setShowTask } = useContext(TasksContext)
@@ -22,12 +24,14 @@ const EditTask = () => {
   const { setNotification } = useContext(NotificationContext)
   const [level, setLevel] = useState()
   const [formLoading, setFormLoading] = useState(false)
+  const [date, setDate] = useState('')
 
   /**
    * state for the level of the task
    */
   useEffect(() => {
     setLevel(showEditTask?.level)
+    setDate(showEditTask?.endDate)
   }, [showEditTask])
   /**
    * Brings register to save the data form the form
@@ -56,14 +60,14 @@ const EditTask = () => {
         name: data.name,
         description: data.description,
         level: data.level,
-        endDate: data.endDate
+        endDate: date
       })
       /**
       * Dispatch the action to the reducer
       */
       dispatchTask({
         type: TYPES.edit,
-        payload: { id: showEditTask?.id, name: data.name, description: data.description, level: data.level, endDate: data.endDate }
+        payload: { id: showEditTask?.id, name: data.name, description: data.description, level: data.level, endDate: date }
       })
       if (showTask) {
         setShowTask({
@@ -71,7 +75,7 @@ const EditTask = () => {
           name: data.name,
           description: data.description,
           level: data.level,
-          endDate: data.endDate
+          endDate: date
         })
       }
       setShowEditTask(false)
@@ -89,7 +93,7 @@ const EditTask = () => {
   return (
     <Modal setShow={setShowEditTask} show={showEditTask}>
       <form onSubmit={handleSubmit(onSubmit)} className='form-modal'>
-        <h2>Edit task</h2>
+        <TitleForm>Edit task</TitleForm>
         {/** Task name */}
         <label>Name</label>
         <div className='relative w-full'>
@@ -114,11 +118,9 @@ const EditTask = () => {
         />
         {/** Task end date */}
         <label>End Date</label>
-        <input
-          type='date'
-          className='input-tasks'
-          defaultValue={showEditTask?.endDate}
-          {...register('endDate')}
+        <CalendarComponent
+          date={date}
+          setDate={setDate}
         />
         {/** Task level */}
         <label>Urgency</label>

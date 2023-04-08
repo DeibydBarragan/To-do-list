@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react'
+import React, { useState, useRef, useEffect } from 'react'
 import PropTypes from 'prop-types'
 import { AnimatePresence, motion } from 'framer-motion'
 
@@ -21,9 +21,16 @@ const Select = ({ children, state, placeholder }) => {
   document.addEventListener('click', (e) => {
     handleCloseDrop(e)
   })
+  useEffect(() => {
+    return () => {
+      document.removeEventListener('click', (e) => {
+        handleCloseDrop(e)
+      })
+    }
+  }, [])
   return (
     <div>
-      <div ref = {drop} className={`text-black dark:text-white ${!state && 'dark:text-gray-400'} bg-white dark:bg-slate-800 rounded-lg p-2 flex items-center justify-between cursor-pointer transition ease-in-out border border-indigo-700 dark:border-none`}
+      <div ref = {drop} className={`text-black dark:text-white ${!state && 'text-gray-500 dark:text-gray-500'} bg-white dark:bg-slate-800 rounded-lg p-2 flex items-center justify-between cursor-pointer transition ease-in-out border border-indigo-700 dark:border-none`}
         onClick={() => setOpen(!open)} >
         {state || placeholder}
         <i ref={icon} className={`bi bi-caret-down-fill text-indigo-700 dark:text-white text-xl ${open && 'transition duration-300 ease-in-out rotate-180'}`}/>

@@ -3,8 +3,9 @@ import Notification from '../../components/pure/notification'
 import PropTypes from 'prop-types'
 import Login from './container/login'
 import Register from './container/register'
-import { AnimatePresence, motion } from 'framer-motion'
+import { motion } from 'framer-motion'
 import { modalVariants } from '../../components/animations/modalAnim'
+import CookiesAdvice from '../../components/pure/cookiesAdvice'
 
 const Auth = ({ path }) => {
   return (
@@ -14,14 +15,11 @@ const Auth = ({ path }) => {
         initial='hidden'
         animate='visible'
       >
-        <AnimatePresence>
-          {path === 'login' && <Login/>}
-        </AnimatePresence>
-        <AnimatePresence>
-          {path === 'register' && <Register/>}
-        </AnimatePresence>
+        {path === 'login' && <Login/>}
+        {path === 'register' && <Register/>}
       </motion.div>
       <Notification/>
+      <CookiesAdvice/>
     </div>
   )
 }

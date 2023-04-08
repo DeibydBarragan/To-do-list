@@ -10,6 +10,7 @@ import { EmailAuthProvider, reauthenticateWithCredential, updatePassword } from 
 import { NotificationContext } from '../../../../../components/context/notificationContext'
 import { auth } from '../../../../../firebase/firebase'
 import { NotificationClass } from '../../../../../models/notification.class'
+import TitleForm from '../../../../../components/forms/pure/titleForm'
 
 /**
  * This component returns the change password form
@@ -78,7 +79,7 @@ const ChangePassword = () => {
       </button>
       <Modal setShow={setShowForm} show={showForm} reset={reset}>
         <form className='form-modal' onSubmit={handleSubmit(onSubmit)}>
-          <h2 className='text-3xl sm:text-4xl'>Change password</h2>
+          <TitleForm>Change password</TitleForm>
           {/** Actual password */}
           <label>Your actual password</label>
           <div className='relative'>

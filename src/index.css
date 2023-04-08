@@ -96,7 +96,75 @@ label {
 ::-webkit-scrollbar-corner {
   @apply bg-indigo-400
 }
-
-
-
-
+/** This is for the calendar styles */
+/** Principal div */
+.react-calendar { 
+ @apply w-72 sm:w-80 max-w-full fixed bg-white dark:bg-slate-800 border border-indigo-700 dark:border-indigo-900 p-5 rounded-lg mt-2 shadow-xl
+}
+/** Header */
+.react-calendar__navigation {
+  @apply flex justify-between items-center gap-3
+}
+.react-calendar__navigation button {
+  @apply text-indigo-700 dark:text-white mt-2 min-w-max
+}
+abbr[title] {
+ text-decoration: none;
+}
+/** Days of the weekend */
+.react-calendar__month-view__days__day--weekend {
+ @apply text-indigo-900 dark:text-indigo-200
+} 
+/** Container of days */
+.react-calendar__tile:enabled:hover,
+.react-calendar__tile:enabled:focus {
+ @apply bg-indigo-700 dark:bg-white text-white dark:text-indigo-700 rounded-lg
+}
+/** Container of today */
+.react-calendar__tile--now {
+  @apply bg-indigo-900 text-white font-bold rounded-lg
+}
+.react-calendar__tile--now:enabled:hover,
+.react-calendar__tile--now:enabled:focus {
+ @apply bg-indigo-800 text-white
+}
+/** Container of active days */
+.react-calendar__tile--hasActive:enabled:hover,
+.react-calendar__tile--hasActive:enabled:focus {
+ @apply bg-white
+}
+.react-calendar__tile--active {
+ background: #4338ca;
+ border-radius: 6px;
+ font-weight: bold;
+ color: white;
+}
+.react-calendar__tile--active:enabled:hover,
+.react-calendar__tile--active:enabled:focus {
+ background: #4338ca;
+ color: white;
+}
+.react-calendar--selectRange .react-calendar__tile--hover {
+ background-color: #6b7280;
+}
+.react-calendar__tile--range {
+ background: #6b7280;
+ color: #4338ca;
+ border-radius: 0;
+}
+.react-calendar__tile--rangeStart {
+ border-top-right-radius: 0;
+ border-bottom-right-radius: 0;
+ border-top-left-radius: 6px;
+ border-bottom-left-radius: 6px;
+ background: #4338ca;
+ color: white;
+}
+.react-calendar__tile--rangeEnd {
+ border-top-left-radius: 0;
+ border-bottom-left-radius: 0;
+ border-top-right-radius: 6px;
+ border-bottom-right-radius: 6px;
+ background: #4338ca;
+ color: white;
+}

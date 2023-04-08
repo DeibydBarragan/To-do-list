@@ -22,7 +22,6 @@ const AuthMethods = () => {
         navigate(`/home/${FILTERS.TODAY}`)
       })
       .catch((error) => {
-        console.log(error)
         /**
          * If the user already has an account with this email, try with another method
          */
@@ -31,8 +30,7 @@ const AuthMethods = () => {
         /**
          * If the user closes the popup, do nothing
          */
-        } else if (error.code !== 'auth/popup-closed-by-user') {
-          console.log(error)
+        } else if (error.code !== 'auth/popup-closed-by-user' && error.code !== 'auth/cancelled-popup-request') {
           setNotification(new NotificationClass('Error', 'Error signing in with this method', 'error'))
         }
       })

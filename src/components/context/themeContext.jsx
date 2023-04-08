@@ -20,10 +20,13 @@ const ThemeContextProvider = ({ children }) => {
    * Toggle the theme in the document and in the localstorage
    */
   useEffect(() => {
-    document.documentElement.classList.toggle('dark')
-    localStorage.getItem('theme')
-      ? localStorage.removeItem('theme')
-      : localStorage.setItem('theme', 'dark')
+    if (theme === 'dark') {
+      document.documentElement.classList.add('dark')
+      localStorage.setItem('theme', 'dark')
+    } else {
+      document.documentElement.classList.remove('dark')
+      localStorage.removeItem('theme')
+    }
   }, [theme])
 
   return (
