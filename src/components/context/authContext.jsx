@@ -51,7 +51,8 @@ const AuthContextProvider = ({ children }) => {
         /**
          * If the user is logged and the email is not verified
          */
-        if (!currentUser.emailVerified) {
+        const methods = currentUser.providerData.map((method) => method.providerId.split('.')[0])
+        if (!currentUser.emailVerified && (!methods.includes('google') || !methods.includes('facebook') || !methods.includes('github'))) {
           setNotification(new NotificationClass('Verify your email', 'Please verify your email', 'error'))
         }
         setUser(currentUser)

@@ -21,7 +21,7 @@ const ProfileView = () => {
    * and the methods to sign in
    */
   const { methods, user } = useContext(AuthContext)
-
+  const isVerified = user.emailVerified && (!methods.includes('Google') || !methods.includes('Facebook') || !methods.includes('Github'))
   return (
     <motion.section className='col-span-12 lg:col-span-8 m-6 lg:w-5/6'
       initial={{ opacity: 0 }}
@@ -42,7 +42,7 @@ const ProfileView = () => {
         {/** Email */}
         {methods.includes('Password') && <ChangeEmail/>}
         {/** Verify email */}
-        {!user.emailVerified && <VerifyEmail/>}
+        {isVerified && <VerifyEmail/>}
         {/** Password */}
         {methods.includes('Password') && <ChangePassword/>}
         {/** Set password */}
