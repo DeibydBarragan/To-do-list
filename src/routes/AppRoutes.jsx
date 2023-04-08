@@ -1,5 +1,5 @@
 import React from 'react'
-import { BrowserRouter, Routes, Route } from 'react-router-dom'
+import { Routes, Route, HashRouter } from 'react-router-dom'
 import Login from '../pages/auth/login'
 import Register from '../pages/auth/register'
 import Home from '../pages/home/home'
@@ -18,7 +18,7 @@ import { FiltersContextProvider } from '../components/context/filtersContext'
  */
 const AppRoutes = () => {
   return (
-    <BrowserRouter>
+    <HashRouter>
       <FiltersContextProvider>
         <Routes>
           {/**
@@ -48,7 +48,7 @@ const AppRoutes = () => {
           <Route path='*' element={<NotFound/>}/>
         </Routes>
       </FiltersContextProvider>
-    </BrowserRouter>
+    </HashRouter>
   )
 }
 

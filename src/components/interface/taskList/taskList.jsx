@@ -7,6 +7,7 @@ import { useSortTasks } from './../../../hooks/useSortTasks'
 import Date from './container/date'
 import ShowTaskComponent from './../../pure/showTask'
 import EditTask from './../../forms/editTask'
+import Charging from '../../pure/charging'
 
 /**
  * Component that returns the list of tasks
@@ -30,13 +31,14 @@ const TaskList = () => {
       <Date/>
       {/** If the tasks are loading, return a loading message */}
       {loadingTasks
-        ? <p>Loading...</p>
+        ? <div className='flex flex-col items-center mt-5'>
+          <Charging/>
+        </div>
         : <div
           className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 2xl:grid-cols-4 gap-4">
           {/** Iterate every element of tasklist to return a TaskComponent for each one */}
           {sortedTasks.map((task) => <TaskComponent task={task} key={`task${task.id}`}/>)}
         </div>}
-
       <NewTaskButton key='NewTaskButton'/>
       <ShowTaskComponent/>
       <EditTask/>

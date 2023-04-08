@@ -63,7 +63,7 @@ label {
 
 /** This is for the inputs in the forms to change tasks */
 .input-tasks {
-  @apply rounded-md outline-none bg-white dark:bg-slate-800 placeholder:text-gray-500 p-2 shadow-md border border-indigo-700 dark:border-none;
+  @apply rounded-md outline-none bg-white dark:bg-slate-800 placeholder:text-gray-500 p-2 shadow-md border border-indigo-700 dark:border-none placeholder:italic;
 }
 
 /** This is for the inputs in the forms of register or login*/
