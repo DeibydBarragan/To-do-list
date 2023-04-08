@@ -10,7 +10,7 @@ import WithNameRoute from './withNameRoute'
 import UnauthenticatedRoutes from './unauthenticadedRoutes'
 import { FiltersContextProvider } from '../components/context/filtersContext'
 import Auth from '../pages/auth/auth'
-import Cookies from '../pages/cookies'
+import Cookies from '../pages/cookies/cookies'
 
 /**
  * This component returns the app routes

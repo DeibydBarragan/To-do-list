@@ -1,11 +1,12 @@
 import React from 'react'
 import { motion } from 'framer-motion'
 import { NavLink } from 'react-router-dom'
+import ExternalLink from './externalLink'
 
 const Cookies = () => {
   return (
     <div className='inset-0 background-auth bg-cover flex justify-center items-center overflow-y-auto p-10'>
-      <motion.div className='h-auto bg-white p-5 md:p-10 rounded-xl w-10/12 sm:2-8/12 md:w-6/12 flex flex-col gap-3 shadow-lg'
+      <motion.div className='h-auto bg-white dark:bg-slate-800 p-5 md:p-10 rounded-xl w-11/12 sm:2-9/12 md:w-7/12 lg:w-6/12 flex flex-col gap-3 shadow-lg'
         initial={{ opacity: 0, y: 50 }}
         animate={{ opacity: 1, y: 0 }}
       >
@@ -27,10 +28,34 @@ const Cookies = () => {
         <p>You can allow, block or eliminate the cookies installed on your computer by configuring the options of the browser installed on your computer.</p>
         <p>Most web browsers offer the possibility of allowing, blocking or deleting cookies installed on your computer.</p>
         <p>Below you can access the settings of the most frequent web browsers to accept, install or disable cookies:</p>
-        <a className='text-indigo-700 dark:text-indigo-700 cursor-pointer underline hover:text-indigo-900' href='https://support.google.com/chrome/answer/95647?hl=es'>Configure cookies in Google Chrome</a>
-        <a className='text-indigo-700 dark:text-indigo-700 cursor-pointer hover:text-indigo-900 underline' href='https://support.mozilla.org/es/kb/habilitar-y-deshabilitar-cookies-sitios-web-rastrear-preferencias?redirectlocale=es&redirectslug=habilitar-y-deshabilitar-cookies-que-los-sitios-we'>Configure cookies in Firefox</a>
-        <a className='text-indigo-700 dark:text-indigo-700 cursor-pointer hover:text-indigo-900 underline' href='https://support.microsoft.com/es-es/help/17442/windows-internet-explorer-delete-manage-cookies'>Configure cookies in Internet Explorer</a>
-        <a className='text-indigo-700 dark:text-indigo-700 cursor-pointer hover:text-indigo-900 underline' href='https://support.apple.com/es-es/guide/safari/sfri11471/mac'>Configure cookies in Safari</a>
+        {/** Chrome */}
+        <ExternalLink link='https://support.google.com/chrome/answer/95647?hl=es'>
+          Configure cookies in Google Chrome
+        </ExternalLink>
+        {/** Firefox */}
+        <ExternalLink link='https://support.mozilla.org/es/kb/habilitar-y-deshabilitar-cookies-sitios-web-rastrear-preferencias?redirectlocale=es&redirectslug=habilitar-y-deshabilitar-cookies-que-los-sitios-we'>
+          Configure cookies in Firefox
+        </ExternalLink>
+        {/** Internet Explorer */}
+        <ExternalLink link='https://support.microsoft.com/es-es/help/17442/windows-internet-explorer-delete-manage-cookies'>
+          Configure cookies in Internet Explorer
+        </ExternalLink>
+        {/** Safari */}
+        <ExternalLink link='https://support.apple.com/es-es/guide/safari/sfri11471/mac'>
+          Configure cookies in Safari
+        </ExternalLink>
+        {/** Opera */}
+        <ExternalLink link='https://help.opera.com/en/latest/web-preferences/#cookies'>
+          Configure cookies in Opera
+        </ExternalLink>
+        {/** Edge */}
+        <ExternalLink link='https://support.microsoft.com/es-es/help/4027947/windows-delete-cookies'>
+          Configure cookies in Edge
+        </ExternalLink>
+        {/** Brave */}
+        <ExternalLink link='https://support.brave.com/hc/en-us/articles/360050634931-How-Do-I-Manage-Cookies-In-Brave-'>
+          Configure cookies in Brave
+        </ExternalLink>
         <h2>Warning about deleting cookies</h2>
         <p>You can delete and block all cookies on this site, but part of the site will not work or the quality of the web page may be affected.</p>
         <p>If you have any questions about our cookie policy, you can contact this website through our Contact channels.</p>
