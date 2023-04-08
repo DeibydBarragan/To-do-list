@@ -12,6 +12,7 @@ import { auth } from '../../../../../firebase/firebase'
 import { NotificationClass } from '../../../../../models/notification.class'
 import FloatForm from '../container/floatForm'
 import TitleForm from '../../../../../components/forms/pure/titleForm'
+import SeePassword from '../../../../../components/forms/pure/seePassword'
 
 /**
  * This component returns the delete user form
@@ -129,8 +130,10 @@ const DeleteUser = () => {
                   className='input-tasks w-full'
                   placeholder='Your password'
                   maxLength='20'
+                  id='actualPassword'
                   {...register('actualPassword')}
                 />
+                <SeePassword id='actualPassword'/>
                 <Popover show={errors.actualPassword?.message} clear={clearErrors} fieldName='actualPassword'/>
               </div>
               <button className='btn bg-red-700 outline-none hover:bg-red-800 text-white hover:text-white' type='submit'>

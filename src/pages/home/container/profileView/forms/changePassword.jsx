@@ -11,6 +11,7 @@ import { NotificationContext } from '../../../../../components/context/notificat
 import { auth } from '../../../../../firebase/firebase'
 import { NotificationClass } from '../../../../../models/notification.class'
 import TitleForm from '../../../../../components/forms/pure/titleForm'
+import SeePassword from '../../../../../components/forms/pure/seePassword'
 
 /**
  * This component returns the change password form
@@ -88,8 +89,10 @@ const ChangePassword = () => {
               className='input-tasks w-full'
               placeholder='Actual password'
               maxLength='20'
+              id='actualPassword'
               {...register('actualPassword')}
             />
+            <SeePassword id='actualPassword'/>
             <Popover show={errors.actualPassword?.message} clear={clearErrors} fieldName='actualPassword'/>
           </div>
           {/** New password */}
@@ -100,8 +103,10 @@ const ChangePassword = () => {
               className='input-tasks w-full'
               placeholder='New password'
               maxLength='20'
+              id='newPassword'
               {...register('newPassword')}
             />
+            <SeePassword id='newPassword'/>
             <Popover show={errors.newPassword?.message} clear={clearErrors} fieldName='newPassword'/>
           </div>
           {/** Confirm new password */}
@@ -112,8 +117,10 @@ const ChangePassword = () => {
               className='input-tasks w-full'
               placeholder='Confirm new password'
               maxLength='20'
+              id='confirmNewPassword'
               {...register('confirmNewPassword')}
             />
+            <SeePassword id='confirmNewPassword'/>
             <Popover show={errors.confirmNewPassword?.message} clear={clearErrors} fieldName='confirmNewPassword'/>
           </div>
           {/** Button to submit the form */}

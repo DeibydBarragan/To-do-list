@@ -2,7 +2,6 @@ import React, { useContext, useState } from 'react'
 import Modal from '../../../components/pure/modal/modal'
 import { useForm } from 'react-hook-form'
 import Popover from '../../../components/forms/pure/popover'
-import { AnimatePresence } from 'framer-motion'
 import LoadingButton from '../../../components/forms/pure/loadingButton'
 import { resetEmail } from './../../../components/forms/formSchema/resetPassword'
 import { yupResolver } from '@hookform/resolvers/yup'
@@ -58,9 +57,7 @@ const ResetPassword = () => {
               autoComplete='off'
               {...register('email')}
             />
-            <AnimatePresence>
-              <Popover show={errors.email?.message} clear={clearErrors} fieldName='email'/>
-            </AnimatePresence>
+            <Popover show={errors.email?.message} clear={clearErrors} fieldName='email'/>
           </div>
           <button className='btn-modal' type='submit'>
               Reset

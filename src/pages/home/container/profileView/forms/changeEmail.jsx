@@ -11,6 +11,7 @@ import { changeEmailSchema } from '../../../../../components/forms/formSchema/ch
 import { NotificationContext } from '../../../../../components/context/notificationContext'
 import { NotificationClass } from '../../../../../models/notification.class'
 import TitleForm from '../../../../../components/forms/pure/titleForm'
+import SeePassword from '../../../../../components/forms/pure/seePassword'
 
 /**
  * This component returns the change email form
@@ -110,8 +111,10 @@ const ChangeEmail = () => {
               className='input-tasks w-full'
               placeholder='Your password'
               maxLength='20'
+              id='actualPassword'
               {...register('actualPassword')}
             />
+            <SeePassword id='actualPassword'/>
             <Popover show={errors.actualPassword?.message} clear={clearErrors} fieldName='actualPassword'/>
           </div>
           {/** New email */}

@@ -8,6 +8,7 @@ import { loginSchema } from '../../../components/forms/formSchema/loginSchema'
 import { useNavigate } from 'react-router-dom'
 import { FILTERS } from '../../../models/filters.enum'
 import LoadingButton from '../../../components/forms/pure/loadingButton'
+import SeePassword from '../../../components/forms/pure/seePassword'
 
 /**
  * This component returns the login form
@@ -55,6 +56,7 @@ const LoginForm = () => {
   }
   return (
     <form onSubmit={handleSubmit(onSubmit)} className='w-full flex flex-col gap-5'>
+      {/** Email */}
       <div className='relative'>
         <input
           type='text'
@@ -65,14 +67,17 @@ const LoginForm = () => {
         />
         <Popover show={errors.email?.message} clear={clearErrors} fieldName='email'/>
       </div>
+      {/** Password */}
       <div className='relative'>
         <input
           type='password'
           className='input-auth'
           placeholder='Password'
           maxLength='20'
+          id='password'
           {...register('password')}
         />
+        <SeePassword id='password' theme={false}/>
         <Popover show={errors.password?.message} clear={clearErrors} fieldName='password'/>
       </div>
       <button

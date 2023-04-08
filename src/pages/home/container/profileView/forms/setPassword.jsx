@@ -11,6 +11,7 @@ import Popover from '../../../../../components/forms/pure/popover'
 import { AuthContext } from '../../../../../components/context/authContext'
 import { registerSchema } from './../../../../../components/forms/formSchema/registerSchema'
 import TitleForm from '../../../../../components/forms/pure/titleForm'
+import SeePassword from '../../../../../components/forms/pure/seePassword'
 
 /**
  * This component returns the set password form
@@ -154,9 +155,11 @@ const SetPassword = () => {
               type='password'
               className='input-tasks w-full'
               placeholder='Password'
+              id='password'
               maxLength='20'
               {...register('password')}
             />
+            <SeePassword id='password'/>
             <Popover show={errors.password?.message} clear={clearErrors} fieldName='password'/>
           </div>
           {/** Confirm password */}
@@ -167,8 +170,10 @@ const SetPassword = () => {
               className='input-tasks w-full'
               placeholder='Confirm your password'
               maxLength='20'
+              id='confirmPassword'
               {...register('confirmPassword')}
             />
+            <SeePassword id='confirmPassword'/>
             <Popover show={errors.confirmPassword?.message} clear={clearErrors} fieldName='cofirmPassword'/>
           </div>
           <button className='btn-modal' type='submit'>

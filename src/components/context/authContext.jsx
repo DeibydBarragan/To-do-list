@@ -1,6 +1,6 @@
 import React, { createContext, useContext, useEffect, useState } from 'react'
 import propTypes from 'prop-types'
-import { onAuthStateChanged, updateProfile } from 'firebase/auth'
+import { onAuthStateChanged } from 'firebase/auth'
 import { auth } from '../../firebase/firebase'
 import { NotificationContext } from './notificationContext'
 import { NotificationClass } from '../../models/notification.class'
@@ -23,18 +23,15 @@ const AuthContextProvider = ({ children }) => {
       /**
        * Set the methods array with the methods that the user used to login
        */
-      setMethods(user.providerData.map((method) => method.providerId.split('.')[0].charAt(0).toUpperCase() + method.providerId.split('.')[0].slice(1)))
+      const authMethods = user.providerData.map((method) => {
+        return method.providerId.split('.')[0].charAt(0).toUpperCase() + method.providerId.split('.')[0].slice(1)
+      })
+      setMethods(authMethods)
       /**
-       * If user is logged with facebook, set the user photo to null
-       * Because facebook doesn't allow to get the user photo
-       */
-      if (user.photoURL !== null && user.providerData[0].providerId === 'facebook.com') {
-        updateProfile(auth.currentUser, {
-          photoURL: ''
-        })
-          .then(() => {
-            setUser({ ...user, photoURL: null })
-          })
+         * If the user is logged and the email is not verified
+         */
+      if (!user.emailVerified && authMethods.includes('Password')) {
+        setNotification(new NotificationClass('Verify your email', 'Please verify your email in settings', 'error'))
       }
     }
   }, [user])
@@ -48,13 +45,6 @@ const AuthContextProvider = ({ children }) => {
      */
     onAuthStateChanged(auth, (currentUser) => {
       if (currentUser) {
-        /**
-         * If the user is logged and the email is not verified
-         */
-        const methods = currentUser.providerData.map((method) => method.providerId.split('.')[0])
-        if (!currentUser.emailVerified && (!methods.includes('google') || !methods.includes('facebook') || !methods.includes('github'))) {
-          setNotification(new NotificationClass('Verify your email', 'Please verify your email', 'error'))
-        }
         setUser(currentUser)
         /**
          * If the user is not logged

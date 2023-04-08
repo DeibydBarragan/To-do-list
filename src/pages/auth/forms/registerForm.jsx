@@ -8,6 +8,7 @@ import { FILTERS } from './../../../models/filters.enum'
 import { useForm } from 'react-hook-form'
 import Popover from '../../../components/forms/pure/popover'
 import LoadingButton from '../../../components/forms/pure/loadingButton'
+import SeePassword from '../../../components/forms/pure/seePassword'
 
 /**
  * This component returns the register form
@@ -81,8 +82,10 @@ const RegisterForm = () => {
           type='password'
           className='input-auth'
           placeholder='Password'
+          id='password'
           {...register('password')}
         />
+        <SeePassword id='password' theme={false}/>
         <Popover show={errors.password?.message} clear={clearErrors} fieldName='password'/>
       </div>
       {/** Confirm password input */}
@@ -92,8 +95,10 @@ const RegisterForm = () => {
           className='input-auth'
           placeholder='Confirm password'
           maxLength='20'
+          id='confirmPassword'
           {...register('confirmPassword')}
         />
+        <SeePassword id='confirmPassword' theme={false}/>
         <Popover show={errors.confirmPassword?.message} clear={clearErrors} fieldName='confirmPassword'/>
       </div>
       <button
