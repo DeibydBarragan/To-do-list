@@ -45,7 +45,7 @@ const TaskComponent = ({ task }) => {
         </p>
         <p className='text-lg break-words text-white'>
           { task.description === ''
-            ? 'Sin descripción'
+            ? 'Without description'
             : task.description.length <= 80 ? task.description : task.description.slice(0, 80) + '...' }
         </p>
       </div>

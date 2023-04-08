@@ -19,7 +19,7 @@ const ShowTaskComponent = () => {
         </h2>
         <h4 className='mt-2 break-words'>
           { showTask?.description === ''
-            ? 'Sin descripción'
+            ? 'Without description'
             : showTask?.description }
         </h4>
         <h4 className='break-words'>
