@@ -43,8 +43,6 @@ const EditTask = () => {
 
   const onSubmit = async (data) => {
     setFormLoading(true)
-    data.name === '' && (data.name = showEditTask?.name)
-    data.description === '' && (data.description = showEditTask?.description)
     // i declare a new propertie to save the level because it doesn't work if i use level directly (i don't know why)
     data.level = level
 
@@ -80,6 +78,7 @@ const EditTask = () => {
       }
       setShowEditTask(false)
       reset()
+      setDate('')
     } catch (error) {
       /**
        * Something went wrong
@@ -111,7 +110,7 @@ const EditTask = () => {
         <label>Description</label>
         <textarea
           className='input-tasks h-36'
-          maxLength='200'
+          maxLength='300'
           autoComplete="off"
           defaultValue={showEditTask?.description}
           {...register('description')}

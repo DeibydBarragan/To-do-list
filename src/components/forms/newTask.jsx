@@ -16,6 +16,8 @@ import { db } from '../../firebase/firebase'
 import { AuthContext } from '../context/authContext'
 import CalendarComponent from './pure/calendarComponent'
 import TitleForm from './pure/titleForm'
+import { NotificationClass } from '../../models/notification.class'
+import { NotificationContext } from '../context/notificationContext'
 
 /**
  * This component returns a form to create a new task
@@ -25,6 +27,7 @@ import TitleForm from './pure/titleForm'
 const NewTask = ({ setShowForm, showForm }) => {
   const { dispatchTask } = useContext(TasksContext)
   const { user } = useContext(AuthContext)
+  const { setNotification } = useContext(NotificationContext)
   const [formLoading, setFormLoading] = useState(false)
   const [date, setDate] = useState('')
   /**
@@ -66,9 +69,11 @@ const NewTask = ({ setShowForm, showForm }) => {
       })
       setShowForm(false)
       reset()
+      setDate('')
     } catch (error) {
       console.error('Error adding task to database:', error)
       // Show an error message to the user or log the error
+      setNotification(new NotificationClass('Error', 'Error adding task to database', 'error'))
     } finally {
       setFormLoading(false)
     }
@@ -95,7 +100,7 @@ const NewTask = ({ setShowForm, showForm }) => {
         <label>Description</label>
         <textarea
           className='input-tasks h-36'
-          maxLength='200'
+          maxLength='300'
           autoComplete="off"
           placeholder='Description'
           {...register('description')}

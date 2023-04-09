@@ -43,7 +43,7 @@ const CalendarComponent = ({ date, setDate }) => {
             {date &&
               /** Delete icon */
               <motion.i
-                className='bi bi-trash text-2xl'
+                className='bi bi-trash text-2xl text-indigo-700 dark:text-white'
                 id='delete'
                 onClick={() => setDate('')}
                 initial={{ opacity: 0 }}
