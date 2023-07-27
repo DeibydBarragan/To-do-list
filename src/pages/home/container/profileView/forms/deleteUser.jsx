@@ -149,13 +149,13 @@ const DeleteUser = () => {
             {/** If the user has no password, it will delete the account without asking for the password */}
             <p className='text-red-600 dark:text-red-600 break-words'>Are you sure you want to delete your account?</p>
             <div className='flex justify-end gap-2'>
-              <button className='btn-settings' onClick={() => setShowForm(false)}>
-                <i className='bi bi-x text-2xl'/>
+              <button className='btn-settings' onClick={() => setShowForm(false)} aria-label='cancel deleting picture'>
+                <i className='bi bi-x text-2xl' alt=''/>
               </button>
-              <button className='btn-settings' onClick={handleDeleteUser}>
+              <button className='btn-settings' onClick={handleDeleteUser} aria-label='confirm deleting account'>
                 {formLoading
                   ? <LoadingButton/>
-                  : <i className='bi bi-check text-2xl'/>
+                  : <i className='bi bi-check text-2xl' alt=''/>
                 }
               </button>
             </div>

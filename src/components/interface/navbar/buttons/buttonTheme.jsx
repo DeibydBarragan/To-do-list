@@ -15,8 +15,8 @@ const ButtonTheme = () => {
   }
 
   return (
-    <button className='btn' onClick={handleTheme}>
-      <i className="bi bi-lightbulb text-3xl"></i>
+    <button className='btn' onClick={handleTheme} aria-label='switch app theme'>
+      <i className="bi bi-lightbulb text-3xl" alt=''/>
     </button>
   )
 }

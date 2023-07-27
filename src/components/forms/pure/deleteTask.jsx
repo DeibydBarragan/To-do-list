@@ -49,8 +49,8 @@ const DeleteTask = ({ task }) => {
     }
   }
   return (
-    <button onClick={handleOnCLick} className='col-start-12 btn-icon'>
-      <i className="bi bi-trash-fill text-3xl"/>
+    <button onClick={handleOnCLick} className='col-start-12 btn-icon' aria-label='delete task'>
+      <i className="bi bi-trash-fill text-3xl" alt=''/>
     </button>
   )
 }

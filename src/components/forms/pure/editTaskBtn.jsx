@@ -16,8 +16,8 @@ const EditTaskBtn = ({ task }) => {
     setShowEditTask(task)
   }
   return (
-    <button onClick={handleOnClick} className='col-start-11 btn-icon'>
-      <i className='bi bi-pencil-fill text-3xl'/>
+    <button onClick={handleOnClick} className='col-start-11 btn-icon' aria-label='edit task'>
+      <i className='bi bi-pencil-fill text-3xl' alt=''/>
     </button>
   )
 }

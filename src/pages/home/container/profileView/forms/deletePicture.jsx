@@ -70,19 +70,21 @@ const DeletePicture = () => {
     <div className='relative'>
       <button className='btn-settings' onClick={(e) => {
         setShowForm(!showForm)
-      }}>
-        <i className='bi bi-trash text-2xl'/>
+      }}
+      aria-label='delete picture'
+      >
+        <i className='bi bi-trash text-2xl' alt=''/>
       </button>
       <FloatForm show={showForm} setShow={(setShowForm)}>
         <p className='text-red-600 dark:text-red-600 break-words'>Are you sure you want to delete your picture?</p>
         <div className='flex justify-end gap-2'>
-          <button className='btn-settings' onClick={() => setShowForm(false)}>
-            <i className='bi bi-x text-2xl'/>
+          <button className='btn-settings' onClick={() => setShowForm(false)} aria-label='cancel deleting picture'>
+            <i className='bi bi-x text-2xl' alt=''/>
           </button>
-          <button className='btn-settings' onClick={deletePicture}>
+          <button className='btn-settings' onClick={deletePicture} aria-label='confirm deleting picture'>
             {formLoading
               ? <LoadingButton/>
-              : <i className='bi bi-check text-2xl'/>
+              : <i className='bi bi-check text-2xl' alt=''/>
             }
           </button>
         </div>

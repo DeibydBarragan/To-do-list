@@ -39,16 +39,16 @@ const AuthMethods = () => {
     <div>
       <div className='flex gap-5'>
         {/** Google button */}
-        <button onClick={() => signInWithMethod(googleProvider)}>
-          <i className="text-4xl bi bi-google"/>
+        <button onClick={() => signInWithMethod(googleProvider)} aria-label='sign with google'>
+          <i className="text-4xl bi bi-google" alt=''/>
         </button>
         {/** Facebook button */}
-        <button onClick={() => signInWithMethod(facebookProvider)}>
-          <i className="text-4xl bi bi-facebook"/>
+        <button onClick={() => signInWithMethod(facebookProvider)} aria-label='sign with facebook'>
+          <i className="text-4xl bi bi-facebook" alt=''/>
         </button>
         {/** Github button */}
-        <button onClick={() => signInWithMethod(githubProvider)}>
-          <i className="text-4xl bi bi-github"/>
+        <button onClick={() => signInWithMethod(githubProvider)} aria-label='sign with github'>
+          <i className="text-4xl bi bi-github" alt=''/>
         </button>
       </div>
     </div>
