@@ -41,7 +41,7 @@ const AppRoutes = () => {
           </Route>
           {/** This routes are for the routes that don't need the user to be authenticated */}
           <Route element={<UnauthenticatedRoutes/>}>
-            <Route path='login' element={<Auth path='login'/>}/>
+            <Route exact strict sensitive={false}  path='login' element={<Auth path='login'/>}/>
             <Route path='register' element={<Auth path='register'/>}/>
           </Route>
           {/** This route is for the 404 page */}
